@@ -11,3 +11,4 @@ From the `public` directory, run `python3 -m http.server 8000` and open <http://
 Run `npm run deploy` from this directory. The Worker serves the static files in `public` at `ajay.nexus`, and redirects `ajay.nexus/polaris/` and `polaris.ajay.nexus` to the main address.
 
 Update the app cards in `public/index.html` when an app's public URL or description changes.
+Keep a card non-clickable until its destination resolves and serves the app.

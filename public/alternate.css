@@ -1,0 +1,86 @@
+/*
+ * Author: Unknown
+ * Project: Polaris
+ * Date: 2026-09-27
+ * File: alternate.css
+ * Description: Responsive list-based alternate landing page.
+ */
+:root {
+  color-scheme: dark;
+  font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #f3f5f2;
+  background: #0b1512;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; }
+a { color: inherit; }
+a:focus-visible { outline: 2px solid #80d5aa; outline-offset: 5px; }
+.skip-link { position: fixed; z-index: 2; top: 12px; left: 12px; padding: 12px 16px; border-radius: 8px; background: #29563f; transform: translateY(-160%); }
+.skip-link:focus { transform: none; }
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, .8fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(48px, 9vw, 140px);
+  width: min(1200px, calc(100% - 80px));
+  min-height: 100vh;
+  margin-inline: auto;
+  padding-block: 70px;
+}
+body {
+  background:
+    radial-gradient(ellipse at 23% 44%, rgba(44, 100, 66, .25), transparent 42%),
+    radial-gradient(ellipse at 92% 18%, rgba(28, 62, 58, .12), transparent 38%),
+    #0b1512;
+}
+.intro { padding-left: clamp(0px, 3vw, 40px); }
+.polaris-logo { display: block; width: 170px; height: 170px; margin-bottom: 26px; filter: drop-shadow(0 0 40px rgba(70, 150, 109, .11)); }
+.intro h1 { margin: 0; font-size: clamp(64px, 6vw, 86px); font-weight: 650; line-height: 1; letter-spacing: -.065em; }
+.subtitle { margin: 16px 0 0; font-size: clamp(22px, 2.3vw, 30px); letter-spacing: -.035em; }
+.description { max-width: 370px; margin: 28px 0 0; color: #c2cec5; font-size: 16px; line-height: 1.6; }
+.apps { display: grid; gap: 12px; }
+.app-row { display: flex; min-height: 112px; align-items: center; gap: 20px; padding: 18px 22px; border: 1px solid rgba(215, 233, 218, .13); border-radius: 17px; background: rgba(15, 28, 22, .72); text-decoration: none; transition: background-color .2s ease, border-color .2s ease, transform .2s ease; }
+a.app-row:hover { border-color: rgba(177, 223, 186, .36); background: rgba(25, 47, 34, .86); transform: translateX(4px); }
+.app-logo { display: block; flex: 0 0 64px; width: 64px; height: 64px; object-fit: contain; }
+.lyra-logo { width: 58px; flex-basis: 64px; }
+.krona-logo { width: 68px; }
+.enigma-mark { flex: 0 0 64px; color: #d2cce7; font-size: 52px; font-weight: 300; line-height: 1; letter-spacing: -.08em; }
+.enigma-mark span { color: #a299d6; }
+.app-text { display: flex; min-width: 0; flex: 1; flex-direction: column; gap: 6px; }
+.app-text strong { font-size: 23px; font-weight: 600; letter-spacing: -.035em; }
+.app-text small { color: #b0beb4; font-size: 13px; line-height: 1.35; }
+.row-arrow { color: #afc6b4; font-size: 25px; line-height: 1; transition: transform .2s ease; }
+a.app-row:hover .row-arrow { transform: translate(2px, -2px); }
+.soon { color: #b5b8b4; font-size: 11px; white-space: nowrap; }
+
+@media (max-width: 800px) {
+  .layout { grid-template-columns: 1fr; gap: 58px; width: min(520px, calc(100% - 40px)); padding-block: 62px 52px; }
+  .intro { padding-left: 0; text-align: center; }
+  .polaris-logo { width: 126px; height: 126px; margin: 0 auto 22px; }
+  .description { margin-inline: auto; }
+}
+
+@media (max-width: 420px) {
+  .layout { gap: 44px; padding-top: 48px; }
+  .intro h1 { font-size: 60px; }
+  .app-row { min-height: 96px; gap: 13px; padding: 14px 16px; }
+  .app-logo, .enigma-mark { flex-basis: 50px; width: 50px; }
+  .app-logo { height: 50px; }
+  .enigma-mark { font-size: 42px; }
+  .app-text strong { font-size: 20px; }
+  .app-text small { font-size: 12px; }
+  .soon { font-size: 10px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-row, .row-arrow { transition: none; }
+  a.app-row:hover, a.app-row:hover .row-arrow { transform: none; }
+}
+
+@media (prefers-contrast: more), (forced-colors: active) {
+  .app-row { border-color: currentColor; }
+}

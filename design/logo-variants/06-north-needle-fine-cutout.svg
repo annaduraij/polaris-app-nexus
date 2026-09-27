@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">Polaris: North Needle, fine cutout</title>
+  <desc id="desc">An elongated lavender four-point astroid with a small, transparent astroid cut out of its center.</desc>
+  <defs>
+    <linearGradient id="starlight" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f4efff"/>
+      <stop offset="1" stop-color="#ad8de7"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#starlight)" fill-rule="evenodd" d="M32 3 C32 18.95 39.2 32 48 32 C39.2 32 32 45.05 32 61 C32 45.05 24.8 32 16 32 C24.8 32 32 18.95 32 3Z M32 24 C32 28.4 34.16 32 36.8 32 C34.16 32 32 35.6 32 40 C32 35.6 29.84 32 27.2 32 C29.84 32 32 28.4 32 24Z"/>
+</svg>

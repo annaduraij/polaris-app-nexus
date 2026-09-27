@@ -107,7 +107,16 @@ a.app-row:hover { border-color: rgba(191, 239, 221, .55); transform: translateY(
   pointer-events: none;
 }
 
-/* The logo and the inset share one aurora surface; the logo stays close to text height. */
+/* Lyra keeps its material neutral; music artwork and small state accents supply color. */
+.lyra {
+  background:
+    radial-gradient(ellipse at 12% 20%, color-mix(in srgb, var(--secondary) 16%, transparent), transparent 59%),
+    radial-gradient(ellipse at 83% 7%, color-mix(in srgb, var(--signature) 9%, transparent), transparent 61%),
+    var(--surface);
+}
+.lyra::before { background: radial-gradient(ellipse at 50% 0, transparent 40%, color-mix(in srgb, var(--signature) 12%, transparent) 48%, transparent 65%); }
+
+/* The logo and inset stay close to text height within each app surface. */
 .logo-panel {
   position: relative;
   display: grid;
@@ -147,11 +156,14 @@ a.app-row:hover { border-color: rgba(191, 239, 221, .55); transform: translateY(
 .app-description, .app-inspiration { color: #c4d3cf; font-size: 12px; line-height: 1.45; }
 .app-inspiration { color: #aebfba; }
 .app-inspiration b { color: #dcece6; font-weight: 600; }
+.lyra .logo-panel { background: rgba(12, 14, 16, .72); }
+.lyra .card-content { background: rgba(12, 14, 16, .88); }
+.lyra .row-arrow { color: var(--signature); }
 .krona .logo-panel { background: rgba(255, 255, 255, .3); }
-.krona .card-content { color: #243b33; background: rgba(255, 255, 255, .78); border-color: rgba(26, 72, 54, .18); }
+.krona .card-content { color: #243b33; background: color-mix(in srgb, var(--surface-raised) 78%, transparent); border-color: rgba(26, 72, 54, .18); }
 .krona .app-text small { color: #315d4b; text-shadow: none; }
 .krona .app-description, .krona .app-inspiration { color: #3d594f; }
-.krona .app-inspiration b, .krona .row-arrow { color: #244e3b; }
+.krona .app-inspiration b, .krona .row-arrow { color: var(--signature); }
 .row-arrow { flex: 0 0 auto; color: #eaf9f4; font-size: 24px; line-height: 1; transition: transform .2s ease; }
 a.app-row:hover .row-arrow { transform: translate(2px, -2px); }
 .soon { flex: 0 0 auto; padding: 6px 9px; border: 1px solid rgba(236, 223, 255, .38); border-radius: 999px; color: #f0e9fa; background: rgba(26, 19, 43, .28); font-size: 10px; white-space: nowrap; }
@@ -189,13 +201,16 @@ a.app-row:hover .row-arrow { transform: translate(2px, -2px); }
   .intro::before, .intro::after { display: none; }
   .logo-panel { background: #202b2d; backdrop-filter: none; -webkit-backdrop-filter: none; }
   .card-content { background: #101c20; backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .lyra .logo-panel, .lyra .card-content { background: #121416; }
+  .krona .card-content { background: #fffefa; }
 }
 
 @media (forced-colors: active) {
   .intro::before, .intro::after { display: none; }
   .app-row, .card-content { border-color: CanvasText; }
-  .app-row, .logo-panel, .card-content, .krona .card-content { background: Canvas; box-shadow: none; }
+  .app-row, .logo-panel, .card-content, .lyra .logo-panel, .lyra .card-content, .krona .logo-panel, .krona .card-content { background: Canvas; box-shadow: none; }
+  .krona .card-content { color: CanvasText; }
   .app-row::before { display: none; }
-  .app-text small, .app-description, .app-inspiration, .soon, .row-arrow { color: CanvasText; }
+  .app-text small, .app-description, .app-inspiration, .soon, .row-arrow, .lyra .row-arrow { color: CanvasText; }
   .krona .app-text small, .krona .app-description, .krona .app-inspiration, .krona .app-inspiration b, .krona .row-arrow { color: CanvasText; }
 }

@@ -3,80 +3,162 @@
  * Project: Polaris
  * Date: 2026-09-27
  * File: styles.css
- * Description: Simple Polaris hero and app cards with restrained green light.
+ * Description: Charcoal glass and aurora-lit app cards for the Polaris landing page.
  */
 :root {
   color-scheme: dark;
   font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color: #f3f5f2;
-  background: #0b1512;
+  color: #f3f5f4;
+  background: #07090b;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
 }
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { margin: 0; }
+body {
+  min-height: 100vh;
+  margin: 0;
+  background:
+    radial-gradient(ellipse at 23% 42%, rgba(33, 91, 78, .22), transparent 43%),
+    radial-gradient(ellipse at 91% 13%, rgba(64, 57, 110, .16), transparent 37%),
+    #07090b;
+}
 a { color: inherit; }
-a:focus-visible { outline: 2px solid #80d5aa; outline-offset: 5px; }
-.skip-link { position: fixed; z-index: 2; top: 12px; left: 12px; padding: 12px 16px; border-radius: 8px; background: #29563f; transform: translateY(-160%); }
+a:focus-visible { outline: 2px solid #a4f6d9; outline-offset: 5px; }
+::selection { color: #fff; background: #385e59; }
+.skip-link { position: fixed; z-index: 2; top: 12px; left: 12px; padding: 12px 16px; border-radius: 8px; background: #173e34; transform: translateY(-160%); }
 .skip-link:focus { transform: none; }
 
-.page-shell {
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, .8fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(48px, 9vw, 140px);
+  width: min(1200px, calc(100% - 80px));
   min-height: 100vh;
-  padding: 28px 28px 72px;
-  background:
-    radial-gradient(ellipse at 32% 22%, rgba(42, 94, 65, .28), transparent 45%),
-    radial-gradient(ellipse at 83% 76%, rgba(31, 71, 67, .13), transparent 44%),
-    #0b1512;
+  margin-inline: auto;
+  padding-block: 70px;
 }
-.site-header, main { width: min(1100px, 100%); margin-inline: auto; }
-.site-header { display: flex; justify-content: flex-end; }
-.app-nav { display: flex; flex-wrap: wrap; gap: 8px; }
-.app-nav a { min-width: 82px; padding: 11px 16px; border: 1px solid rgba(210, 227, 214, .16); border-radius: 999px; color: #d9e3da; font-size: 13px; text-align: center; text-decoration: none; transition: background-color .2s ease, border-color .2s ease; }
-.app-nav a:hover { background: rgba(144, 191, 152, .1); border-color: rgba(210, 227, 214, .36); }
+.intro { padding-left: clamp(0px, 3vw, 40px); }
+.polaris-logo { display: block; width: 170px; height: 170px; margin-bottom: 26px; filter: drop-shadow(0 0 42px rgba(231, 191, 121, .17)); }
+.intro h1 { margin: 0; font-size: clamp(64px, 6vw, 86px); font-weight: 650; line-height: 1; letter-spacing: -.065em; }
+.subtitle { margin: 16px 0 0; font-size: clamp(22px, 2.3vw, 30px); letter-spacing: -.035em; }
+.description { max-width: 370px; margin: 28px 0 0; color: #abbab6; font-size: 16px; line-height: 1.6; }
 
-.intro { display: grid; grid-template-columns: minmax(260px, .85fr) 1fr; align-items: center; gap: clamp(40px, 8vw, 108px); min-height: 410px; padding: 48px 52px 68px; }
-.polaris-logo { display: block; width: min(100%, 290px); height: auto; justify-self: center; filter: drop-shadow(0 0 52px rgba(70, 150, 109, .13)); }
-.intro-copy h1 { margin: 0; font-size: clamp(58px, 7vw, 86px); font-weight: 650; letter-spacing: -.065em; line-height: 1.04; }
-.subtitle { margin: 12px 0 0; font-size: clamp(22px, 2.6vw, 30px); letter-spacing: -.035em; }
-.description { max-width: 430px; margin: 28px 0 0; color: #c3cec6; font-size: 16px; line-height: 1.6; }
+.apps { display: grid; gap: 16px; scroll-margin-top: 28px; }
+.app-row {
+  --aurora-a: 44, 185, 139;
+  --aurora-b: 38, 135, 162;
+  --aurora-c: 111, 82, 187;
+  display: grid;
+  grid-template-columns: minmax(132px, 34%) minmax(0, 1fr);
+  min-height: 164px;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid rgba(215, 240, 232, .2);
+  border-radius: 22px;
+  background: #101517;
+  box-shadow: inset 0 1px rgba(236, 255, 249, .08), 0 20px 44px rgba(0, 0, 0, .28);
+  text-decoration: none;
+  transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+.krona { --aurora-a: 43, 166, 132; --aurora-b: 36, 142, 153; --aurora-c: 54, 111, 188; }
+.enigma { --aurora-a: 57, 126, 164; --aurora-b: 99, 99, 190; --aurora-c: 157, 83, 195; }
+a.app-row:hover { border-color: rgba(191, 239, 221, .55); transform: translateY(-3px); box-shadow: inset 0 1px rgba(236, 255, 249, .12), 0 26px 52px rgba(0, 0, 0, .4); }
 
-.apps-section { padding-top: 24px; }
-.app-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
-.app-card { display: flex; min-height: 264px; flex-direction: column; align-items: flex-start; justify-content: flex-end; padding: 28px; border: 1px solid rgba(210, 227, 214, .14); border-radius: 20px; background: rgba(12, 22, 19, .76); text-decoration: none; transition: background-color .2s ease, border-color .2s ease; }
-a.app-card:hover { background: rgba(23, 40, 31, .88); border-color: rgba(169, 215, 178, .38); }
-.app-logo { display: block; width: 76px; height: 76px; margin-bottom: auto; object-fit: contain; }
-.lyra-logo { width: 74px; }
-.krona-logo { width: 84px; margin-left: -5px; }
-.enigma-mark { display: block; margin-bottom: auto; color: #d2cce7; font-size: 68px; font-weight: 300; letter-spacing: -.08em; line-height: 1; }
-.enigma-mark span { color: #a299d6; }
-.app-name { display: flex; width: 100%; align-items: center; justify-content: space-between; margin: 28px 0 0; font-size: 29px; font-weight: 600; letter-spacing: -.045em; line-height: 1.15; }
-.card-arrow { color: #a8b9ad; font-size: 22px; font-weight: 400; }
-.status { margin-top: 11px; color: #adb8b0; font-size: 12px; }
-.upcoming { scroll-margin-top: 24px; }
+/* The translucent logo pane keeps each brand clear against the charcoal card. */
+.logo-panel {
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  padding: 18px;
+  border-right: 1px solid rgba(225, 249, 240, .15);
+  background:
+    radial-gradient(ellipse at 100% 0, rgba(var(--aurora-a), .12), transparent 70%),
+    linear-gradient(145deg, rgba(221, 242, 235, .21), rgba(139, 171, 169, .1) 48%, rgba(6, 11, 14, .3));
+  box-shadow: inset 0 1px rgba(255, 255, 255, .13), 10px 0 28px rgba(0, 0, 0, .1);
+  backdrop-filter: blur(24px) saturate(1.2);
+  -webkit-backdrop-filter: blur(24px) saturate(1.2);
+}
+.app-logo { display: block; width: 96px; height: 96px; object-fit: contain; filter: drop-shadow(0 8px 18px rgba(0, 0, 0, .22)); }
+.lyra-logo { width: 108px; height: 108px; }
+.krona-logo { width: 112px; height: 112px; filter: brightness(1.25) saturate(1.12) drop-shadow(0 8px 18px rgba(0, 0, 0, .22)); }
+.enigma-mark { color: #e1d6f3; font-size: 93px; font-weight: 300; letter-spacing: -.08em; line-height: 1; text-shadow: 0 8px 20px rgba(0, 0, 0, .2); }
+.enigma-mark span { color: #bcb0ed; }
 
-@media (max-width: 760px) {
-  .page-shell { padding: 24px 20px 48px; }
-  .site-header { justify-content: center; }
-  .intro { grid-template-columns: 1fr; gap: 12px; min-height: 0; padding: 58px 0 60px; text-align: center; }
-  .polaris-logo { width: min(48vw, 210px); }
+/* The content half carries layered color bands beneath a dark text scrim. */
+.card-content {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 10px;
+  overflow: hidden;
+  padding: 24px 23px;
+  background:
+    linear-gradient(180deg, rgba(7, 12, 17, .1), rgba(7, 11, 14, .38) 50%, rgba(6, 9, 12, .84)),
+    radial-gradient(ellipse at 10% 10%, rgba(var(--aurora-a), .65), transparent 61%),
+    radial-gradient(ellipse at 96% 3%, rgba(var(--aurora-c), .68), transparent 66%),
+    radial-gradient(ellipse at 75% 100%, rgba(var(--aurora-b), .45), transparent 65%),
+    #15212a;
+}
+.card-content::before {
+  position: absolute;
+  inset: -48% -25% 5%;
+  transform: rotate(-19deg);
+  background:
+    radial-gradient(ellipse at 48% 8%, transparent 34%, rgba(var(--aurora-a), .55) 44%, rgba(var(--aurora-b), .16) 52%, transparent 64%),
+    radial-gradient(ellipse at 94% 18%, transparent 32%, rgba(var(--aurora-c), .5) 45%, transparent 59%);
+  filter: blur(14px);
+  content: "";
+  pointer-events: none;
+}
+.app-text, .row-arrow, .soon { position: relative; }
+.app-text { display: flex; min-width: 0; flex-direction: column; gap: 8px; }
+.app-text strong { font-size: 29px; font-weight: 600; letter-spacing: -.045em; line-height: 1; text-shadow: 0 2px 15px rgba(0, 0, 0, .28); }
+.app-text small { max-width: 210px; color: #e0e9e7; font-size: 13px; line-height: 1.4; text-shadow: 0 1px 7px rgba(0, 0, 0, .45); }
+.row-arrow { align-self: flex-start; color: #eaf9f4; font-size: 25px; line-height: 1; transition: transform .2s ease; }
+a.app-row:hover .row-arrow { transform: translate(2px, -2px); }
+.soon { align-self: flex-start; padding: 6px 9px; border: 1px solid rgba(236, 223, 255, .38); border-radius: 999px; color: #f0e9fa; background: rgba(26, 19, 43, .28); font-size: 10px; white-space: nowrap; }
+
+@media (max-width: 800px) {
+  .layout { grid-template-columns: 1fr; gap: 58px; width: min(560px, calc(100% - 40px)); padding-block: 62px 52px; }
+  .intro { padding-left: 0; text-align: center; }
+  .polaris-logo { width: 126px; height: 126px; margin: 0 auto 22px; }
   .description { margin-inline: auto; }
-  .app-grid { grid-template-columns: 1fr; max-width: 460px; margin-inline: auto; }
-  .app-card { min-height: 225px; }
 }
 
 @media (max-width: 420px) {
-  .app-nav { gap: 6px; }
-  .app-nav a { min-width: 0; padding-inline: 13px; }
-  .intro-copy h1 { font-size: 58px; }
+  .layout { gap: 44px; padding-top: 48px; }
+  .intro h1 { font-size: 60px; }
+  .app-row { grid-template-columns: minmax(96px, 31%) minmax(0, 1fr); min-height: 142px; }
+  .logo-panel { padding: 10px; }
+  .app-logo, .lyra-logo, .krona-logo { width: 84px; height: 84px; }
+  .enigma-mark { font-size: 74px; }
+  .card-content { padding: 18px 16px; }
+  .app-text strong { font-size: 25px; }
+  .app-text small { font-size: 12px; }
+  .soon { padding: 5px 7px; font-size: 9px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .app-nav a, .app-card { transition: none; }
+  .app-row, .row-arrow { transition: none; }
+  a.app-row:hover, a.app-row:hover .row-arrow { transform: none; }
 }
 
-@media (prefers-contrast: more), (forced-colors: active) {
-  .app-nav a, .app-card { border-color: currentColor; }
+@media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+  .logo-panel { background: #202b2d; backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .card-content { background: #233d43; }
+  .card-content::before { display: none; }
+}
+
+@media (forced-colors: active) {
+  .app-row, .logo-panel { border-color: CanvasText; }
+  .app-row, .logo-panel, .card-content { background: Canvas; box-shadow: none; }
+  .card-content::before { display: none; }
+  .app-text small, .soon, .row-arrow { color: CanvasText; }
 }

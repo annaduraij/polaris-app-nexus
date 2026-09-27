@@ -71,7 +71,7 @@ a:focus-visible { outline: 2px solid #a4f6d9; outline-offset: 5px; }
   to { transform: translate3d(-11%, 8%, 0) rotate(-13deg) scale(1.08); opacity: .95; }
 }
 .polaris-logo { display: block; width: 170px; height: 170px; margin-bottom: 26px; filter: drop-shadow(0 0 42px rgba(231, 191, 121, .17)); }
-.intro h1 { margin: 0; font-size: clamp(64px, 6vw, 86px); font-weight: 650; line-height: 1; letter-spacing: -.065em; }
+.intro h1 { margin: 0; font-size: clamp(64px, 6vw, 86px); font-weight: 650; line-height: 1; letter-spacing: .065em; }
 .subtitle { margin: 16px 0 0; font-size: clamp(22px, 2.3vw, 30px); letter-spacing: -.035em; }
 .description { max-width: 370px; margin: 28px 0 0; color: #abbab6; font-size: 16px; line-height: 1.6; }
 
@@ -80,14 +80,23 @@ a:focus-visible { outline: 2px solid #a4f6d9; outline-offset: 5px; }
   --aurora-a: 117, 207, 63;
   --aurora-b: 21, 176, 135;
   --aurora-c: 35, 132, 153;
+  position: relative;
   display: grid;
-  grid-template-columns: 104px minmax(0, 1fr);
-  min-height: 100px;
+  grid-template-columns: 62px minmax(0, 1fr);
+  align-items: center;
+  gap: 9px;
+  min-height: 88px;
   isolation: isolate;
   overflow: hidden;
+  padding: 8px;
   border: 1px solid rgba(215, 240, 232, .2);
-  border-radius: 18px;
-  background: #101517;
+  border-radius: 19px;
+  background:
+    linear-gradient(105deg, rgba(6, 11, 14, .35), rgba(7, 11, 14, .08) 52%, rgba(7, 11, 14, .27)),
+    radial-gradient(ellipse at 12% 20%, rgba(var(--aurora-a), .75), transparent 59%),
+    radial-gradient(ellipse at 83% 7%, rgba(var(--aurora-b), .65), transparent 61%),
+    radial-gradient(ellipse at 70% 100%, rgba(var(--aurora-c), .61), transparent 64%),
+    #17242a;
   box-shadow: inset 0 1px rgba(236, 255, 249, .08), 0 20px 44px rgba(0, 0, 0, .28);
   text-decoration: none;
   transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease;
@@ -95,29 +104,35 @@ a:focus-visible { outline: 2px solid #a4f6d9; outline-offset: 5px; }
 .krona { --aurora-a: 21, 80, 62; --aurora-b: 92, 134, 112; --aurora-c: 157, 176, 148; }
 .enigma { --aurora-a: 100, 88, 167; --aurora-b: 145, 103, 190; --aurora-c: 202, 170, 223; }
 a.app-row:hover { border-color: rgba(191, 239, 221, .55); transform: translateY(-3px); box-shadow: inset 0 1px rgba(236, 255, 249, .12), 0 26px 52px rgba(0, 0, 0, .4); }
+.app-row::before {
+  position: absolute;
+  inset: -80% -20%;
+  transform: rotate(-16deg);
+  background: radial-gradient(ellipse at 50% 0, transparent 37%, rgba(var(--aurora-a), .34) 46%, rgba(var(--aurora-b), .14) 55%, transparent 67%);
+  filter: blur(18px);
+  content: "";
+  pointer-events: none;
+}
 
-/* The translucent logo pane keeps each brand clear against the charcoal card. */
+/* The logo and the inset share one aurora surface; the logo stays close to text height. */
 .logo-panel {
-  z-index: 1;
+  position: relative;
   display: grid;
   place-items: center;
   min-width: 0;
-  padding: 10px;
-  border-right: 1px solid rgba(225, 249, 240, .15);
-  background:
-    radial-gradient(ellipse at 100% 0, rgba(var(--aurora-a), .12), transparent 70%),
-    linear-gradient(145deg, rgba(221, 242, 235, .21), rgba(139, 171, 169, .1) 48%, rgba(6, 11, 14, .3));
-  box-shadow: inset 0 1px rgba(255, 255, 255, .13), 10px 0 28px rgba(0, 0, 0, .1);
-  backdrop-filter: blur(24px) saturate(1.2);
-  -webkit-backdrop-filter: blur(24px) saturate(1.2);
+  height: 62px;
+  border-radius: 12px;
+  background: rgba(7, 12, 15, .2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
-.app-logo { display: block; width: 78px; height: 78px; object-fit: contain; filter: drop-shadow(0 6px 12px rgba(0, 0, 0, .22)); }
-.lyra-logo { width: 82px; height: 82px; }
-.krona-logo { width: 82px; height: 82px; filter: brightness(1.25) saturate(1.12) drop-shadow(0 6px 12px rgba(0, 0, 0, .22)); }
-.enigma-mark { color: #e1d6f3; font-size: 67px; font-weight: 300; letter-spacing: -.08em; line-height: 1; text-shadow: 0 6px 12px rgba(0, 0, 0, .2); }
+.app-logo { display: block; width: 46px; height: 46px; object-fit: contain; filter: drop-shadow(0 4px 9px rgba(0, 0, 0, .24)); }
+.lyra-logo { width: 48px; height: 48px; }
+.krona-logo { width: 48px; height: 48px; filter: brightness(1.25) saturate(1.12) drop-shadow(0 4px 9px rgba(0, 0, 0, .24)); }
+.enigma-mark { color: #e1d6f3; font-size: 47px; font-weight: 300; letter-spacing: -.08em; line-height: 1; text-shadow: 0 4px 9px rgba(0, 0, 0, .24); }
 .enigma-mark span { color: #bcb0ed; }
 
-/* The content half carries layered color bands beneath a dark text scrim. */
+/* The text reads from its own dark glass inset while the aurora stays visible around it. */
 .card-content {
   position: relative;
   display: flex;
@@ -126,28 +141,18 @@ a.app-row:hover { border-color: rgba(191, 239, 221, .55); transform: translateY(
   justify-content: space-between;
   gap: 10px;
   overflow: hidden;
-  padding: 17px 20px;
-  background:
-    linear-gradient(90deg, rgba(5, 9, 10, .66), rgba(6, 9, 11, .3) 45%, rgba(6, 8, 11, .44)),
-    radial-gradient(ellipse at 5% 15%, rgba(var(--aurora-a), .66), transparent 68%),
-    radial-gradient(ellipse at 95% 0, rgba(var(--aurora-c), .68), transparent 70%),
-    radial-gradient(ellipse at 68% 100%, rgba(var(--aurora-b), .5), transparent 73%),
-    #182026;
-}
-.card-content::before {
-  position: absolute;
-  inset: -48% -25% 5%;
-  transform: rotate(-19deg);
-  background:
-    radial-gradient(ellipse at 48% 8%, transparent 34%, rgba(var(--aurora-a), .55) 44%, rgba(var(--aurora-b), .16) 52%, transparent 64%),
-    radial-gradient(ellipse at 94% 18%, transparent 32%, rgba(var(--aurora-c), .5) 45%, transparent 59%);
-  filter: blur(14px);
-  content: "";
-  pointer-events: none;
+  min-height: 66px;
+  padding: 12px 18px;
+  border: 1px solid rgba(235, 250, 247, .17);
+  border-radius: 13px;
+  background: rgba(5, 10, 13, .63);
+  box-shadow: inset 0 1px rgba(255, 255, 255, .08), 0 7px 20px rgba(0, 0, 0, .12);
+  backdrop-filter: blur(20px) saturate(1.15);
+  -webkit-backdrop-filter: blur(20px) saturate(1.15);
 }
 .app-text, .row-arrow, .soon { position: relative; }
 .app-text { display: flex; min-width: 0; align-items: baseline; gap: 12px; white-space: nowrap; }
-.app-text strong { flex: 0 0 auto; font-size: 24px; font-weight: 600; letter-spacing: -.045em; line-height: 1; text-shadow: 0 2px 15px rgba(0, 0, 0, .28); }
+.app-text strong { flex: 0 0 auto; font-size: 22px; font-weight: 600; letter-spacing: -.025em; line-height: 1; }
 .app-text small { min-width: 0; overflow: hidden; color: #e0e9e7; font-size: 13px; line-height: 1.4; text-overflow: ellipsis; text-shadow: 0 1px 7px rgba(0, 0, 0, .45); }
 .row-arrow { flex: 0 0 auto; color: #eaf9f4; font-size: 24px; line-height: 1; transition: transform .2s ease; }
 a.app-row:hover .row-arrow { transform: translate(2px, -2px); }
@@ -162,12 +167,12 @@ a.app-row:hover .row-arrow { transform: translate(2px, -2px); }
 
 @media (max-width: 420px) {
   .layout { gap: 44px; padding-top: 48px; }
-  .intro h1 { font-size: 60px; }
-  .app-row { grid-template-columns: 78px minmax(0, 1fr); min-height: 82px; }
-  .logo-panel { padding: 7px; }
-  .app-logo, .lyra-logo, .krona-logo { width: 62px; height: 62px; }
-  .enigma-mark { font-size: 54px; }
-  .card-content { padding: 12px 13px; }
+  .intro h1 { font-size: 60px; letter-spacing: .055em; }
+  .app-row { grid-template-columns: 50px minmax(0, 1fr); gap: 6px; min-height: 72px; padding: 6px; }
+  .logo-panel { height: 50px; }
+  .app-logo, .lyra-logo, .krona-logo { width: 40px; height: 40px; }
+  .enigma-mark { font-size: 42px; }
+  .card-content { min-height: 54px; padding: 9px 11px; }
   .app-text { gap: 8px; }
   .app-text strong { font-size: 20px; }
   .app-text small { font-size: 11px; }
@@ -185,14 +190,13 @@ a.app-row:hover .row-arrow { transform: translate(2px, -2px); }
 @media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
   .intro::before, .intro::after { display: none; }
   .logo-panel { background: #202b2d; backdrop-filter: none; -webkit-backdrop-filter: none; }
-  .card-content { background: #233d43; }
-  .card-content::before { display: none; }
+  .card-content { background: #101c20; backdrop-filter: none; -webkit-backdrop-filter: none; }
 }
 
 @media (forced-colors: active) {
   .intro::before, .intro::after { display: none; }
-  .app-row, .logo-panel { border-color: CanvasText; }
+  .app-row, .card-content { border-color: CanvasText; }
   .app-row, .logo-panel, .card-content { background: Canvas; box-shadow: none; }
-  .card-content::before { display: none; }
+  .app-row::before { display: none; }
   .app-text small, .soon, .row-arrow { color: CanvasText; }
 }

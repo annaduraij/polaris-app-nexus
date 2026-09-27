@@ -3,6 +3,8 @@
   "private": true,
   "scripts": {
     "dev": "wrangler dev",
+    "sync:apps": "node scripts/sync-app-contract.mjs",
+    "predeploy": "npm run sync:apps",
     "deploy": "wrangler deploy",
     "check": "wrangler deploy --dry-run"
   },

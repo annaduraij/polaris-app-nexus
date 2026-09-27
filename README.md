@@ -17,14 +17,18 @@ Each app README begins with the same plain-text fields, before its first `##` he
 
 **Inspiration:** One short sentence explaining why it was created.
 
-**Primary surface:** #0c0e10 (surface name)
+**Primary surface:** #050606 (page charcoal)
 
-**Secondary color:** #155d46 (color name)
+**Secondary surface:** #0c0e10 (glass charcoal)
 
-**Accent color:** #c8ec43 (color name)
+**Secondary color:** #155d46 (forest green)
+
+**Signature color:** #00b377 (playback green)
+
+**Accent color:** #ccee44 (sampled logo yellow-green)
 ```
 
-The logo path is relative to that app's repository. Polaris checks that all fields exist, that the subtitle has five words, that each description and inspiration is at most 180 characters, and that the three colors are six-digit hex values. The sync command copies the logos and writes the copy and colors into `public/index.html`; the app READMEs remain the source of truth for their identity.
+The logo path is relative to that app's repository. Polaris checks that all fields exist, that the subtitle has five words, that each description and inspiration is at most 180 characters, and that the five colors are six-digit hex values. The sync command copies the logos and writes the copy and colors into `public/index.html`; the app READMEs remain the source of truth for their identity. A color contract names the surfaces and accents; each application still controls how much of each color it uses.
 
 Run `npm run sync:apps` after changing an app identity. The command expects the `lyra-music`, `krona-budget`, and `enigma-misc` checkouts under `/Users/ajay/projects` in this workspace. Set `POLARIS_APPS_ROOT` to the parent directory of those repositories elsewhere. Ren is the current identity of the `enigma-misc` repository; its Polaris card stays non-clickable until a public destination is ready.
 

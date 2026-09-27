@@ -1,97 +1,80 @@
 <!doctype html>
+<!-- Project: Polaris | Date: 2026-09-27 | File: index.html
+     Description: A black-glass entrance to Jay's apps with aurora-tinted surfaces. -->
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta
-      name="description"
-      content="Polaris is Jay's App Nexus: one place to discover Ajay's apps and experiments."
-    />
-    <meta name="theme-color" content="#0b1020" />
+    <meta name="description" content="Polaris is Jay's App Nexus: one place to discover Ajay's apps and experiments." />
+    <meta name="theme-color" content="#060809" />
     <title>Polaris — Jay's App Nexus</title>
     <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <div class="page-shell">
-      <header class="site-header">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="page-shell" id="top">
+      <header class="site-header glass">
         <a class="wordmark" href="#top" aria-label="Polaris home">
-          <img class="wordmark-symbol" src="./logo.svg" alt="" />
+          <img class="wordmark-symbol" src="./logo.svg" width="30" height="30" alt="" />
           <span>polaris</span>
         </a>
         <a class="header-link" href="#apps">Explore apps <span aria-hidden="true">↗</span></a>
       </header>
-
-      <main id="top">
+      <main id="main">
         <section class="intro" aria-labelledby="page-title">
-          <div class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span> A collection of useful little things</div>
-          <h1 id="page-title">Polaris<span class="title-period">.</span></h1>
-          <div class="subtitle">Jay's App Nexus</div>
-          <p>
-            One place for the apps, tools, and experiments I'm building. Pick
-            something that catches your eye and make yourself at home.
-          </p>
-          <a class="intro-link" href="#apps">See the apps <span aria-hidden="true">↓</span></a>
-          <div class="orbit orbit-one" aria-hidden="true"></div>
-          <div class="orbit orbit-two" aria-hidden="true"></div>
-          <img class="north-star" src="./logo.svg" alt="" aria-hidden="true" />
+          <div class="intro-copy">
+            <div class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>A few things, thoughtfully built.</div>
+            <h1 id="page-title">Polaris<span class="title-period">.</span></h1>
+            <p class="subtitle">Jay's App Nexus</p>
+            <p class="intro-description">A home for my apps, tools, and little experiments.<br class="desktop-break" /> Find something that makes your day a little easier.</p>
+            <a class="intro-link" href="#apps">Explore the collection <span aria-hidden="true">↓</span></a>
+          </div>
+          <div class="hero-surface glass aurora" aria-hidden="true">
+            <span class="hero-coordinate">A LITTLE SPACE FOR POSSIBILITY</span>
+            <img class="north-star" src="./logo.svg" width="150" height="150" alt="" />
+            <div class="hero-caption"><span>Many ideas. One North Star.</span><span>01 — ∞</span></div>
+          </div>
         </section>
-
         <section class="apps-section" id="apps" aria-labelledby="apps-title">
           <div class="section-heading">
-            <div>
-              <span class="section-kicker">THE COLLECTION</span>
-              <h2 id="apps-title">Find your next stop.</h2>
-            </div>
-            <span class="app-count">02 AVAILABLE · 01 COMING SOON</span>
+            <div><span class="section-kicker">THE COLLECTION</span><h2 id="apps-title">Find your next stop.</h2></div>
+            <span class="app-count">02 AVAILABLE <span aria-hidden="true">/</span> 01 COMING SOON</span>
           </div>
-
           <div class="app-grid">
-            <article class="app-card enigma coming-soon" aria-label="Enigma coming soon">
-              <div class="card-top">
-                <span class="app-icon" aria-hidden="true">✦</span>
-                <span class="soon-badge">SOON</span>
-              </div>
+            <a class="app-card glass aurora lyra" href="https://lyra.ajay.nexus" aria-label="Open Lyra">
+              <div class="card-top"><span class="card-index">01 / MUSIC</span><span class="card-arrow" aria-hidden="true">↗</span></div>
+              <div class="app-identity" aria-hidden="true"><img class="app-logo lyra-logo" src="./brand/lyra.png" width="96" height="96" alt="" /></div>
               <div class="card-bottom">
-                <span class="card-index">01 / UTILITIES</span>
-                <h3>Enigma</h3>
-                <p>Small, independent applets for everyday tasks are on the way.</p>
-                <span class="card-cta">Coming soon</span>
+                <h3>Lyra</h3>
+                <p>Your music, in one place.<br />A personal space to listen and explore.</p>
+                <span class="card-cta">Open Lyra <span aria-hidden="true">↗</span></span>
+              </div>
+            </a>
+            <a class="app-card glass aurora krona" href="https://krona.ajay.nexus" aria-label="Open Krona">
+              <div class="card-top"><span class="card-index">02 / FINANCE</span><span class="card-arrow" aria-hidden="true">↗</span></div>
+              <div class="app-identity" aria-hidden="true"><img class="app-logo krona-logo" src="./brand/krona.svg" width="96" height="96" alt="" /></div>
+              <div class="card-bottom">
+                <h3>Krona</h3>
+                <p>A calmer view of your finances.<br />Make room for what matters.</p>
+                <span class="card-cta">Open Krona <span aria-hidden="true">↗</span></span>
+              </div>
+            </a>
+            <article class="app-card glass aurora enigma" aria-labelledby="enigma-title">
+              <div class="card-top"><span class="card-index">03 / UTILITIES</span><span class="soon-label">IN THE WORKS</span></div>
+              <div class="app-identity" aria-hidden="true"><span class="enigma-mark">e<span>·</span></span></div>
+              <div class="card-bottom">
+                <h3 id="enigma-title">Enigma</h3>
+                <p>Little tools for everyday things.<br />A few useful ideas are taking shape.</p>
+                <span class="card-cta coming-soon"><span class="status-dot" aria-hidden="true"></span>Coming soon</span>
               </div>
             </article>
-
-            <a class="app-card krona" href="https://krona.ajay.nexus" aria-label="Open Krona">
-              <div class="card-top">
-                <span class="app-icon" aria-hidden="true">◷</span>
-                <span class="card-arrow" aria-hidden="true">↗</span>
-              </div>
-              <div class="card-bottom">
-                <span class="card-index">02 / FINANCE</span>
-                <h3>Krona</h3>
-                <p>A calmer place to see and manage your budget.</p>
-                <span class="card-cta">Explore Krona <span aria-hidden="true">↗</span></span>
-              </div>
-            </a>
-
-            <a class="app-card lyra" href="https://lyra.ajay.nexus" aria-label="Open Lyra">
-              <div class="card-top">
-                <span class="app-icon" aria-hidden="true">♫</span>
-                <span class="card-arrow" aria-hidden="true">↗</span>
-              </div>
-              <div class="card-bottom">
-                <span class="card-index">03 / MUSIC</span>
-                <h3>Lyra</h3>
-                <p>A personal workspace for your music library and playback.</p>
-                <span class="card-cta">Explore Lyra <span aria-hidden="true">↗</span></span>
-              </div>
-            </a>
           </div>
         </section>
       </main>
-
       <footer class="site-footer">
-        <span><img class="footer-symbol" src="./logo.svg" alt="" /> Polaris</span>
-        <span>Made by Ajay · More on the way</span>
+        <span class="footer-brand"><img src="./logo.svg" width="20" height="20" alt="" />Polaris</span>
+        <span>Made by Ajay <span class="footer-dot" aria-hidden="true">·</span> More on the way</span>
       </footer>
     </div>
   </body>

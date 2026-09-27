@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="505" viewBox="0 0 1040 505" role="img" aria-labelledby="title desc">
+<title id="title">Polaris open cutout color options</title>
+<desc id="desc">Four color options for the open cutout North Needle logo: Glacier Blue, Aurora Mint, North Gold, and Coral Light.</desc>
+<defs><radialGradient id="aurora"><stop offset="0" stop-color="#1b4944"/><stop offset="0.55" stop-color="#102a2b"/><stop offset="1" stop-color="#0a1013"/></radialGradient></defs>
+<rect width="1040" height="505" rx="24" fill="#060809"/>
+<text x="32" y="48" fill="#f2f5f4" font-size="24" font-family="Arial,sans-serif">Open cutout / color studies</text>
+<text x="32" y="75" fill="#a5afad" font-size="13" font-family="Arial,sans-serif">The same transparent astroid in four palettes</text>
+<linearGradient id="color0" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E9FAFF"/><stop offset="1" stop-color="#7CC7EA"/></linearGradient>
+<rect x="24" y="103" width="238" height="364" rx="18" fill="url(#aurora)" stroke="#38524e" stroke-opacity=".75"/>
+<text x="44" y="134" fill="#92b5aa" font-size="12" font-family="Arial,sans-serif" letter-spacing="2">01</text>
+<g transform="translate(59 151) scale(2.65)"><path d="M32 3 C32 18.95 39.2 32 48 32 C39.2 32 32 45.05 32 61 C32 45.05 24.8 32 16 32 C24.8 32 32 18.95 32 3Z M32 21 C32 27.05 35.15 32 39 32 C35.15 32 32 36.95 32 43 C32 36.95 28.85 32 25 32 C28.85 32 32 27.05 32 21Z" fill="url(#color0)" fill-rule="evenodd"/></g>
+<text x="44" y="351" fill="#f2f5f4" font-size="19" font-family="Arial,sans-serif">Glacier Blue</text>
+<text x="44" y="375" fill="#b0c4bd" font-size="12" font-family="Arial,sans-serif">Cool, luminous blue</text>
+<g transform="translate(43 399) scale(.47)"><path d="M32 3 C32 18.95 39.2 32 48 32 C39.2 32 32 45.05 32 61 C32 45.05 24.8 32 16 32 C24.8 32 32 18.95 32 3Z M32 21 C32 27.05 35.15 32 39 32 C35.15 32 32 36.95 32 43 C32 36.95 28.85 32 25 32 C28.85 32 32 27.05 32 21Z" fill="url(#color0)" fill-rule="evenodd"/></g>
+<text x="79" y="434" fill="#f2f5f4" font-size="23" font-family="Arial,sans-serif" letter-spacing="1.8">polaris</text>
+<linearGradient id="color1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E1FFF2"/><stop offset="1" stop-color="#59D8AD"/></linearGradient>
+<rect x="278" y="103" width="238" height="364" rx="18" fill="url(#aurora)" stroke="#38524e" stroke-opacity=".75"/>
+<text x="298" y="134" fill="#92b5aa" font-size="12" font-family="Arial,sans-serif" letter-spacing="2">02</text>
+<g transform="translate(313 151) scale(2.65)"><path d="M32 3 C32 18.95 39.2 32 48 32 C39.2 32 32 45.05 32 61 C32 45.05 24.8 32 16 32 C24.8 32 32 18.95 32 3Z M32 21 C32 27.05 35.15 32 39 32 C35.15 32 32 36.95 32 43 C32 36.95 28.85 32 25 32 C28.85 32 32 27.05 32 21Z" fill="url(#color1)" fill-rule="evenodd"/></g>
+<text x="298" y="351" fill="#f2f5f4" font-size="19" font-family="Arial,sans-serif">Aurora Mint</text>
+<text x="298" y="375" fill="#b0c4bd" font-size="12" font-family="Arial,sans-serif">Bright green-teal</text>
+<g transform="translate(297 399) scale(.47)"><path d="M32 3 C32 18.95 39.2 32 48 32 C39.2 32 32 45.05 32 61 C32 45.05 24.8 32 16 32 C24.8 32 32 18.95 32 3Z M32 21 C32 27.05 35.15 32 39 32 C35.15 32 32 36.95 32 43 C32 36.95 28.85 32 25 32 C28.85 32 32 27.05 32 21Z" fill="url(#color1)" fill-rule="evenodd"/></g>
+<text x="333" y="434" fill="#f2f5f4" font-size="23" font-family="Arial,sans-serif" letter-spacing="1.8">polaris</text>
+<linearGradient id="color2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFF4CF"/><stop offset="1" stop-color="#D9A55D"/></linearGradient>
+<rect x="532" y="103" width="238" height="364" rx="18" fill="url(#aurora)" stroke="#38524e" stroke-opacity=".75"/>
+<text x="552" y="134" fill="#92b5aa" font-size="12" font-family="Arial,sans-serif" letter-spacing="2">03</text>
+<g transform="translate(567 151) scale(2.65)"><path d="M32 3 C32 18.95 39.2 32 48 32 C39.2 32 32 45.05 32 61 C32 45.05 24.8 32 16 32 C24.8 32 32 18.95 32 3Z M32 21 C32 27.05 35.15 32 39 32 C35.15 32 32 36.95 32 43 C32 36.95 28.85 32 25 32 C28.85 32 32 27.05 32 21Z" fill="url(#color2)" fill-rule="evenodd"/></g>
+<text x="552" y="351" fill="#f2f5f4" font-size="19" font-family="Arial,sans-serif">North Gold</text>
+<text x="552" y="375" fill="#b0c4bd" font-size="12" font-family="Arial,sans-serif">Warm focal color</text>
+<g transform="translate(551 399) scale(.47)"><path d="M32 3 C32 18.95 39.2 32 48 32 C39.2 32 32 45.05 32 61 C32 45.05 24.8 32 16 32 C24.8 32 32 18.95 32 3Z M32 21 C32 27.05 35.15 32 39 32 C35.15 32 32 36.95 32 43 C32 36.95 28.85 32 25 32 C28.85 32 32 27.05 32 21Z" fill="url(#color2)" fill-rule="evenodd"/></g>
+<text x="587" y="434" fill="#f2f5f4" font-size="23" font-family="Arial,sans-serif" letter-spacing="1.8">polaris</text>
+<linearGradient id="color3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFE7DE"/><stop offset="1" stop-color="#E99A8C"/></linearGradient>
+<rect x="786" y="103" width="238" height="364" rx="18" fill="url(#aurora)" stroke="#38524e" stroke-opacity=".75"/>
+<text x="806" y="134" fill="#92b5aa" font-size="12" font-family="Arial,sans-serif" letter-spacing="2">04</text>
+<g transform="translate(821 151) scale(2.65)"><path d="M32 3 C32 18.95 39.2 32 48 32 C39.2 32 32 45.05 32 61 C32 45.05 24.8 32 16 32 C24.8 32 32 18.95 32 3Z M32 21 C32 27.05 35.15 32 39 32 C35.15 32 32 36.95 32 43 C32 36.95 28.85 32 25 32 C28.85 32 32 27.05 32 21Z" fill="url(#color3)" fill-rule="evenodd"/></g>
+<text x="806" y="351" fill="#f2f5f4" font-size="19" font-family="Arial,sans-serif">Coral Light</text>
+<text x="806" y="375" fill="#b0c4bd" font-size="12" font-family="Arial,sans-serif">Soft, warm contrast</text>
+<g transform="translate(805 399) scale(.47)"><path d="M32 3 C32 18.95 39.2 32 48 32 C39.2 32 32 45.05 32 61 C32 45.05 24.8 32 16 32 C24.8 32 32 18.95 32 3Z M32 21 C32 27.05 35.15 32 39 32 C35.15 32 32 36.95 32 43 C32 36.95 28.85 32 25 32 C28.85 32 32 27.05 32 21Z" fill="url(#color3)" fill-rule="evenodd"/></g>
+<text x="841" y="434" fill="#f2f5f4" font-size="23" font-family="Arial,sans-serif" letter-spacing="1.8">polaris</text>
+</svg>

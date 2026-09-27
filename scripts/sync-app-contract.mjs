@@ -53,13 +53,15 @@ function readIdentity(readme, id) {
   return {
     name, logo, subtitle, description, inspiration,
     surface: color('Primary surface'),
+    raisedSurface: color('Secondary surface'),
     secondary: color('Secondary color'),
+    signature: color('Signature color'),
     accent: color('Accent color'),
   };
 }
 
 function renderApp(app, identity) {
-  const { name, subtitle, description, inspiration, logoFile, surface, secondary, accent } = identity;
+  const { name, subtitle, description, inspiration, logoFile, surface, raisedSurface, secondary, signature, accent } = identity;
   const tag = app.url ? 'a' : 'article';
   const attributes = app.url
     ? `href="${app.url}" aria-label="Open ${escapeHtml(name)}"`
@@ -68,7 +70,7 @@ function renderApp(app, identity) {
     ? '<span class="row-arrow" aria-hidden="true">↗</span>'
     : '<span class="soon">Coming soon</span>';
 
-  return `        <${tag} class="app-row ${app.id}${app.url ? '' : ' upcoming'}" ${attributes} style="--surface: ${surface}; --secondary: ${secondary}; --accent: ${accent}">
+  return `        <${tag} class="app-row ${app.id}${app.url ? '' : ' upcoming'}" ${attributes} style="--surface: ${surface}; --surface-raised: ${raisedSurface}; --secondary: ${secondary}; --signature: ${signature}; --accent: ${accent}">
           <span class="logo-panel"><img class="app-logo ${app.id}-logo" src="./brand/${logoFile}" width="48" height="48" alt="" /></span>
           <span class="card-content">
             <span class="app-text">

@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
-  <title id="title">Polaris North Star</title>
-  <desc id="desc">An elongated gold astroid with a transparent astroid at its center.</desc>
+  <title id="title">Polaris: North Gold open cutout</title>
+  <desc id="desc">An elongated four-point astroid with a transparent nested astroid and a north gold gradient.</desc>
   <defs>
     <linearGradient id="starlight" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#FFF4CF"/>

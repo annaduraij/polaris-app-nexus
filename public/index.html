@@ -1,81 +1,48 @@
 <!doctype html>
 <!-- Project: Polaris | Date: 2026-09-27 | File: index.html
-     Description: A black-glass entrance to Jay's apps with aurora-tinted surfaces. -->
+     Description: A glass and aurora entrance to Jay's apps. -->
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Polaris is Jay's App Nexus: one place to discover Ajay's apps and experiments." />
-    <meta name="theme-color" content="#060809" />
+    <meta name="description" content="Polaris — Jay's App Nexus." />
+    <meta name="theme-color" content="#07090b" />
     <title>Polaris — Jay's App Nexus</title>
     <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./styles.css?v=3" />
   </head>
   <body>
-    <a class="skip-link" href="#main">Skip to content</a>
-    <div class="page-shell" id="top">
-      <header class="site-header glass">
-        <a class="wordmark" href="#top" aria-label="Polaris home">
-          <img class="wordmark-symbol" src="./logo.svg" width="30" height="30" alt="" />
-          <span>polaris</span>
-        </a>
-        <a class="header-link" href="#apps">Explore apps <span aria-hidden="true">↗</span></a>
+    <a class="skip-link" href="#apps">Skip to apps</a>
+    <main class="layout">
+      <header class="intro">
+        <img class="polaris-logo" src="./logo.svg" width="170" height="170" alt="" />
+        <h1>Polaris</h1>
+        <p class="subtitle">Jay's App Nexus</p>
+        <p class="description">A collection of personal projects and useful tools.</p>
       </header>
-      <main id="main">
-        <section class="intro" aria-labelledby="page-title">
-          <div class="intro-copy">
-            <div class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>A few things, thoughtfully built.</div>
-            <h1 id="page-title">Polaris<span class="title-period">.</span></h1>
-            <p class="subtitle">Jay's App Nexus</p>
-            <p class="intro-description">A home for my apps, tools, and little experiments.<br class="desktop-break" /> Find something that makes your day a little easier.</p>
-            <a class="intro-link" href="#apps">Explore the collection <span aria-hidden="true">↓</span></a>
-          </div>
-          <div class="hero-surface glass aurora" aria-hidden="true">
-            <span class="hero-coordinate">A LITTLE SPACE FOR POSSIBILITY</span>
-            <img class="north-star" src="./logo.svg" width="150" height="150" alt="" />
-            <div class="hero-caption"><span>Many ideas. One North Star.</span><span>01 — ∞</span></div>
-          </div>
-        </section>
-        <section class="apps-section" id="apps" aria-labelledby="apps-title">
-          <div class="section-heading">
-            <div><span class="section-kicker">THE COLLECTION</span><h2 id="apps-title">Find your next stop.</h2></div>
-            <span class="app-count">02 AVAILABLE <span aria-hidden="true">/</span> 01 COMING SOON</span>
-          </div>
-          <div class="app-grid">
-            <a class="app-card glass aurora lyra" href="https://lyra.ajay.nexus" aria-label="Open Lyra">
-              <div class="card-top"><span class="card-index">01 / MUSIC</span><span class="card-arrow" aria-hidden="true">↗</span></div>
-              <div class="app-identity" aria-hidden="true"><img class="app-logo lyra-logo" src="./brand/lyra.png" width="96" height="96" alt="" /></div>
-              <div class="card-bottom">
-                <h3>Lyra</h3>
-                <p>Your music, in one place.<br />A personal space to listen and explore.</p>
-                <span class="card-cta">Open Lyra <span aria-hidden="true">↗</span></span>
-              </div>
-            </a>
-            <a class="app-card glass aurora krona" href="https://krona.ajay.nexus" aria-label="Open Krona">
-              <div class="card-top"><span class="card-index">02 / FINANCE</span><span class="card-arrow" aria-hidden="true">↗</span></div>
-              <div class="app-identity" aria-hidden="true"><img class="app-logo krona-logo" src="./brand/krona.svg" width="96" height="96" alt="" /></div>
-              <div class="card-bottom">
-                <h3>Krona</h3>
-                <p>A calmer view of your finances.<br />Make room for what matters.</p>
-                <span class="card-cta">Open Krona <span aria-hidden="true">↗</span></span>
-              </div>
-            </a>
-            <article class="app-card glass aurora enigma" aria-labelledby="enigma-title">
-              <div class="card-top"><span class="card-index">03 / UTILITIES</span><span class="soon-label">IN THE WORKS</span></div>
-              <div class="app-identity" aria-hidden="true"><span class="enigma-mark">e<span>·</span></span></div>
-              <div class="card-bottom">
-                <h3 id="enigma-title">Enigma</h3>
-                <p>Little tools for everyday things.<br />A few useful ideas are taking shape.</p>
-                <span class="card-cta coming-soon"><span class="status-dot" aria-hidden="true"></span>Coming soon</span>
-              </div>
-            </article>
-          </div>
-        </section>
-      </main>
-      <footer class="site-footer">
-        <span class="footer-brand"><img src="./logo.svg" width="20" height="20" alt="" />Polaris</span>
-        <span>Made by Ajay <span class="footer-dot" aria-hidden="true">·</span> More on the way</span>
-      </footer>
-    </div>
+      <section class="apps" id="apps" aria-label="Apps">
+        <a class="app-row lyra" href="https://lyra.ajay.nexus" aria-label="Open Lyra">
+          <span class="logo-panel"><img class="app-logo lyra-logo" src="./brand/lyra.png" width="108" height="108" alt="" /></span>
+          <span class="card-content">
+            <span class="app-text"><strong>Lyra</strong><small>Music player with Spotify integration</small></span>
+            <span class="row-arrow" aria-hidden="true">↗</span>
+          </span>
+        </a>
+        <a class="app-row krona" href="https://krona.ajay.nexus" aria-label="Open Krona">
+          <span class="logo-panel"><img class="app-logo krona-logo" src="./brand/krona.svg" width="112" height="112" alt="" /></span>
+          <span class="card-content">
+            <span class="app-text"><strong>Krona</strong><small>Budgeting, spending, and visualizations</small></span>
+            <span class="row-arrow" aria-hidden="true">↗</span>
+          </span>
+        </a>
+        <article class="app-row enigma upcoming" aria-labelledby="enigma-title">
+          <span class="logo-panel"><span class="enigma-mark" aria-hidden="true">e<span>·</span></span></span>
+          <span class="card-content">
+            <span class="app-text"><strong id="enigma-title">Enigma</strong><small>Useful tools for everyday tasks</small></span>
+            <span class="soon">Coming soon</span>
+          </span>
+        </article>
+      </section>
+    </main>
   </body>
 </html>

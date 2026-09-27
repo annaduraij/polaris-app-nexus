@@ -3,167 +3,162 @@
  * Project: Polaris
  * Date: 2026-09-27
  * File: styles.css
- * Description: Black glass and integrated aurora gradients for the app collection.
+ * Description: Charcoal glass and aurora-lit app cards for the Polaris landing page.
  */
 :root {
   color-scheme: dark;
   font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color: #f2f5f4;
-  background: #060809;
+  color: #f3f5f4;
+  background: #07090b;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
-  --muted: #a5afad;
-  --edge: rgba(213, 242, 233, .14);
-  --glass: rgba(8, 12, 13, .9);
 }
+
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 28px; }
-body { margin: 0; }
+html { scroll-behavior: smooth; }
+body {
+  min-height: 100vh;
+  margin: 0;
+  background:
+    radial-gradient(ellipse at 23% 42%, rgba(33, 91, 78, .22), transparent 43%),
+    radial-gradient(ellipse at 91% 13%, rgba(64, 57, 110, .16), transparent 37%),
+    #07090b;
+}
 a { color: inherit; }
-a:focus-visible { outline: 2px solid #a4f6d9; outline-offset: 6px; }
+a:focus-visible { outline: 2px solid #a4f6d9; outline-offset: 5px; }
 ::selection { color: #fff; background: #385e59; }
-.skip-link { position: fixed; z-index: 10; top: 12px; left: 12px; padding: 12px 18px; border-radius: 8px; color: #fff; background: #173e34; transform: translateY(-160%); }
+.skip-link { position: fixed; z-index: 2; top: 12px; left: 12px; padding: 12px 16px; border-radius: 8px; background: #173e34; transform: translateY(-160%); }
 .skip-link:focus { transform: none; }
-.page-shell { min-height: 100vh; padding-top: 24px; background: radial-gradient(ellipse at 50% 0, rgba(37, 56, 54, .16), transparent 65%), #060809; }
-.site-header, .intro, .apps-section, .site-footer { width: min(1240px, calc(100% - 80px)); margin-inline: auto; }
-/* A common black substrate keeps colored reflections consistent across surfaces. */
-.glass { border: 1px solid var(--edge); background-color: var(--glass); box-shadow: inset 0 1px 0 rgba(235, 255, 247, .035), 0 18px 44px rgba(0, 0, 0, .26); }
-.site-header { min-height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 10px 24px; border-radius: 18px; background-image: linear-gradient(110deg, rgba(45, 120, 99, .07), transparent 45%, rgba(91, 71, 140, .07)); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); }
-.wordmark { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; font-size: 23px; font-weight: 500; letter-spacing: .08em; text-decoration: none; }
-.wordmark-symbol { width: 30px; height: 30px; }
-.header-link { display: inline-flex; align-items: center; gap: 22px; min-height: 44px; color: #c6cfcd; font-size: 13px; text-decoration: none; }
-.header-link span { font-size: 20px; }
-.header-link:hover { color: #fff; }
-.intro { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 54px; padding-block: 62px 68px; }
-.intro-copy { padding-block: 14px; }
-.eyebrow, .section-kicker, .card-index, .app-count, .soon-label, .hero-coordinate { font-size: 10px; font-weight: 500; letter-spacing: .15em; }
-.eyebrow { display: flex; align-items: center; gap: 9px; color: #b0c6bc; letter-spacing: .065em; }
-.eyebrow-dot, .status-dot { flex-shrink: 0; width: 5px; height: 5px; border-radius: 50%; background: #a2e4c7; }
-.eyebrow-dot { box-shadow: 0 0 14px rgba(118, 242, 191, .4); }
-.intro h1 { margin: 18px 0 2px -5px; font-size: clamp(68px, 7.8vw, 108px); font-weight: 600; line-height: 1.04; letter-spacing: -.065em; }
-.title-period { color: #b4e8d7; }
-.subtitle { margin: 10px 0 20px; font-size: clamp(24px, 2.4vw, 32px); font-weight: 400; letter-spacing: -.04em; }
-.intro-description { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.85; }
-.intro-link { display: inline-flex; align-items: center; justify-content: space-between; gap: 32px; min-height: 44px; margin-top: 24px; border-bottom: 1px solid rgba(163, 214, 197, .4); font-size: 13px; text-decoration: none; }
-.intro-link span { color: #9ad9c4; font-size: 17px; transition: transform .2s ease; }
-.intro-link:hover span { transform: translateY(3px); }
-/* Light lives within the glass, without a separate image panel. Elliptical
-   bands suggest aurora curtains; the lower scrim protects text contrast.
-   Static gradients avoid continuous full-surface repaints. */
-.aurora {
-  --aurora-a: 29, 184, 132;
-  --aurora-b: 49, 142, 174;
-  --aurora-c: 107, 67, 177;
-  position: relative;
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, .8fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(48px, 9vw, 140px);
+  width: min(1200px, calc(100% - 80px));
+  min-height: 100vh;
+  margin-inline: auto;
+  padding-block: 70px;
+}
+.intro { padding-left: clamp(0px, 3vw, 40px); }
+.polaris-logo { display: block; width: 170px; height: 170px; margin-bottom: 26px; filter: drop-shadow(0 0 42px rgba(231, 191, 121, .17)); }
+.intro h1 { margin: 0; font-size: clamp(64px, 6vw, 86px); font-weight: 650; line-height: 1; letter-spacing: -.065em; }
+.subtitle { margin: 16px 0 0; font-size: clamp(22px, 2.3vw, 30px); letter-spacing: -.035em; }
+.description { max-width: 370px; margin: 28px 0 0; color: #abbab6; font-size: 16px; line-height: 1.6; }
+
+.apps { display: grid; gap: 16px; scroll-margin-top: 28px; }
+.app-row {
+  --aurora-a: 44, 185, 139;
+  --aurora-b: 38, 135, 162;
+  --aurora-c: 111, 82, 187;
+  display: grid;
+  grid-template-columns: minmax(132px, 34%) minmax(0, 1fr);
+  min-height: 164px;
   isolation: isolate;
   overflow: hidden;
-  background-image:
-    linear-gradient(180deg, rgba(3, 7, 8, .08), rgba(3, 5, 7, .3) 40%, rgba(4, 6, 8, .96) 83%),
-    radial-gradient(ellipse at 13% 5%, rgba(var(--aurora-a), .19), transparent 54%),
-    radial-gradient(ellipse at 98% 35%, rgba(var(--aurora-c), .18), transparent 62%);
+  border: 1px solid rgba(215, 240, 232, .2);
+  border-radius: 22px;
+  background: #101517;
+  box-shadow: inset 0 1px rgba(236, 255, 249, .08), 0 20px 44px rgba(0, 0, 0, .28);
+  text-decoration: none;
+  transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease;
 }
-.aurora::before, .aurora::after { content: ""; position: absolute; pointer-events: none; z-index: -1; }
-.aurora::before {
-  inset: -34% -32% 14%;
-  transform: rotate(-26deg);
+.krona { --aurora-a: 43, 166, 132; --aurora-b: 36, 142, 153; --aurora-c: 54, 111, 188; }
+.enigma { --aurora-a: 57, 126, 164; --aurora-b: 99, 99, 190; --aurora-c: 157, 83, 195; }
+a.app-row:hover { border-color: rgba(191, 239, 221, .55); transform: translateY(-3px); box-shadow: inset 0 1px rgba(236, 255, 249, .12), 0 26px 52px rgba(0, 0, 0, .4); }
+
+/* The translucent logo pane keeps each brand clear against the charcoal card. */
+.logo-panel {
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  padding: 18px;
+  border-right: 1px solid rgba(225, 249, 240, .15);
   background:
-    radial-gradient(ellipse at 50% 12%, transparent 43%, rgba(var(--aurora-a), .06) 47%, rgba(var(--aurora-a), .48) 52%, rgba(var(--aurora-b), .14) 57%, transparent 66%),
-    radial-gradient(ellipse at 92% 0%, transparent 40%, rgba(var(--aurora-c), .42) 52%, rgba(var(--aurora-c), .06) 63%, transparent 69%);
-  filter: blur(15px);
-  opacity: .85;
+    radial-gradient(ellipse at 100% 0, rgba(var(--aurora-a), .12), transparent 70%),
+    linear-gradient(145deg, rgba(221, 242, 235, .21), rgba(139, 171, 169, .1) 48%, rgba(6, 11, 14, .3));
+  box-shadow: inset 0 1px rgba(255, 255, 255, .13), 10px 0 28px rgba(0, 0, 0, .1);
+  backdrop-filter: blur(24px) saturate(1.2);
+  -webkit-backdrop-filter: blur(24px) saturate(1.2);
 }
-.aurora::after { inset: 0; background: linear-gradient(180deg, rgba(2, 4, 5, .12), transparent 27%, rgba(3, 5, 6, .48) 57%, rgba(4, 6, 7, .95) 87%); }
-.hero-surface { display: flex; min-height: 340px; flex-direction: column; justify-content: space-between; align-items: center; padding: 25px 27px; border-radius: 26px; }
-.hero-surface::before { inset: -30% -24% -18%; opacity: 1; filter: blur(12px); }
-.hero-surface::after { background: linear-gradient(180deg, rgba(2, 4, 5, .24), transparent 50%, rgba(3, 5, 6, .76)); }
-.hero-coordinate { align-self: flex-start; color: #b6c4c5; font-size: 9px; letter-spacing: .19em; }
-.north-star { width: 124px; height: 124px; filter: drop-shadow(0 0 22px rgba(170, 247, 227, .24)); }
-.hero-caption { display: flex; justify-content: space-between; gap: 20px; width: 100%; color: #bdc9c7; font-size: 11px; }
-.hero-caption > :last-child { color: #96aaa6; letter-spacing: .1em; }
-.apps-section { padding-bottom: 64px; scroll-margin-top: 28px; }
-.section-heading { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 25px; }
-.section-kicker { color: #9bb1a8; }
-.section-heading h2 { margin: 10px 0 0; font-size: clamp(25px, 2.8vw, 35px); line-height: 1.2; font-weight: 500; letter-spacing: -.04em; }
-.app-count { padding-bottom: 4px; color: #98a4a0; font-size: 9px; letter-spacing: .1em; }
-.app-count span { padding-inline: 8px; color: #53645d; }
-.app-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
-.app-card { display: flex; min-height: 360px; flex-direction: column; padding: 25px 28px 28px; border-radius: 22px; text-decoration: none; transition: border-color .22s ease, box-shadow .22s ease; }
- a.app-card:hover, a.app-card:focus-visible { border-color: rgba(185, 236, 220, .4); box-shadow: inset 0 1px rgba(213, 255, 240, .12), 0 18px 44px rgba(0, 0, 0, .4); }
-.lyra { --aurora-a: 35, 170, 125; --aurora-b: 33, 119, 139; --aurora-c: 95, 75, 183; }
-.krona { --aurora-a: 54, 165, 137; --aurora-b: 34, 150, 145; --aurora-c: 37, 121, 158; }
-.enigma { --aurora-a: 60, 114, 153; --aurora-b: 93, 89, 183; --aurora-c: 138, 77, 190; }
-.card-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 22px; }
-.card-index { color: #bccbc6; font-size: 9px; letter-spacing: .17em; }
-.card-arrow { color: #b7c7c2; font-size: 21px; line-height: 1; }
-.soon-label { color: #beb5cc; font-size: 8px; letter-spacing: .09em; }
-.app-identity { display: flex; align-items: center; height: 124px; }
-.app-logo { display: block; width: 78px; height: 78px; object-fit: contain; filter: drop-shadow(0 5px 14px rgba(0, 0, 0, .3)); }
-.lyra-logo { width: 72px; height: 72px; }
-.krona-logo { width: 84px; height: 84px; margin-left: -7px; }
-.enigma-mark { font-size: 71px; line-height: 1; font-weight: 300; letter-spacing: -.085em; color: #d2cce7; }
-.enigma-mark span { color: #a299d6; }
-.card-bottom { display: flex; flex: 1; flex-direction: column; }
-.card-bottom h3 { margin: 3px 0 11px; font-size: 31px; line-height: 1.1; font-weight: 500; letter-spacing: -.045em; }
-.card-bottom p { margin: 0 0 27px; color: #abb7b3; font-size: 13px; line-height: 1.75; }
-.card-cta { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: auto; padding-top: 18px; border-top: 1px solid rgba(213, 242, 233, .12); font-size: 12px; font-weight: 500; color: #e3ebe7; }
-.card-cta > span:not(.status-dot) { font-size: 17px; color: #a8c6bc; }
-.coming-soon { justify-content: flex-start; color: #b9b4c7; }
-.status-dot { background: #b2a6cf; width: 4px; height: 4px; }
-.site-footer { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 24px 0 32px; border-top: 1px solid rgba(213, 242, 233, .1); color: #96a19c; font-size: 11px; }
-.footer-brand { display: flex; align-items: center; gap: 10px; color: #c5cfca; }
-.footer-dot { padding-inline: 6px; }
-@media (max-width: 1000px) {
-  .site-header, .intro, .apps-section, .site-footer { width: calc(100% - 48px); }
-  .intro { gap: 28px; padding-block: 46px; }
-  .intro h1 { font-size: clamp(68px, 9vw, 90px); }
-  .hero-surface { min-height: 320px; padding-inline: 20px; }
-  .app-grid { gap: 14px; }
-  .app-card { padding: 22px 20px; }
-  .card-bottom p { font-size: 12px; }
-  .desktop-break { display: none; }
+.app-logo { display: block; width: 96px; height: 96px; object-fit: contain; filter: drop-shadow(0 8px 18px rgba(0, 0, 0, .22)); }
+.lyra-logo { width: 108px; height: 108px; }
+.krona-logo { width: 112px; height: 112px; filter: brightness(1.25) saturate(1.12) drop-shadow(0 8px 18px rgba(0, 0, 0, .22)); }
+.enigma-mark { color: #e1d6f3; font-size: 93px; font-weight: 300; letter-spacing: -.08em; line-height: 1; text-shadow: 0 8px 20px rgba(0, 0, 0, .2); }
+.enigma-mark span { color: #bcb0ed; }
+
+/* The content half carries layered color bands beneath a dark text scrim. */
+.card-content {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 10px;
+  overflow: hidden;
+  padding: 24px 23px;
+  background:
+    linear-gradient(180deg, rgba(7, 12, 17, .1), rgba(7, 11, 14, .38) 50%, rgba(6, 9, 12, .84)),
+    radial-gradient(ellipse at 10% 10%, rgba(var(--aurora-a), .65), transparent 61%),
+    radial-gradient(ellipse at 96% 3%, rgba(var(--aurora-c), .68), transparent 66%),
+    radial-gradient(ellipse at 75% 100%, rgba(var(--aurora-b), .45), transparent 65%),
+    #15212a;
 }
-@media (max-width: 760px) {
-  .intro { grid-template-columns: 1fr; gap: 30px; }
-  .intro-copy { padding: 0; }
-  .intro h1 { font-size: clamp(70px, 13vw, 100px); }
-  .hero-surface { min-height: 240px; }
-  .north-star { width: 105px; height: 105px; }
-  .section-heading { align-items: start; flex-direction: column; gap: 14px; }
-  .app-grid { grid-template-columns: 1fr; gap: 18px; }
-  .app-card { min-height: 330px; padding: 24px 28px; }
-  .app-identity { height: 108px; }
-  .card-bottom p { font-size: 14px; }
-  .apps-section { padding-bottom: 44px; }
+.card-content::before {
+  position: absolute;
+  inset: -48% -25% 5%;
+  transform: rotate(-19deg);
+  background:
+    radial-gradient(ellipse at 48% 8%, transparent 34%, rgba(var(--aurora-a), .55) 44%, rgba(var(--aurora-b), .16) 52%, transparent 64%),
+    radial-gradient(ellipse at 94% 18%, transparent 32%, rgba(var(--aurora-c), .5) 45%, transparent 59%);
+  filter: blur(14px);
+  content: "";
+  pointer-events: none;
 }
+.app-text, .row-arrow, .soon { position: relative; }
+.app-text { display: flex; min-width: 0; flex-direction: column; gap: 8px; }
+.app-text strong { font-size: 29px; font-weight: 600; letter-spacing: -.045em; line-height: 1; text-shadow: 0 2px 15px rgba(0, 0, 0, .28); }
+.app-text small { max-width: 210px; color: #e0e9e7; font-size: 13px; line-height: 1.4; text-shadow: 0 1px 7px rgba(0, 0, 0, .45); }
+.row-arrow { align-self: flex-start; color: #eaf9f4; font-size: 25px; line-height: 1; transition: transform .2s ease; }
+a.app-row:hover .row-arrow { transform: translate(2px, -2px); }
+.soon { align-self: flex-start; padding: 6px 9px; border: 1px solid rgba(236, 223, 255, .38); border-radius: 999px; color: #f0e9fa; background: rgba(26, 19, 43, .28); font-size: 10px; white-space: nowrap; }
+
+@media (max-width: 800px) {
+  .layout { grid-template-columns: 1fr; gap: 58px; width: min(560px, calc(100% - 40px)); padding-block: 62px 52px; }
+  .intro { padding-left: 0; text-align: center; }
+  .polaris-logo { width: 126px; height: 126px; margin: 0 auto 22px; }
+  .description { margin-inline: auto; }
+}
+
 @media (max-width: 420px) {
-  .page-shell { padding-top: 16px; }
-  .site-header, .intro, .apps-section, .site-footer { width: calc(100% - 32px); }
-  .site-header { padding: 8px 14px; border-radius: 14px; gap: 12px; }
-  .wordmark { font-size: 19px; gap: 6px; }
-  .wordmark-symbol { width: 25px; height: 25px; }
-  .header-link { font-size: 11px; gap: 8px; }
-  .intro { padding-block: 36px; }
-  .eyebrow { font-size: 9px; letter-spacing: .035em; }
-  .intro-description { font-size: 13px; }
-  .hero-surface { padding: 22px 18px; border-radius: 20px; }
-  .hero-coordinate { font-size: 8px; letter-spacing: .13em; }
-  .hero-caption { font-size: 9px; gap: 8px; }
-  .app-card { padding-inline: 24px; }
-  .site-footer { align-items: flex-start; flex-direction: column; gap: 12px; }
+  .layout { gap: 44px; padding-top: 48px; }
+  .intro h1 { font-size: 60px; }
+  .app-row { grid-template-columns: minmax(96px, 31%) minmax(0, 1fr); min-height: 142px; }
+  .logo-panel { padding: 10px; }
+  .app-logo, .lyra-logo, .krona-logo { width: 84px; height: 84px; }
+  .enigma-mark { font-size: 74px; }
+  .card-content { padding: 18px 16px; }
+  .app-text strong { font-size: 25px; }
+  .app-text small { font-size: 12px; }
+  .soon { padding: 5px 7px; font-size: 9px; }
 }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .app-card, .intro-link span { transition: none; }
-  .intro-link:hover span { transform: none; }
+  .app-row, .row-arrow { transition: none; }
+  a.app-row:hover, a.app-row:hover .row-arrow { transform: none; }
 }
-/* Preserve legibility when transparency or authored colors are unavailable. */
+
 @media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
-  .glass { background: #080c0d; border-color: #82938b; backdrop-filter: none; -webkit-backdrop-filter: none; }
-  .aurora::before, .aurora::after { display: none; }
-  .card-bottom p, .intro-description, .app-count { color: #d1dcd6; }
+  .logo-panel { background: #202b2d; backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .card-content { background: #233d43; }
+  .card-content::before { display: none; }
 }
+
 @media (forced-colors: active) {
-  .glass { background: Canvas; border: 1px solid CanvasText; box-shadow: none; }
-  .aurora::before, .aurora::after { display: none; }
-  a:focus-visible { outline-color: Highlight; }
+  .app-row, .logo-panel { border-color: CanvasText; }
+  .app-row, .logo-panel, .card-content { background: Canvas; box-shadow: none; }
+  .card-content::before { display: none; }
+  .app-text small, .soon, .row-arrow { color: CanvasText; }
 }

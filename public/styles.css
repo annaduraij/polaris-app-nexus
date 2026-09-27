@@ -77,9 +77,6 @@ a:focus-visible { outline: 2px solid #a4f6d9; outline-offset: 5px; }
 
 .apps { display: grid; gap: 12px; scroll-margin-top: 28px; }
 .app-row {
-  --aurora-a: 117, 207, 63;
-  --aurora-b: 21, 176, 135;
-  --aurora-c: 35, 132, 153;
   position: relative;
   display: grid;
   grid-template-columns: 62px minmax(0, 1fr);
@@ -92,23 +89,19 @@ a:focus-visible { outline: 2px solid #a4f6d9; outline-offset: 5px; }
   border: 1px solid rgba(215, 240, 232, .2);
   border-radius: 19px;
   background:
-    linear-gradient(105deg, rgba(6, 11, 14, .35), rgba(7, 11, 14, .08) 52%, rgba(7, 11, 14, .27)),
-    radial-gradient(ellipse at 12% 20%, rgba(var(--aurora-a), .75), transparent 59%),
-    radial-gradient(ellipse at 83% 7%, rgba(var(--aurora-b), .65), transparent 61%),
-    radial-gradient(ellipse at 70% 100%, rgba(var(--aurora-c), .61), transparent 64%),
-    #17242a;
+    radial-gradient(ellipse at 12% 20%, color-mix(in srgb, var(--secondary) 75%, transparent), transparent 59%),
+    radial-gradient(ellipse at 83% 7%, color-mix(in srgb, var(--accent) 56%, transparent), transparent 61%),
+    var(--surface);
   box-shadow: inset 0 1px rgba(236, 255, 249, .08), 0 20px 44px rgba(0, 0, 0, .28);
   text-decoration: none;
   transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease;
 }
-.krona { --aurora-a: 21, 80, 62; --aurora-b: 92, 134, 112; --aurora-c: 157, 176, 148; }
-.enigma { --aurora-a: 100, 88, 167; --aurora-b: 145, 103, 190; --aurora-c: 202, 170, 223; }
 a.app-row:hover { border-color: rgba(191, 239, 221, .55); transform: translateY(-3px); box-shadow: inset 0 1px rgba(236, 255, 249, .12), 0 26px 52px rgba(0, 0, 0, .4); }
 .app-row::before {
   position: absolute;
   inset: -80% -20%;
   transform: rotate(-16deg);
-  background: radial-gradient(ellipse at 50% 0, transparent 37%, rgba(var(--aurora-a), .34) 46%, rgba(var(--aurora-b), .14) 55%, transparent 67%);
+  background: radial-gradient(ellipse at 50% 0, transparent 37%, color-mix(in srgb, var(--secondary) 34%, transparent) 46%, color-mix(in srgb, var(--accent) 14%, transparent) 55%, transparent 67%);
   filter: blur(18px);
   content: "";
   pointer-events: none;
@@ -129,8 +122,7 @@ a.app-row:hover { border-color: rgba(191, 239, 221, .55); transform: translateY(
 .app-logo { display: block; width: 46px; height: 46px; object-fit: contain; filter: drop-shadow(0 4px 9px rgba(0, 0, 0, .24)); }
 .lyra-logo { width: 48px; height: 48px; }
 .krona-logo { width: 48px; height: 48px; filter: brightness(1.25) saturate(1.12) drop-shadow(0 4px 9px rgba(0, 0, 0, .24)); }
-.enigma-mark { color: #e1d6f3; font-size: 47px; font-weight: 300; letter-spacing: -.08em; line-height: 1; text-shadow: 0 4px 9px rgba(0, 0, 0, .24); }
-.enigma-mark span { color: #bcb0ed; }
+.ren-logo { width: 48px; height: 48px; }
 
 /* The text reads from its own dark glass inset while the aurora stays visible around it. */
 .card-content {
@@ -149,9 +141,17 @@ a.app-row:hover { border-color: rgba(191, 239, 221, .55); transform: translateY(
   box-shadow: inset 0 1px rgba(255, 255, 255, .08), 0 7px 20px rgba(0, 0, 0, .12);
 }
 .app-text, .row-arrow, .soon { position: relative; }
-.app-text { display: flex; min-width: 0; align-items: baseline; gap: 12px; white-space: nowrap; }
-.app-text strong { flex: 0 0 auto; font-size: 22px; font-weight: 600; letter-spacing: -.025em; line-height: 1; }
-.app-text small { min-width: 0; overflow: hidden; color: #e0e9e7; font-size: 13px; line-height: 1.4; text-overflow: ellipsis; text-shadow: 0 1px 7px rgba(0, 0, 0, .45); }
+.app-text { display: flex; min-width: 0; flex-direction: column; gap: 4px; }
+.app-text strong { font-size: 22px; font-weight: 600; letter-spacing: -.025em; line-height: 1.1; }
+.app-text small { color: #e0e9e7; font-size: 13px; line-height: 1.4; text-shadow: 0 1px 7px rgba(0, 0, 0, .45); }
+.app-description, .app-inspiration { color: #c4d3cf; font-size: 12px; line-height: 1.45; }
+.app-inspiration { color: #aebfba; }
+.app-inspiration b { color: #dcece6; font-weight: 600; }
+.krona .logo-panel { background: rgba(255, 255, 255, .3); }
+.krona .card-content { color: #243b33; background: rgba(255, 255, 255, .78); border-color: rgba(26, 72, 54, .18); }
+.krona .app-text small { color: #315d4b; text-shadow: none; }
+.krona .app-description, .krona .app-inspiration { color: #3d594f; }
+.krona .app-inspiration b, .krona .row-arrow { color: #244e3b; }
 .row-arrow { flex: 0 0 auto; color: #eaf9f4; font-size: 24px; line-height: 1; transition: transform .2s ease; }
 a.app-row:hover .row-arrow { transform: translate(2px, -2px); }
 .soon { flex: 0 0 auto; padding: 6px 9px; border: 1px solid rgba(236, 223, 255, .38); border-radius: 999px; color: #f0e9fa; background: rgba(26, 19, 43, .28); font-size: 10px; white-space: nowrap; }
@@ -168,12 +168,12 @@ a.app-row:hover .row-arrow { transform: translate(2px, -2px); }
   .intro h1 { font-size: 60px; letter-spacing: .055em; }
   .app-row { grid-template-columns: 50px minmax(0, 1fr); gap: 6px; min-height: 72px; padding: 6px; }
   .logo-panel { height: 50px; }
-  .app-logo, .lyra-logo, .krona-logo { width: 40px; height: 40px; }
-  .enigma-mark { font-size: 42px; }
+  .app-logo, .lyra-logo, .krona-logo, .ren-logo { width: 40px; height: 40px; }
   .card-content { min-height: 54px; padding: 9px 11px; }
   .app-text { gap: 8px; }
   .app-text strong { font-size: 20px; }
   .app-text small { font-size: 11px; }
+  .app-description, .app-inspiration { font-size: 11px; }
   .row-arrow { font-size: 20px; }
   .soon { padding: 5px 7px; font-size: 9px; }
 }
@@ -194,7 +194,8 @@ a.app-row:hover .row-arrow { transform: translate(2px, -2px); }
 @media (forced-colors: active) {
   .intro::before, .intro::after { display: none; }
   .app-row, .card-content { border-color: CanvasText; }
-  .app-row, .logo-panel, .card-content { background: Canvas; box-shadow: none; }
+  .app-row, .logo-panel, .card-content, .krona .card-content { background: Canvas; box-shadow: none; }
   .app-row::before { display: none; }
-  .app-text small, .soon, .row-arrow { color: CanvasText; }
+  .app-text small, .app-description, .app-inspiration, .soon, .row-arrow { color: CanvasText; }
+  .krona .app-text small, .krona .app-description, .krona .app-inspiration, .krona .app-inspiration b, .krona .row-arrow { color: CanvasText; }
 }

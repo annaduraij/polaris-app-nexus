@@ -88,3 +88,5 @@ export function glassEffect(material: GlassValues): number;
 export function glassSliderChanges(material: GlassValues, name: 'clarity' | 'transmission' | 'effect', value: number): Partial<GlassValues>;
 export function glassPreset(material: GlassMaterial, preset: 'subdued' | 'moderate' | 'dramatic'): GlassMaterial;
 export function glassPresetName(material: GlassMaterial, approved: GlassMaterial): 'subdued' | 'moderate' | 'dramatic' | 'adjusted';
+
+export function resetGlassControl(material: GlassMaterial, approved: GlassMaterial, control: 'clarity' | 'transmission' | 'effect', role?: GlassRole | null): GlassMaterial;

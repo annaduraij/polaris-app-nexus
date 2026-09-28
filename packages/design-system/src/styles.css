@@ -147,3 +147,5 @@
 .polaris-glass-function { padding: 7px 14px; border-radius: 8px; }
 @media (prefers-reduced-transparency: reduce), (prefers-contrast: more) { [data-polaris-glass] { background: var(--glass-tint); backdrop-filter: none; -webkit-backdrop-filter: none; } }
 @media (forced-colors: active) { [data-polaris-glass] { background: Canvas; border-color: CanvasText; backdrop-filter: none; -webkit-backdrop-filter: none; } }
+
+.polaris-lab .polaris-glass-control input { touch-action: pan-y; cursor: ew-resize; }

@@ -4,7 +4,8 @@ import { FAMILIES, SHADES, TYPE_ROLES, validateCatalog } from './contracts.js';
 import { content } from '../generated/content.js';
 import { polarisLogo } from '../generated/logo.js';
 import { labIcons } from '../generated/lab-icons.js';
-import { GLASS_ROLES, GLASS_FIELDS, POLARIS_MATERIAL, resolveGlass, editGlass, glassEffect, glassSliderChanges, glassPreset, glassPresetName } from './glass.js';
+import { GLASS_ROLES, GLASS_FIELDS, POLARIS_MATERIAL, resolveGlass, editGlass, glassEffect, glassSliderChanges, glassPreset, glassPresetName, resetGlassControl } from './glass.js';
+import { bindGlassSlider } from './glass-slider.js';
 import { contrastReport } from './engine.js';
 let launcherCount = 0;
 
@@ -206,13 +207,25 @@ export function mountLabs(engine, { container = document.body, fonts = {}, copy 
       preset.value = glassPresetName(engine.profile.material, approved);
     }
     if (glassEditing === 'sliders') {
+      const hint = el('p', 'polaris-lab-note', t('lab.glassSliderHint')); hint.id = `${launcherButton.getAttribute('aria-controls')}-glass-slider-hint`;
+      material.append(hint);
       for (const name of ['clarity', 'transmission', 'effect']) {
         const input = el('input'), wrapper = el('label', 'polaris-glass-control');
         const title = t(`lab.glass${name[0].toUpperCase()}${name.slice(1)}`);
         input.type = 'range'; input.min = 0; input.max = 100; input.step = 1; input.setAttribute('aria-label', title);
-        const value = target(); input.value = Math.round(100 * (name === 'clarity' ? 1 - value.blur / 60 : name === 'transmission' ? 1 - value.opacity : glassEffect(value)));
-        input.addEventListener('input', () => { change(glassSliderChanges(target(), name, Number(input.value) / 100)); input.setAttribute('aria-valuetext', `${input.value}%`); });
-        input.setAttribute('aria-valuetext', `${input.value}%`);
+        function refreshSlider() {
+          const value = target(); input.value = Math.round(100 * (name === 'clarity' ? 1 - value.blur / 60 : name === 'transmission' ? 1 - value.opacity : glassEffect(value)));
+          input.setAttribute('aria-valuetext', `${input.value}%`);
+        }
+        refreshSlider(); input.setAttribute('aria-describedby', hint.id);
+        bindGlassSlider(input, {
+          adjust() { change(glassSliderChanges(target(), name, Number(input.value) / 100)); input.setAttribute('aria-valuetext', `${input.value}%`); },
+          reset() {
+            update(next => { next.material = resetGlassControl(next.material, approved, name, role()); }, glass.status);
+            refreshSlider(); preset.value = glassPresetName(engine.profile.material, approved);
+            glass.status.textContent = t('lab.glassControlReset').replace('{control}', title);
+          },
+        });
         const ends = el('span', 'polaris-glass-endpoints'); ends.append(el('span', '', t(`lab.glass${name}Low`)), el('span', '', t(`lab.glass${name}High`)));
         wrapper.append(el('span', '', title), input, ends); material.append(wrapper);
       }

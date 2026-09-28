@@ -186,5 +186,7 @@ export declare const content: {
   readonly "lab.glassAppReset": string;
   readonly "lab.glassPolarisReset": string;
   readonly "lab.glassRoleColors": string;
+  readonly "lab.glassSliderHint": string;
+  readonly "lab.glassControlReset": string;
 };
 export type ContentKey = keyof typeof content;

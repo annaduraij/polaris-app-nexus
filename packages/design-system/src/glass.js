@@ -60,3 +60,16 @@ export function glassPresetName(material, approved) {
   const same = (a, b) => JSON.stringify(resolveGlass(a)) === JSON.stringify(resolveGlass(b));
   return ['subdued', 'moderate', 'dramatic'].find(name => same(material, glassPreset(approved, name))) ?? 'adjusted';
 }
+
+/** Restore one control's app calibration, retaining unrelated glass fields and color references. */
+export function resetGlassControl(material, approved, control, role = null) {
+  const fields = control === 'clarity' ? ['blur'] : control === 'transmission' ? ['opacity'] : ['saturation', 'borderOpacity'];
+  const next = structuredClone(material), defaults = resolveGlass(approved);
+  next.layers ??= {};
+  for (const name of role ? [role] : GLASS_ROLES) {
+    next.layers[name] ??= {};
+    for (const field of fields) next.layers[name][field] = defaults[name][field];
+  }
+  if (!role) for (const field of fields) next[field] = approved[field];
+  return next;
+}

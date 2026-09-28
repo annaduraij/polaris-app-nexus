@@ -1,6 +1,6 @@
 # Polaris
 
-**Jay's App Nexus** is a static overview of Ajay's apps and the home of the Polaris shared design system. The landing page has no runtime dependencies. Its app cards are generated from the opening paragraphs of the Lyra, Krona, and Ren READMEs.
+**Polaris** is Jay's App Nexus and the shared design and application architecture system behind his apps. It centralizes design contracts, common controls, themes, and simple surfaces while preserving each app's own identity. The landing page has no runtime dependencies. Its compact app rows and expandable details are generated from the opening paragraphs of the Lyra, Krona, and Ren READMEs. See [Polaris appearance and palette](DESIGN.md).
 
 ## Shared design system
 

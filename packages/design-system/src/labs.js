@@ -179,8 +179,16 @@ export function mountLabs(engine, { container = document.body, fonts = {}, copy 
     const role = () => glassScope === 'split' ? glassRole : null;
     function choices(label, values, selected, choose) {
       const group = el('div', 'polaris-glass-switch'); group.setAttribute('role', 'group'); group.setAttribute('aria-label', t(label));
+      group.dataset.choice = label;
+      group.append(el('span', 'polaris-glass-switch-label', t(label)));
       for (const value of values) {
-        const option = button(t(`lab.glass${value[0].toUpperCase()}${value.slice(1)}`), () => { choose(value); renderGlass(); });
+        const option = button(t(`lab.glass${value[0].toUpperCase()}${value.slice(1)}`), () => {
+          choose(value);
+          renderGlass();
+          glass.body.querySelector(`.polaris-glass-switch[data-choice="${label}"] [data-value="${value}"]`)?.focus();
+        });
+        option.classList.add('polaris-glass-option');
+        option.dataset.value = value;
         option.setAttribute('aria-pressed', String(value === selected)); group.append(option);
       }
       glass.body.append(group);

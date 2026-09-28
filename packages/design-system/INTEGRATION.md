@@ -1,6 +1,6 @@
 # Polaris design system v1
 
-Polaris is both Jay's App Nexus and the owner of shared design contracts, reusable engines, developer labs, and common components. `@polaris/design-system` is a native ES module package with **no runtime dependencies**. Lyra-style vanilla JavaScript and photography-style React consumers are working reference fixtures. **The existing Lyra and photography applications have not been migrated.**
+Polaris is both Jay's App Nexus and the owner of shared design contracts, reusable engines, developer labs, and common components. `@polaris/design-system` is a native ES module package with **no runtime dependencies**. The showcase contains vanilla and React reference fixtures. **Lyra and Krona now locally consume the shared startup engines and labs** through app-owned profiles and pinned vendor snapshots. Their existing workflow headers and legacy application copy remain app-owned. **Photography remains an untouched, read-only reference**, with any application migration deferred. No deployment is part of these integrations.
 
 The existing landing page and app identities remain intact. Its design-system link opens `/design-system/`, which demonstrates app profiles, production/development behavior, live theme and typography, the common header, and generated copy.
 
@@ -32,6 +32,8 @@ Open `http://localhost:8016/design-system/?app=photography&mode=development` or 
 GitHub Actions runs `npm ci` and `npm run check` on pushes and pull requests, with no deployment step. The check fails on generated drift before building the ignored showcase assets, then validates types/tests and runs the Worker dry run. A child app must adopt equivalent contract checks and migrate actual token consumers before claiming Polaris conformance; installing this package alone is insufficient.
 
 Create a distributable with `npm pack ./packages/design-system`. The tarball includes runtime modules, generated data/types, schemas, integration instructions, selected font files, and their OFL notices. The package's vanilla entry point does not import React or labs. React and build tooling are development dependencies of the Polaris showcase only.
+
+Applications without a package registry can copy `scripts/vendor-design-package.mjs` into their repository and run it with `--source path/to/polaris/packages/design-system --target public/vendor/polaris`. Commit the resulting snapshot and `polaris-vendor.json`; the manifest pins every byte with SHA-256 and records the package version without embedding machine-specific paths. Run the same script with `--target public/vendor/polaris --check` in CI for local drift, or additionally provide `--source` to compare against a reviewed upstream checkout. Updating is explicit and retains bundled fonts and licenses.
 
 ## Design contract
 
@@ -134,7 +136,7 @@ if (developmentBuild) {
 }
 ```
 
-The floating Chroma Lab edits every family shade, semantic mapping, material setting, status/data/media palette, and reports contrast. Typography Lab enables optional roles and edits family, weight, size, scale, line height, tracking and genuine variable width. Both offer a labelled JSON import/export area, validation errors, and reset. Their native dialogs support keyboard navigation, Escape and focus return. Calling `mountLabs` for a production engine creates no controls.
+One compact cog with a red center dot opens the Chroma Lab and Typography Lab choices. The menu supports arrow/Home/End keys, Escape, outside dismissal and focus return. Chroma Lab edits every family shade, semantic mapping, material setting, status/data/media palette, and reports contrast. Typography Lab enables optional roles and edits family, weight, size, scale, line height, tracking and genuine variable width. Both offer a labelled JSON import/export area, validation errors, and reset. Their native dialogs support keyboard navigation, Escape and return focus to the cog. Calling `mountLabs` for a production engine creates no controls.
 
 ## React integration
 
@@ -196,19 +198,21 @@ Render text through `textContent` or normal React text children. The engine retu
 
 ## Source-app migration boundaries
 
-The source audit and browser verification notes are in `docs/source-audit.md` and `docs/design-verification.md` in the Polaris repository. The source apps were treated as read-only references throughout this work.
+The original source audit and package-fixture verification notes are in `docs/source-audit.md` and `docs/design-verification.md` in the Polaris repository. Initial extraction treated the apps as read-only references. The subsequent consumer phase connects Lyra and Krona to the shared runtime; photography continues to be read-only. Each app documents its actual integration coverage rather than claiming complete contract conformance.
 
-For **photography**, mount the engine once before the root React render. Replace menu-mounted Chroma/Typography preference owners with lab views over that engine. This directly addresses Chroma reverting on close and Typography hydrating only after reopening a menu. Migrate public header/menu globals, body/control surfaces, text/borders, and status variables to semantic tokens. Keep route-specific semantic mappings explicit instead of deriving them from a family name. The `photographyAliases` opt-in bridge covers selected legacy family variables; it is a migration starting point, not full CSS parity.
+For **photography**, the following is a future migration plan, not completed work: mount the engine once before the root React render and replace menu-mounted Chroma/Typography preference owners with lab views over it. This addresses Chroma reverting on close and Typography hydrating only after reopening a menu. Public header/menu globals, body/control surfaces, text/borders, and status variables need explicit semantic mappings. Keep route-specific semantics explicit rather than deriving them from a family name. The `photographyAliases` opt-in bridge is a migration starting point, not full CSS parity.
 
 The photography reference covers **dark browser UI only**. Its existing light routes require separately approved palettes/mappings before migration. Ceremonial headings can use a component-specific role mapping; the reference's serif-body role demonstrates Cormorant with a different body size. Email HTML and contract/PDF outputs retain their separate renderer/font contracts and are not styled by a browser-root engine. Existing decorative script had no page consumer; this fixture deliberately exercises it. Production font loading no longer depends on development CSS.
 
-For **Lyra**, load native modules at startup without adding React or a runtime build dependency. Map `--bg`, `--text`, `--green`, and selected material variables using `lyraAliases`, then migrate components incrementally. Preserve the charcoal material base, green primary, forest secondary, lime accent and neutral action/foreground roles. Keep player artwork palettes and data/status scales separate. The bridge deliberately does not overwrite every Lyra material derivative: preserve or explicitly migrate `--material-accent-text`, edge/highlight alphas, saturation conventions, strong/card surfaces and player-specific effects after reviewing their actual consumers.
+For **Lyra**, the actual browser shell now loads native modules at startup without adding React or runtime npm dependencies. Its app-owned profile and CSS bridge connect page/accent/text, header materials, glass/control surfaces, semantic playback actions, real typography roles, status, and categorical chart colors. Existing glass-level calibrations remain explicit offsets around the Balanced material baseline. The functional header, legacy copy, artwork sampling/shader preferences and volume/intensity scale remain Lyra-owned. See Lyra's `docs/POLARIS.md` and its native integration tests for coverage and snapshot update instructions.
+
+For **Krona**, the actual static application now loads the shared startup engine with its own light profile, preserving ivory surfaces, sage, deep-green actions and existing Mulish/Lustria typography. Its app-owned token bridge connects existing UI consumers, while a development server enables the shared cog; ordinary production static files remain lab-free. Budget, recurrence, guide and backup data/models remain outside the design integration. The date/profile workflow header and existing non-YAML copy remain app-owned. Krona's integration documentation and tests define its precise coverage.
 
 `installAliases(target, aliases)` validates names, installs CSS references and returns cleanup that restores pre-existing inline values. It provides an opt-in bridge for targeted migration; importing the package alone changes no app.
 
 ## Known v1 limits
 
-- The reference profiles are approved examples for dark browser UI, not a claim of complete visual parity with every source-app route.
+- The package reference profiles are dark browser examples. Actual apps own their approvals; Krona supplies a light profile. Neither fixtures nor partial consumer adoption claim complete visual parity or contract conformance across every app route.
 - The engine provides preferences and contracts; apps decide which public settings UI to expose. Developer controls are not an authorization system.
 - Revisions invalidate old preferences rather than performing automatic migrations. Storage updates are scoped to the current engine; cross-tab live synchronization is not included.
 - The small shared component set is intentional: header, semantic buttons/surfaces, typography-role styling, and lab fields/dialogs. Existing application-specific layouts remain app-owned.

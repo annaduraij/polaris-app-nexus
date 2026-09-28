@@ -69,6 +69,7 @@ export const content = {
   "header.saved": "Saved",
   "header.actionFeedback": "Selected {action}.",
   "lab.chroma": "Chroma Lab",
+  "lab.launcher": "Design labs",
   "lab.typography": "Typography Lab",
   "lab.close": "Close lab",
   "lab.palette": "Color families",

@@ -5,11 +5,12 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Polaris — Jay's App Nexus." />
+    <meta name="description" content="Polaris brings Jay's apps together through a shared design system and application architecture." />
     <meta name="theme-color" content="#07090b" />
     <title>Polaris — Jay's App Nexus</title>
     <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./styles.css?v=6" />
+    <link rel="stylesheet" href="./styles.css?v=7" />
+    <script src="./landing.js" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#apps">Skip to apps</a>
@@ -18,46 +19,52 @@
         <img class="polaris-logo" src="./logo.svg" width="170" height="170" alt="" />
         <h1>Polaris</h1>
         <p class="subtitle">Jay's App Nexus</p>
-        <p class="description">A collection of personal projects and useful tools.</p>
-        <a class="design-system-link" href="./design-system/">Explore the Polaris design system <span aria-hidden="true">↗</span></a>
+        <p class="description">A shared design and application architecture for Jay's apps. Common controls, themes, and simple surfaces give each app a familiar foundation.</p>
+        <a class="design-system-link" href="./design-system/">Explore the design system <span aria-hidden="true">↗</span></a>
       </header>
       <section class="apps" id="apps" aria-label="Apps">
         <!-- apps:start -->
-        <a class="app-row lyra" href="https://lyra.ajay.nexus" aria-label="Open Lyra" style="--surface: #050606; --surface-raised: #0c0e10; --secondary: #155d46; --signature: #00b377; --accent: #ccee44">
-          <span class="logo-panel"><img class="app-logo lyra-logo" src="./brand/lyra.png" width="48" height="48" alt="" /></span>
-          <span class="card-content">
-            <span class="app-text">
-              <strong>Lyra</strong>
-              <small>Music and metadata in harmony</small>
-              <span class="app-description">Lyra brings Spotify library data, playback, and recording metadata together in a local music workspace.</span>
-              <span class="app-inspiration"><b>Why:</b> Created to make a personal music library easier to explore and organize while keeping useful metadata close at hand.</span>
-            </span>
-            <span class="row-arrow" aria-hidden="true">↗</span>
-          </span>
-        </a>
-        <a class="app-row krona" href="https://krona.ajay.nexus" aria-label="Open Krona" style="--surface: #f7f4ee; --surface-raised: #fffefa; --secondary: #7f9d91; --signature: #14503e; --accent: #c5a46d">
-          <span class="logo-panel"><img class="app-logo krona-logo" src="./brand/krona.svg" width="48" height="48" alt="" /></span>
-          <span class="card-content">
-            <span class="app-text">
-              <strong>Krona</strong>
-              <small>Budgeting and visualization in sync</small>
-              <span class="app-description">Krona is a browser-local monthly budget app for tracking spending, planned purchases, and recurring bills.</span>
-              <span class="app-inspiration"><b>Why:</b> Created to make everyday money decisions easier to see and plan while keeping personal budget data on your device.</span>
-            </span>
-            <span class="row-arrow" aria-hidden="true">↗</span>
-          </span>
-        </a>
-        <article class="app-row ren upcoming" aria-labelledby="ren-title" style="--surface: #284f45; --surface-raised: #f5f3ed; --secondary: #d88fad; --signature: #66815e; --accent: #e5c76b">
-          <span class="logo-panel"><img class="app-logo ren-logo" src="./brand/ren.svg" width="48" height="48" alt="" /></span>
-          <span class="card-content">
-            <span class="app-text">
-              <strong id="ren-title">Ren</strong>
-              <small>Useful little tools in bloom</small>
-              <span class="app-description">Ren is a collection of small, independent applets for everyday tasks.</span>
-              <span class="app-inspiration"><b>Why:</b> Created to give small ideas a useful home where each tool can grow as it is refined.</span>
-            </span>
-            <span class="soon">Coming soon</span>
-          </span>
+        <article class="app-row lyra" style="--surface: #050606; --surface-raised: #0c0e10; --secondary: #155d46; --signature: #00b377; --accent: #ccee44">
+          <div class="app-compact">
+            <a class="app-main" href="https://lyra.ajay.nexus" aria-label="Open Lyra">
+              <span class="logo-panel"><img class="app-logo lyra-logo" src="./brand/lyra.png" width="48" height="48" alt="" /></span>
+              <span class="app-line"><strong id="lyra-title">Lyra</strong><small>Music and metadata in harmony</small></span>
+              <span class="row-arrow" aria-hidden="true">↗</span>
+            </a>
+            <button class="app-details-toggle" type="button" aria-expanded="false" aria-controls="lyra-details" aria-label="Show Lyra details" hidden>Details <span aria-hidden="true">⌄</span></button>
+          </div>
+          <div class="app-details" id="lyra-details">
+            <p>Lyra brings Spotify library data, playback, and recording metadata together in a local music workspace.</p>
+            <p><b>Why:</b> Created to make a personal music library easier to explore and organize while keeping useful metadata close at hand.</p>
+          </div>
+        </article>
+        <article class="app-row krona" style="--surface: #f7f4ee; --surface-raised: #fffefa; --secondary: #7f9d91; --signature: #14503e; --accent: #c5a46d">
+          <div class="app-compact">
+            <a class="app-main" href="https://krona.ajay.nexus" aria-label="Open Krona">
+              <span class="logo-panel"><img class="app-logo krona-logo" src="./brand/krona.svg" width="48" height="48" alt="" /></span>
+              <span class="app-line"><strong id="krona-title">Krona</strong><small>Budgeting and visualization in sync</small></span>
+              <span class="row-arrow" aria-hidden="true">↗</span>
+            </a>
+            <button class="app-details-toggle" type="button" aria-expanded="false" aria-controls="krona-details" aria-label="Show Krona details" hidden>Details <span aria-hidden="true">⌄</span></button>
+          </div>
+          <div class="app-details" id="krona-details">
+            <p>Krona is a browser-local monthly budget app for tracking spending, planned purchases, and recurring bills.</p>
+            <p><b>Why:</b> Created to make everyday money decisions easier to see and plan while keeping personal budget data on your device.</p>
+          </div>
+        </article>
+        <article class="app-row ren upcoming" style="--surface: #284f45; --surface-raised: #f5f3ed; --secondary: #d88fad; --signature: #66815e; --accent: #e5c76b">
+          <div class="app-compact">
+            <div class="app-main">
+              <span class="logo-panel"><img class="app-logo ren-logo" src="./brand/ren.svg" width="48" height="48" alt="" /></span>
+              <span class="app-line"><strong id="ren-title">Ren</strong><small>Useful little tools in bloom</small></span>
+              <span class="soon">Coming soon</span>
+            </div>
+            <button class="app-details-toggle" type="button" aria-expanded="false" aria-controls="ren-details" aria-label="Show Ren details" hidden>Details <span aria-hidden="true">⌄</span></button>
+          </div>
+          <div class="app-details" id="ren-details">
+            <p>Ren is a collection of small, independent applets for everyday tasks.</p>
+            <p><b>Why:</b> Created to give small ideas a useful home where each tool can grow as it is refined.</p>
+          </div>
         </article>
         <!-- apps:end -->
       </section>

@@ -1,6 +1,6 @@
 # Polaris
 
-**Polaris** is Jay's App Nexus and the shared design and application architecture system behind his apps. It centralizes design contracts, common controls, themes, and simple surfaces while preserving each app's own identity. The landing page has no runtime dependencies. Its compact app rows and expandable details are generated from the opening paragraphs of the Lyra, Krona, and Ren READMEs. See [Polaris appearance and palette](DESIGN.md).
+**Polaris** is Jay's App Nexus and the shared design and application architecture system behind his apps. It centralizes design contracts, common controls, themes, and simple surfaces while preserving each app's own identity. The landing page has no runtime dependencies. Its compact app rows and expandable details use the opening paragraphs of the Lyra, Krona, and Ren READMEs, plus a manual alpha preview for Fano. See [Polaris appearance and palette](DESIGN.md).
 
 ## Shared design system
 
@@ -36,7 +36,7 @@ Each app README begins with the same plain-text fields, before its first `##` he
 
 The logo path is relative to that app's repository. Polaris checks that all fields exist, that the subtitle has five words, that each description and inspiration is at most 180 characters, and that the five colors are six-digit hex values. The sync command copies the logos and writes the copy and colors into `public/index.html`; the app READMEs remain the source of truth for their identity. A color contract names the surfaces and accents; each application still controls how much of each color it uses.
 
-Run `npm run sync:apps` after changing an app identity. The command expects the `lyra-music`, `krona-budget`, and `enigma-misc` checkouts under `/Users/ajay/projects` in this workspace. Set `POLARIS_APPS_ROOT` to the parent directory of those repositories elsewhere. Ren is the current identity of the `enigma-misc` repository; its Polaris card stays non-clickable until a public destination is ready.
+Run `npm run sync:apps` after changing an app identity. The command looks for sibling `lyra-music`, `krona-budget`, and `enigma-misc` checkouts, with the older `/Users/ajay/projects` workspace layout as a fallback. Set `POLARIS_APPS_ROOT` to the parent directory of those repositories elsewhere. Ren is the current identity of the `enigma-misc` repository; its beta card stays non-clickable because it is for private use. Fano is an alpha preview whose public copy and colors currently live in `scripts/sync-app-contract.mjs`, since its local CLI README has no app identity block. Release-stage labels are Polaris-owned metadata, separate from application color and UI-status contracts.
 
 ## Preview
 

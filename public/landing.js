@@ -9,6 +9,8 @@ function setExpanded(row, expanded) {
   const name = row.querySelector('.app-line strong').textContent;
   button.setAttribute('aria-expanded', String(expanded));
   button.setAttribute('aria-label', `${expanded ? 'Hide' : 'Show'} ${name} details`);
+  button.querySelector('span').textContent = expanded ? '−' : '+';
+  row.classList.toggle('expanded', expanded);
   panel.hidden = !expanded;
 }
 

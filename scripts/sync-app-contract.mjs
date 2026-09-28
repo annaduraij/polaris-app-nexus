@@ -7,17 +7,37 @@
  */
 
 import { readFile, copyFile, writeFile } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const appsRoot = path.resolve(process.env.POLARIS_APPS_ROOT ?? path.join(projectRoot, '../../../../projects'));
+const siblingRoot = path.resolve(projectRoot, '..');
+const defaultAppsRoot = existsSync(path.join(siblingRoot, 'lyra-music/README.md'))
+  ? siblingRoot
+  : path.resolve(projectRoot, '../../../../projects');
+const appsRoot = path.resolve(process.env.POLARIS_APPS_ROOT ?? defaultAppsRoot);
 const indexPath = path.join(projectRoot, 'public/index.html');
 const apps = [
   { id: 'lyra', directory: 'lyra-music', url: 'https://lyra.ajay.nexus' },
   { id: 'krona', directory: 'krona-budget', url: 'https://krona.ajay.nexus' },
-  { id: 'ren', directory: 'enigma-misc' },
+  { id: 'ren', directory: 'enigma-misc', stage: 'beta' },
+  {
+    id: 'fano', stage: 'alpha',
+    // Fano is a local CLI and has no public app identity contract yet.
+    identity: {
+      name: 'Fano', subtitle: 'A clearer Apple Photos catalog',
+      description: 'Fano audits an Apple Photos library and prepares exact, reviewable changes in a local Mac workspace.',
+      inspiration: 'Created to make photo organization easier to review before changes are applied.',
+      surface: '#1b2731', raisedSurface: '#263742', secondary: '#557f8c', signature: '#7db7c0', accent: '#d4b77c',
+      logoFile: null,
+    },
+  },
 ];
+const stages = {
+  alpha: { label: 'Alpha', meaning: 'early preview' },
+  beta: { label: 'Beta', meaning: 'live for private use' },
+};
 
 function escapeHtml(value) {
   return value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
@@ -64,16 +84,23 @@ function renderApp(app, identity) {
   const { name, subtitle, description, inspiration, logoFile, surface, raisedSurface, secondary, signature, accent } = identity;
   const mainTag = app.url ? 'a' : 'div';
   const mainAttributes = app.url ? ` href="${app.url}" aria-label="Open ${escapeHtml(name)}"` : '';
-  const action = app.url ? '<span class="row-arrow" aria-hidden="true">↗</span>' : '<span class="soon">Coming soon</span>';
+  const action = app.url
+    ? `<a class="app-launch" href="${app.url}" aria-label="Open ${escapeHtml(name)}"><span aria-hidden="true">↗</span></a>`
+    : `<span class="release-badge ${app.stage}" aria-label="${stages[app.stage].label}: ${stages[app.stage].meaning}">${stages[app.stage].label}</span>`;
+  const logo = logoFile
+    ? `<img class="app-logo ${app.id}-logo" src="./brand/${logoFile}" width="48" height="48" alt="" />`
+    : '<span class="app-monogram" aria-hidden="true">F</span>';
 
-  return `        <article class="app-row ${app.id}${app.url ? '' : ' upcoming'}" style="--surface: ${surface}; --surface-raised: ${raisedSurface}; --secondary: ${secondary}; --signature: ${signature}; --accent: ${accent}">
+  return `        <article class="app-row ${app.id}" style="--surface: ${surface}; --surface-raised: ${raisedSurface}; --secondary: ${secondary}; --signature: ${signature}; --accent: ${accent}">
           <div class="app-compact">
             <${mainTag} class="app-main"${mainAttributes}>
-              <span class="logo-panel"><img class="app-logo ${app.id}-logo" src="./brand/${logoFile}" width="48" height="48" alt="" /></span>
+              <span class="logo-panel">${logo}</span>
               <span class="app-line"><strong id="${app.id}-title">${escapeHtml(name)}</strong><small>${escapeHtml(subtitle)}</small></span>
-              ${action}
             </${mainTag}>
-            <button class="app-details-toggle" type="button" aria-expanded="false" aria-controls="${app.id}-details" aria-label="Show ${escapeHtml(name)} details" hidden>Details <span aria-hidden="true">⌄</span></button>
+            <div class="app-actions">
+              <button class="app-details-toggle" type="button" aria-expanded="false" aria-controls="${app.id}-details" aria-label="Show ${escapeHtml(name)} details" hidden><span aria-hidden="true">+</span></button>
+              ${action}
+            </div>
           </div>
           <div class="app-details" id="${app.id}-details">
             <p>${escapeHtml(description)}</p>
@@ -90,6 +117,10 @@ if (!marker.test(html)) {
 
 const sources = [];
 for (const app of apps) {
+  if (app.identity) {
+    sources.push({ app, identity: app.identity });
+    continue;
+  }
   const appRoot = path.join(appsRoot, app.directory);
   const readme = await readFile(path.join(appRoot, 'README.md'), 'utf8');
   const identity = readIdentity(readme, app.id);
@@ -102,7 +133,7 @@ for (const app of apps) {
 }
 
 for (const { logoPath, logoFile } of sources) {
-  await copyFile(logoPath, path.join(projectRoot, 'public/brand', logoFile));
+  if (logoPath) await copyFile(logoPath, path.join(projectRoot, 'public/brand', logoFile));
 }
 const cards = sources.map(({ app, identity, logoFile }) => renderApp(app, { ...identity, logoFile }));
 await writeFile(indexPath, html.replace(marker, `${cards.join('\n')}\n`));

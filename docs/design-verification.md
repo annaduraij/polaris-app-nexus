@@ -47,6 +47,13 @@ overrides, content interpolation and persistence, and weighted header planning.
 Run `npm test` for the current complete suite. Generated YAML drift, syntax,
 package typing, and build checks belong to the repository validation commands.
 
+An independent packaging smoke test installed the `npm pack` tarball in a fresh
+temporary consumer project. Root, profiles, content, labs and React adapter
+imports resolved without installing React. The vanilla engine mounted and
+disposed successfully, and TypeScript strict NodeNext imports compiled. The
+tarball included declarations, schemas, local fonts, licenses and integration
+documentation (41 files, approximately 630 KB compressed at verification).
+
 ## Scope limits
 
 The profiles demonstrate dark browser UI. Existing photography light routes,

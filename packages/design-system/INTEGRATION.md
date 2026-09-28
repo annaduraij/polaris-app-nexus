@@ -262,3 +262,24 @@ The route contract requires:
 Public appearance customization is an opt-in product capability, not evidence of complete design-contract conformance. Each consumer must document which components consume semantic color, typography and material tokens, and identify remaining hard-coded values. Header layout and YAML content adoption are audited separately. Public content editing is outside this route contract.
 
 Lyra is the first consumer of this route. Krona still needs its static route integration. Photography remains a reference and future consumer; do not infer it has been migrated from the presence of the reference profile.
+
+## Glass hierarchy and editing contract (package 1.2)
+
+Decorative material nesting has a maximum of **Background → Container → Surface**. A page may omit levels. Further visible nesting must serve an interaction or other functional purpose. **Functional** covers headers, player bars, menus, dialogs and interactive controls; it is a separate material role, not permission for a fourth decorative layer. Components remain responsible for geometry and semantic markup.
+
+`material` retains its four baseline numeric fields for compatibility. Optional `material.layers` entries (`background`, `container`, `surface`, `functional`) override opacity, blur, saturation, border opacity and a `tint` referencing an existing semantic color. Missing entries inherit the versioned Polaris relationship in `resolveGlass`. `compileTokens` emits `--polaris-glass-<role>-{opacity,blur,saturation,border-opacity,tint}`. A shared `[data-polaris-glass="surface"]` style consumes these tokens; legacy apps can map their own selectors instead.
+
+The default editor is **Sliders + Shared**. Editing style and scope are independent view controls and must not change appearance on switching:
+
+- Sliders: Clarity (frosted to clear, inversely related to blur), Transmission (opaque to transparent, inversely related to opacity), Effect (coordinated saturation and edge strength). Exact exposes the four underlying numeric values. Sliders avoid requiring numerical entry; their accessible values remain available to assistive technology.
+- Shared: interpolate opacity/blur for all roles toward their endpoints, retaining relative separation between endpoints; saturation and border changes preserve calibrated offsets within validated limits. Split: edit only the selected role. Switching back to Shared preserves split edits until the next deliberate shared adjustment.
+- Background applies tint and blur over the page's ambient/media backdrop, not to the text/content above it. Media selection, album colors and animation remain app-owned. Functional component variants can use documented opacity/blur adjustments when required for readability.
+- Tint selects a Chroma semantic color reference. Choosing Role colors restores the standard semantic role references. Palette editing remains in Chroma so changes are explicit and centralized.
+
+**Dramatic is the app-approved material configuration**. `glassPreset(approved, 'moderate' | 'subdued')` derives quieter versions: more opaque, less blurred, less saturated and lighter-edged, retaining semantic tint links. An app can tailor its reference by editing approved role calibrations in code/YAML. Material changes that do not match a preset show Adjusted. These names describe coordinated material treatments, not the ambient renderer's effect intensity.
+
+Reset to app default restores only `engine.approved.material`. Reset to Polaris default replaces only material settings with `POLARIS_MATERIAL` plus resolved role defaults, retaining the consuming app's semantic palette and typography. Full-profile import/export/reset remains explicitly grouped under Import/export preview.
+
+Old profiles without role entries remain valid. When an app adds approved role calibrations, the engine upgrades stored legacy previews using their prior baseline offsets while preserving color and typography edits. New exports include resolved roles. Schema/runtime validation rejects unknown role names, out-of-range values and unrecognized tint references before applying state.
+
+Refinement workflow: inspect the actual application, adjust and export a candidate, review its role relationships and accessibility, update approved app calibrations or Polaris defaults, then run role isolation, preset/reset and browser checks. Changes to opinionated defaults must be reviewed and versioned; they are not silently published from the lab. Lyra demonstrates the hierarchy; other consumers must wire each role and document remaining exceptions before claiming full adoption.

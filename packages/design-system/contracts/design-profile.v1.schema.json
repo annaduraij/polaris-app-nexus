@@ -314,6 +314,211 @@
           "type": "number",
           "minimum": 0,
           "maximum": 1
+        },
+        "tint": {
+          "type": "string",
+          "enum": [
+            "page",
+            "surface",
+            "surfaceRaised",
+            "surfaceInset",
+            "text",
+            "textMuted",
+            "border",
+            "focus",
+            "primaryFill",
+            "primaryText",
+            "secondaryFill",
+            "secondaryText",
+            "headerFill",
+            "headerText"
+          ]
+        },
+        "layers": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "background": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "opacity": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "blur": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 60
+                },
+                "saturation": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 2
+                },
+                "borderOpacity": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "tint": {
+                  "type": "string",
+                  "enum": [
+                    "page",
+                    "surface",
+                    "surfaceRaised",
+                    "surfaceInset",
+                    "text",
+                    "textMuted",
+                    "border",
+                    "focus",
+                    "primaryFill",
+                    "primaryText",
+                    "secondaryFill",
+                    "secondaryText",
+                    "headerFill",
+                    "headerText"
+                  ]
+                }
+              }
+            },
+            "container": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "opacity": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "blur": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 60
+                },
+                "saturation": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 2
+                },
+                "borderOpacity": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "tint": {
+                  "type": "string",
+                  "enum": [
+                    "page",
+                    "surface",
+                    "surfaceRaised",
+                    "surfaceInset",
+                    "text",
+                    "textMuted",
+                    "border",
+                    "focus",
+                    "primaryFill",
+                    "primaryText",
+                    "secondaryFill",
+                    "secondaryText",
+                    "headerFill",
+                    "headerText"
+                  ]
+                }
+              }
+            },
+            "surface": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "opacity": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "blur": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 60
+                },
+                "saturation": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 2
+                },
+                "borderOpacity": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "tint": {
+                  "type": "string",
+                  "enum": [
+                    "page",
+                    "surface",
+                    "surfaceRaised",
+                    "surfaceInset",
+                    "text",
+                    "textMuted",
+                    "border",
+                    "focus",
+                    "primaryFill",
+                    "primaryText",
+                    "secondaryFill",
+                    "secondaryText",
+                    "headerFill",
+                    "headerText"
+                  ]
+                }
+              }
+            },
+            "functional": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "opacity": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "blur": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 60
+                },
+                "saturation": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 2
+                },
+                "borderOpacity": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "tint": {
+                  "type": "string",
+                  "enum": [
+                    "page",
+                    "surface",
+                    "surfaceRaised",
+                    "surfaceInset",
+                    "text",
+                    "textMuted",
+                    "border",
+                    "focus",
+                    "primaryFill",
+                    "primaryText",
+                    "secondaryFill",
+                    "secondaryText",
+                    "headerFill",
+                    "headerText"
+                  ]
+                }
+              }
+            }
+          }
         }
       },
       "required": [

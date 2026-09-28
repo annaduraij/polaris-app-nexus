@@ -1,6 +1,7 @@
 /* Author: Codex | Project: Polaris | Date: 2026-09-27
  * File: engine.js | Description: Long-lived, scoped design state with isolated preview and personal persistence. */
 import { validateProfile, validateEnvelope, validateContent, applyPersonal, CONTRACT_VERSION } from './contracts.js';
+import { resolveGlass, editGlass } from './glass.js';
 const clone = value => structuredClone(value);
 const kebab = value => value.replace(/[A-Z]/g, c => `-${c.toLowerCase()}`).replaceAll('_', '-');
 
@@ -15,6 +16,10 @@ export function compileTokens(profile) {
   vars['--polaris-glass-blur'] = `${profile.material.blur}px`;
   vars['--polaris-glass-saturation'] = String(profile.material.saturation);
   vars['--polaris-glass-border-opacity'] = String(profile.material.borderOpacity);
+  for (const [role, material] of Object.entries(resolveGlass(profile.material))) {
+    for (const key of ['opacity', 'blur', 'saturation', 'borderOpacity']) vars[`--polaris-glass-${role}-${kebab(key)}`] = `${material[key]}${key === 'blur' ? 'px' : ''}`;
+    vars[`--polaris-glass-${role}-tint`] = vars[`--polaris-${kebab(material.tint)}`];
+  }
   for (const [role, spec] of Object.entries(profile.typography.roles)) {
     const font = profile.fonts[spec.font], prefix = `--polaris-font-${kebab(role)}`;
     vars[`${prefix}-family`] = ['system-ui', 'ui-monospace'].includes(font.family) ? `${font.family}, ${font.fallback}` : `"${font.family}", ${font.fallback}`;
@@ -91,11 +96,24 @@ export function createDesignEngine({ profile, target = globalThis.document?.docu
   function fromPersonal(values) {
     return applyPersonal(approved, values);
   }
+  function normalizePreview(value) {
+    // Older previews keep their colors/fonts and receive the app's newly declared role calibration.
+    if (approved.material.layers && !value.material.layers) {
+      value = clone(value);
+      const legacy = value.material;
+      value.material = editGlass(approved.material, legacy);
+      // Preserve the previous baseline-plus-offset interpretation when upgrading a legacy preview.
+      for (const [role, layer] of Object.entries(resolveGlass(approved.material))) {
+        for (const [key, max] of [['opacity', 1], ['blur', 60]]) value.material.layers[role][key] = Math.round(Math.min(max, Math.max(0, layer[key] + legacy[key] - approved.material[key])) * 10000) / 10000;
+      }
+    }
+    return value;
+  }
   function persistAndApply(value) {
     checkAlive();
     const data = envelope(value);
     validateEnvelope(data, approved, kind);
-    const next = kind === 'preview' ? value : fromPersonal(value);
+    const next = kind === 'preview' ? normalizePreview(value) : fromPersonal(value);
     const prepared = prepare(next);
     // Storage failure cannot publish a state the next reload would lose.
     persistence?.setItem(key, JSON.stringify(data));
@@ -108,7 +126,7 @@ export function createDesignEngine({ profile, target = globalThis.document?.docu
       if (stored.length > 150000) throw new Error('Stored preferences exceed 150 KB');
       const data = validateEnvelope(JSON.parse(stored), approved, kind);
       if (kind === 'personal') personal = clone(data.value);
-      active = kind === 'preview' ? clone(data.value) : fromPersonal(data.value);
+      active = kind === 'preview' ? normalizePreview(clone(data.value)) : fromPersonal(data.value);
     }
   } catch (error) { onError(error); }
   const initialPrepared = prepare(active);

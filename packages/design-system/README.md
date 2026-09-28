@@ -22,3 +22,5 @@ Copy this package's `assets/` directory to `/vendor/polaris/assets/`, or rewrite
 See `INTEGRATION.md` for complete vanilla/React integration, generated-content checks, migration boundaries and production policy. Versioned machine-readable schemas are in `contracts/`. Runtime validation additionally checks relationships that JSON Schema cannot express, including font axis ranges, permitted preference paths and app/revision matching.
 
 Consumers can optionally expose the full application at `/polaris` (disabled by default and controlled by app build/server configuration) using `mode: 'customization'`. Its browser-only appearance previews persist separately from developer and normal production preferences. This never enables server development mode or publication; see the route contract in `INTEGRATION.md`.
+
+Glass Lab supports Sliders/Exact and Shared/Split editing across Background, Container, Surface and Functional roles, with Chroma-linked tint, app-calibrated Dramatic/Moderate/Subdued presets, and material-only app/Polaris resets.

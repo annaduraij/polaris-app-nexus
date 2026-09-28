@@ -74,6 +74,8 @@ a:focus-visible { outline: 2px solid #a4f6d9; outline-offset: 5px; }
 .intro h1 { margin: 0; font-size: clamp(64px, 6vw, 86px); font-weight: 650; line-height: 1; letter-spacing: .065em; }
 .subtitle { margin: 16px 0 0; font-size: clamp(22px, 2.3vw, 30px); letter-spacing: -.035em; }
 .description { max-width: 370px; margin: 28px 0 0; color: #abbab6; font-size: 16px; line-height: 1.6; }
+.design-system-link { display: inline-flex; align-items: center; gap: 12px; margin-top: 28px; padding-block: 10px; color: #bce8d7; font-size: 13px; text-decoration: none; }
+.design-system-link:hover { text-decoration: underline; text-underline-offset: 5px; }
 
 .apps { display: grid; gap: 12px; scroll-margin-top: 28px; }
 .app-row {

@@ -69,6 +69,7 @@ export declare const content: {
   readonly "header.saved": string;
   readonly "header.actionFeedback": string;
   readonly "lab.chroma": string;
+  readonly "lab.launcher": string;
   readonly "lab.typography": string;
   readonly "lab.close": string;
   readonly "lab.palette": string;

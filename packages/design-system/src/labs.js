@@ -47,6 +47,14 @@ export function mountLabs(engine, { container = document.body, fonts = {}, copy 
     trigger.setAttribute('aria-label', t(`lab.${name}`)); trigger.title = t(`lab.${name}`);
     const iconTemplate = doc.createElement('template'); iconTemplate.innerHTML = labIcons[name];
     const icon = iconTemplate.content.firstElementChild; icon.setAttribute('aria-hidden', 'true');
+    const defs = doc.createElementNS(icon.namespaceURI, 'defs'), aurora = doc.createElementNS(icon.namespaceURI, 'linearGradient');
+    aurora.id = `${choices.id}-${name}-aurora`; aurora.setAttribute('gradientUnits', 'userSpaceOnUse');
+    for (const [key, value] of Object.entries({ x1: 2, y1: 2, x2: 22, y2: 22 })) aurora.setAttribute(key, value);
+    for (const [offset, tone] of [['0%', 'emerald'], ['35%', 'teal'], ['68%', 'cyan'], ['100%', 'violet']]) {
+      const stop = doc.createElementNS(icon.namespaceURI, 'stop'); stop.setAttribute('offset', offset); stop.setAttribute('stop-color', `var(--polaris-tool-aurora-${tone})`); aurora.append(stop);
+    }
+    defs.append(aurora); icon.prepend(defs); icon.setAttribute('stroke', `url(#${aurora.id})`);
+    icon.querySelectorAll('[fill="currentColor"]').forEach(detail => detail.setAttribute('fill', `url(#${aurora.id})`));
     trigger.append(icon);
     const head = el('header', 'polaris-lab-head');
     const close = button(t('lab.close'), () => dialog.close());

@@ -117,6 +117,7 @@ lab.imported: Validated preview imported.
 lab.resetDone: Approved defaults restored.
 lab.updated: Preview updated.
 lab.previewOnly: Local development preview · never published automatically
+lab.customizationOnly: Appearance preview · saved in this browser · normal app appearance stays unchanged
 lab.chooseRole: Choose a typography role
 lab.separateFamilies: Separate serif and sans-serif styles
 lab.groupedRoles: These styles currently have separate settings. Edits here apply to both; enable separate styles to adjust each individually.

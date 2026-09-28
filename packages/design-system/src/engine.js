@@ -58,10 +58,12 @@ export function selectedFontCSS(profile, assetBase) {
 /** Mount once at application startup. Labs are disposable views of this engine. */
 export function createDesignEngine({ profile, target = globalThis.document?.documentElement, mode = 'production', storage, assetBase, onError = () => {} } = {}) {
   validateProfile(profile);
-  if (!['production', 'development'].includes(mode)) throw new Error('mode must be production or development');
+  if (!['production', 'development', 'customization'].includes(mode)) throw new Error('mode must be production, development or customization');
   if (!target?.style) throw new Error('A target element with a style declaration is required');
-  const approved = clone(profile), kind = mode === 'development' ? 'preview' : 'personal';
-  const key = `polaris:v${CONTRACT_VERSION}:${profile.id}:${profile.revision}:${kind}`;
+  const approved = clone(profile), kind = mode === 'production' ? 'personal' : 'preview';
+  // Public customization uses the same validated preview format, with independent browser storage.
+  const scope = mode === 'customization' ? 'customization' : kind;
+  const key = `polaris:v${CONTRACT_VERSION}:${profile.id}:${profile.revision}:${scope}`;
   let active = clone(approved), personal = {}, disposed = false;
   const listeners = new Set(), previous = new Map();
   let appliedKeys = [];
@@ -118,7 +120,7 @@ export function createDesignEngine({ profile, target = globalThis.document?.docu
     get profile() { return clone(active); },
     get approved() { return clone(approved); },
     subscribe(callback) { checkAlive(); listeners.add(callback); return () => listeners.delete(callback); },
-    preview(next) { if (mode !== 'development') throw new Error('Preview editing is development-only'); persistAndApply(next); },
+    preview(next) { if (kind !== 'preview') throw new Error('Preview editing requires development or customization mode'); persistAndApply(next); },
     setPersonal(values) {
       if (mode !== 'production') throw new Error('Personal preferences belong to the production engine');
       persistAndApply({ ...personal, ...values });

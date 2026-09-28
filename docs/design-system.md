@@ -99,7 +99,7 @@ Copy the package's `assets/` directory to `/vendor/polaris/assets/`, or set appr
 | --- | --- |
 | `profile`, `approved` | Return isolated copies of active state and approved defaults |
 | `subscribe(callback)` | Subscribe to profile changes; returns unsubscribe |
-| `preview(fullProfile)` | Development only; validate, persist, apply |
+| `preview(fullProfile)` | Development or customization; validate, persist, apply |
 | `setPersonal(flatPaths)` | Production only; merge explicitly permitted preferences |
 | `export()` / `import(json)` | Versioned, app-scoped and revision-scoped preference envelopes |
 | `reset()` | Remove this scope's preferences and restore approved defaults |
@@ -125,10 +125,10 @@ Browser preferences survive ordinary reloads. Clearing site data can erase them.
 
 ## Floating labs
 
-Load labs only in development, after creating the long-lived engine:
+Load labs in development or on the explicit public customization route, after creating the long-lived engine:
 
 ```js
-if (developmentBuild) {
+if (engine.mode === 'development' || engine.mode === 'customization') {
   const { mountLabs } = await import('@polaris/design-system/labs');
   const { developerFonts } = await import('@polaris/design-system/developer-fonts');
   const labs = mountLabs(engine, { fonts: developerFonts });
@@ -233,3 +233,32 @@ Lucide artwork and its license are bundled in the shared package; the source rev
 The launcher logo renders at 40 pixels inside its 44-pixel target. Lucide strokes and filled details use a diagonal emerald–teal–cyan–violet aurora gradient, retaining the original icon shapes and transparent button backgrounds.
 
 Lab chrome follows the photography AppearanceControls styling: 14px panel corners, faint 16% borders, borderless section groups with muted labels, 10px controls, and quiet surface buttons. App semantic colors remain live; keyboard focus and increased-contrast/forced-color affordances remain explicit. Photography was used as a read-only reference.
+
+## Standard public customization route: `/polaris`
+
+Polaris consumers may opt into `/polaris` (also accepting `/polaris/`) as the standard public appearance-customization entry point. Production exposure is optional and disabled by default. A build/server-owned `customizationEnabled` setting must control route availability; disabling it returns 404 (or omits the static entry), without mounting labs or applying customization preferences. Development labs remain independent of this public-route setting. Apps that disable this capability still conform to Polaris. Render the actual application there, with its usual authentication and permissions, and create its design engine with `mode: 'customization'`. Mount the shared labs against that engine. This is a browser customization mode and does not require `NODE_ENV=development`, debug servers, relaxed authorization, source writes, or publishing access.
+
+```js
+// Derive this value from an explicitly configured application route.
+// The router must reject customizationRoute when customizationEnabled is false.
+const mode = customizationEnabled && customizationRoute ? 'customization' : developmentBuild ? 'development' : 'production';
+const engine = createDesignEngine({ profile, mode, assetBase });
+if (mode !== 'production') {
+  const { mountLabs } = await import('@polaris/design-system/labs');
+  const { developerFonts } = await import('@polaris/design-system/developer-fonts');
+  mountLabs(engine, { fonts: developerFonts });
+}
+```
+
+The route contract requires:
+
+- The full app remains usable while its Polaris launcher exposes Typography, Chroma, and Glass Labs. SPA navigation retains the customization path; the app's home link can exit to `/`.
+- Changes apply only to that browser's customization view. Storage uses `polaris:v1:<app>:<revision>:customization`, separate from developer `preview` and production `personal`. Reload restores the customization; ordinary `/` retains approved appearance plus permitted personal preferences.
+- Provide visible browser-only wording, validated import/export, reset, accessible focus, and contrast feedback. Clearing site data removes preferences. Exports use the existing validated `preview` envelope; deliberate imports can transfer a reviewed preview between developer and customization modes for the same app/revision.
+- Authentication, API authorization, content publication, Spotify/budget data and other business operations remain independent. This path neither grants access nor makes private content public. Server authorization remains mandatory for privileged actions.
+- Imported profiles validate before storage or CSS changes. The current font contract permits HTTPS font assets; these may make browser network requests. Apps requiring bundled fonts only must add that restriction before applying imported profiles.
+- Static consumers must configure an explicit rewrite or entry file for `/polaris`; query flags are not a substitute. Apps under a base path reserve `<base>/polaris`. Tests must cover enabled and disabled route availability, signed-out and signed-in rendering where applicable, route reload, storage isolation, reset/import rejection, and unchanged API permissions.
+
+Public appearance customization is an opt-in product capability, not evidence of complete design-contract conformance. Each consumer must document which components consume semantic color, typography and material tokens, and identify remaining hard-coded values. Header layout and YAML content adoption are audited separately. Public content editing is outside this route contract.
+
+Lyra is the first consumer of this route. Krona still needs its static route integration. Photography remains a reference and future consumer; do not infer it has been migrated from the presence of the reference profile.

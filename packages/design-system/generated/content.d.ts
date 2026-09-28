@@ -106,6 +106,7 @@ export declare const content: {
   readonly "lab.resetDone": string;
   readonly "lab.updated": string;
   readonly "lab.previewOnly": string;
+  readonly "lab.customizationOnly": string;
   readonly "lab.chooseRole": string;
   readonly "lab.separateFamilies": string;
   readonly "lab.groupedRoles": string;

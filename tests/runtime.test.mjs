@@ -15,7 +15,7 @@ test('developer edits hydrate before any lab exists, survive view subscription d
   let engine = start('development'); const next = engine.profile; next.palette.primary['500'] = '#123456'; const off = engine.subscribe(() => {});
   engine.preview(next); off(); assert.equal(f.styles.get('--polaris-primary-fill'), '#123456'); engine.dispose();
   engine = start('development'); assert.equal(f.styles.get('--polaris-primary-fill'), '#123456'); engine.dispose();
-  engine = start('production'); assert.equal(f.styles.get('--polaris-primary-fill'), profiles.lyra.palette.primary['500']); assert.throws(() => engine.preview(next), /development-only/);
+  engine = start('production'); assert.equal(f.styles.get('--polaris-primary-fill'), profiles.lyra.palette.primary['500']); assert.throws(() => engine.preview(next), /development or customization/);
 });
 test('invalid imports and failed storage writes leave current state intact', () => {
   const f = fixture(), engine = createDesignEngine({ ...f, profile: profiles.lyra, mode: 'development' });
@@ -44,4 +44,27 @@ test('content is runtime safe, retains interpolation contracts and isolates deve
   assert.equal(createContentEngine(defaults, { mode: 'production', storage, app: 'lyra' }).text('title'), 'Approved copy');
   assert.throws(() => createContentEngine(defaults, { mode: 'production' }).preview(defaults));
   b.reset(); assert.equal(b.text('title'), 'Approved copy'); assert.equal(storage.getItem(b.storageKey), null);
+});
+
+test('public customization is isolated, validated, portable, and resettable', () => {
+  const f = fixture(), start = mode => createDesignEngine({ ...f, profile: profiles.lyra, mode });
+  let engine = start('customization');
+  const key = engine.storageKey, next = engine.profile;
+  next.palette.primary['500'] = '#123456'; next.material.blur = 12;
+  engine.preview(next); const exported = engine.export(); engine.dispose();
+  assert.match(key, /:customization$/);
+  for (const mode of ['development', 'production']) {
+    const other = start(mode);
+    assert.equal(other.profile.palette.primary['500'], profiles.lyra.palette.primary['500']);
+    assert.notEqual(other.storageKey, key); other.dispose();
+  }
+  engine = start('customization');
+  assert.equal(engine.profile.palette.primary['500'], '#123456');
+  const invalid = engine.profile; invalid.material.blur = 900;
+  assert.throws(() => engine.preview(invalid)); assert.equal(engine.export(), exported);
+  engine.reset(); assert.equal(f.values.has(key), false);
+  engine.import(exported); assert.equal(engine.profile.material.blur, 12);
+  const invalidImport = JSON.parse(exported); invalidImport.value.palette.primary['500'] = 'url(evil)';
+  assert.throws(() => engine.import(JSON.stringify(invalidImport)));
+  assert.equal(engine.export(), exported); engine.dispose();
 });

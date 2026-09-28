@@ -3,7 +3,7 @@ export type Shade = '100' | '300' | '500' | '700' | '900';
 export type Role = 'serif_heading' | 'sans_heading' | 'serif_body' | 'sans_body' | 'label' | 'control' | 'script' | 'mono';
 export type SemanticRole = 'page' | 'surface' | 'surfaceRaised' | 'surfaceInset' | 'text' | 'textMuted' | 'border' | 'focus' | 'primaryFill' | 'primaryText' | 'secondaryFill' | 'secondaryText' | 'headerFill' | 'headerText';
 export type ColorReference = `${Family}.${Shade}`;
-export type Mode = 'production' | 'development';
+export type Mode = 'production' | 'development' | 'customization';
 export interface FontAsset { url: string; weight: string; style: 'normal' | 'italic' }
 export interface FontSpec { family: string; fallback: 'serif' | 'sans-serif' | 'monospace' | 'cursive' | 'system-ui'; assets: FontAsset[]; axes: Partial<Record<'wght' | 'wdth', [number, number]>>; weights: number[] }
 export type FontCatalog = Record<string, FontSpec>;
@@ -73,4 +73,4 @@ export interface ContentEngine<T extends Record<string, string>> {
   import(json: string): void;
   reset(): void;
 }
-export function createContentEngine<T extends Record<string, string>>(defaults: T, options?: { mode?: Mode; app?: string; revision?: string; storage?: StorageLike | null; onError?: (error: Error) => void }): ContentEngine<T>;
+export function createContentEngine<T extends Record<string, string>>(defaults: T, options?: { mode?: Exclude<Mode, 'customization'>; app?: string; revision?: string; storage?: StorageLike | null; onError?: (error: Error) => void }): ContentEngine<T>;

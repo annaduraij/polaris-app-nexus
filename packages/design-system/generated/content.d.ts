@@ -102,6 +102,10 @@ export declare const content: {
   readonly "lab.updated": string;
   readonly "lab.previewOnly": string;
   readonly "lab.chooseRole": string;
+  readonly "lab.separateFamilies": string;
+  readonly "lab.groupedRoles": string;
+  readonly "role.heading": string;
+  readonly "role.body": string;
   readonly "lab.status": string;
   readonly "lab.data": string;
   readonly "lab.media": string;

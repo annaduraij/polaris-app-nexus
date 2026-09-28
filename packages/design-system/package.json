@@ -1,6 +1,6 @@
 {
   "name": "@polaris/design-system",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "type": "module",
   "description": "Framework-independent design contracts, engines, labs and components",
   "exports": {

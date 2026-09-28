@@ -19,7 +19,7 @@ export interface DesignProfile {
   status: Record<'success' | 'warning' | 'error' | 'info', string>;
   data: string[];
   media: string[];
-  material: { opacity: number; blur: number; saturation: number; borderOpacity: number };
+  material: GlassMaterial;
   fonts: FontCatalog;
   typography: { scale: number; roles: Partial<Record<Role, TypeRole>> };
   personal: PersonalPath[];
@@ -74,3 +74,17 @@ export interface ContentEngine<T extends Record<string, string>> {
   reset(): void;
 }
 export function createContentEngine<T extends Record<string, string>>(defaults: T, options?: { mode?: Exclude<Mode, 'customization'>; app?: string; revision?: string; storage?: StorageLike | null; onError?: (error: Error) => void }): ContentEngine<T>;
+
+export type GlassRole = 'background' | 'container' | 'surface' | 'functional';
+export interface GlassValues { opacity: number; blur: number; saturation: number; borderOpacity: number }
+export type GlassLayer = GlassValues & { tint: SemanticRole };
+export type GlassMaterial = GlassValues & { tint?: SemanticRole; layers?: Partial<Record<GlassRole, Partial<GlassLayer>>> };
+export const GLASS_ROLES: GlassRole[];
+export const GLASS_FIELDS: Record<keyof GlassValues, [number, number]>;
+export const POLARIS_MATERIAL: Readonly<GlassValues>;
+export function resolveGlass(material: GlassMaterial): Record<GlassRole, GlassLayer>;
+export function editGlass(material: GlassMaterial, changes: Partial<GlassLayer>, role?: GlassRole | null): GlassMaterial;
+export function glassEffect(material: GlassValues): number;
+export function glassSliderChanges(material: GlassValues, name: 'clarity' | 'transmission' | 'effect', value: number): Partial<GlassValues>;
+export function glassPreset(material: GlassMaterial, preset: 'subdued' | 'moderate' | 'dramatic'): GlassMaterial;
+export function glassPresetName(material: GlassMaterial, approved: GlassMaterial): 'subdued' | 'moderate' | 'dramatic' | 'adjusted';

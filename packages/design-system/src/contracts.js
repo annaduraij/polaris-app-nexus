@@ -87,7 +87,17 @@ export function validateProfile(profile) {
     ensure(Array.isArray(profile[name]) && profile[name].length >= 1 && profile[name].length <= (name === 'media' ? 5 : 12), name, 'invalid palette length');
     profile[name].forEach((color, i) => ensure(HEX.test(color), `${name}.${i}`, 'must be a hex color'));
   }
-  object(profile.material, 'material', ['opacity', 'blur', 'saturation', 'borderOpacity']);
+  object(profile.material, 'material', ['opacity', 'blur', 'saturation', 'borderOpacity', 'tint', 'layers'], ['opacity', 'blur', 'saturation', 'borderOpacity']);
+  if (profile.material.tint !== undefined) ensure(SEMANTIC_ROLES.includes(profile.material.tint), 'material.tint', 'must reference a semantic color');
+  if (profile.material.layers !== undefined) {
+    object(profile.material.layers, 'material.layers', ['background', 'container', 'surface', 'functional'], []);
+    for (const [role, layer] of Object.entries(profile.material.layers)) {
+      const path = `material.layers.${role}`;
+      object(layer, path, ['opacity', 'blur', 'saturation', 'borderOpacity', 'tint'], []);
+      for (const [key, max] of [['opacity', 1], ['blur', 60], ['saturation', 2], ['borderOpacity', 1]]) if (layer[key] !== undefined) number(layer[key], `${path}.${key}`, 0, max);
+      if (layer.tint !== undefined) ensure(SEMANTIC_ROLES.includes(layer.tint), `${path}.tint`, 'must reference a semantic color');
+    }
+  }
   number(profile.material.opacity, 'material.opacity', 0, 1);
   number(profile.material.blur, 'material.blur', 0, 60);
   number(profile.material.saturation, 'material.saturation', 0, 2);

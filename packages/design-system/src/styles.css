@@ -129,3 +129,21 @@
 [data-polaris-role="control"] { --role-family: var(--polaris-font-control-family); --role-weight: var(--polaris-font-control-weight); --role-size: var(--polaris-font-control-size); --role-line-height: var(--polaris-font-control-line-height); --role-tracking: var(--polaris-font-control-tracking); --role-width: var(--polaris-font-control-width); --role-variation: var(--polaris-font-control-variation); }
 [data-polaris-role="script"] { --role-family: var(--polaris-font-script-family); --role-weight: var(--polaris-font-script-weight); --role-size: var(--polaris-font-script-size); --role-line-height: var(--polaris-font-script-line-height); --role-tracking: var(--polaris-font-script-tracking); --role-width: var(--polaris-font-script-width); --role-variation: var(--polaris-font-script-variation); }
 [data-polaris-role="mono"] { --role-family: var(--polaris-font-mono-family); --role-weight: var(--polaris-font-mono-weight); --role-size: var(--polaris-font-mono-size); --role-line-height: var(--polaris-font-mono-line-height); --role-tracking: var(--polaris-font-mono-tracking); --role-width: var(--polaris-font-mono-width); --role-variation: var(--polaris-font-mono-variation); }
+
+/* Explicit material roles keep appearance independent of structural component selectors. */
+[data-polaris-glass] { background: color-mix(in srgb, var(--glass-tint) calc(var(--glass-opacity) * 100%), transparent); border: 1px solid color-mix(in srgb, var(--polaris-border) calc(var(--glass-edge) * 100%), transparent); backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation)); -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation)); }
+[data-polaris-glass="background"] { --glass-tint: var(--polaris-glass-background-tint); --glass-opacity: var(--polaris-glass-background-opacity); --glass-blur: var(--polaris-glass-background-blur); --glass-saturation: var(--polaris-glass-background-saturation); --glass-edge: var(--polaris-glass-background-border-opacity); }
+[data-polaris-glass="container"] { --glass-tint: var(--polaris-glass-container-tint); --glass-opacity: var(--polaris-glass-container-opacity); --glass-blur: var(--polaris-glass-container-blur); --glass-saturation: var(--polaris-glass-container-saturation); --glass-edge: var(--polaris-glass-container-border-opacity); }
+[data-polaris-glass="surface"] { --glass-tint: var(--polaris-glass-surface-tint); --glass-opacity: var(--polaris-glass-surface-opacity); --glass-blur: var(--polaris-glass-surface-blur); --glass-saturation: var(--polaris-glass-surface-saturation); --glass-edge: var(--polaris-glass-surface-border-opacity); }
+[data-polaris-glass="functional"] { --glass-tint: var(--polaris-glass-functional-tint); --glass-opacity: var(--polaris-glass-functional-opacity); --glass-blur: var(--polaris-glass-functional-blur); --glass-saturation: var(--polaris-glass-functional-saturation); --glass-edge: var(--polaris-glass-functional-border-opacity); }
+.polaris-glass-switch { display: flex; gap: 6px; margin-bottom: 10px; }
+.polaris-glass-switch button { flex: 1; }
+.polaris-glass-switch [aria-pressed="true"] { box-shadow: inset 0 -2px var(--polaris-primary-fill); color: var(--polaris-text); }
+.polaris-glass-endpoints { display: flex; justify-content: space-between; font-size: 11px; color: var(--polaris-text-muted); }
+.polaris-glass-preview { position: relative; gap: 12px; isolation: isolate; margin-top: 16px; }
+.polaris-glass-backdrop { position: absolute; inset: 0; z-index: -1; }
+.polaris-glass-sample { box-sizing: border-box; padding: 12px; }
+.polaris-glass-sample > .polaris-glass-sample { margin-top: 12px; }
+.polaris-glass-function { padding: 7px 14px; border-radius: 8px; }
+@media (prefers-reduced-transparency: reduce), (prefers-contrast: more) { [data-polaris-glass] { background: var(--glass-tint); backdrop-filter: none; -webkit-backdrop-filter: none; } }
+@media (forced-colors: active) { [data-polaris-glass] { background: Canvas; border-color: CanvasText; backdrop-filter: none; -webkit-backdrop-filter: none; } }

@@ -1,8 +1,15 @@
 /* Author: Codex | Project: Polaris | Date: 2026-09-27
  * File: styles.css | Description: Charcoal glass, page-wide aurora, and compact app rows. */
+@font-face {
+  font-family: Mulish;
+  src: url('./design-system/runtime/assets/fonts/Mulish-VariableFont_wght.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 200 1000;
+  font-display: swap;
+}
 :root {
   color-scheme: dark;
-  font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: Mulish, ui-sans-serif, sans-serif;
   color: #f3f5f4;
   background: #07090b;
   font-synthesis: none;
@@ -22,26 +29,27 @@ body {
   min-height: 100vh;
   margin: 0;
   overflow-x: hidden;
-  background:
-    radial-gradient(ellipse 70% 55% at 12% 22%, #17493b73, transparent 78%),
-    radial-gradient(ellipse 65% 58% at 86% 32%, #2e38678a, transparent 78%),
-    radial-gradient(ellipse 70% 48% at 50% 88%, #39284d70, transparent 82%),
-    var(--polaris-charcoal);
+  background: var(--polaris-charcoal);
 }
-/* Light crosses the viewport so the aurora belongs to Polaris, not a card. */
+/* Soft circular light moves across the page, beneath a charcoal glass tint. */
 body::before {
   position: fixed;
-  inset: -25%;
+  inset: -18%;
   z-index: 0;
-  background: linear-gradient(108deg, transparent 22%, color-mix(in srgb, var(--polaris-aurora-emerald) 10%, transparent) 38%, color-mix(in srgb, var(--polaris-aurora-teal) 8%, transparent) 48%, color-mix(in srgb, var(--polaris-aurora-cyan) 10%, transparent) 58%, color-mix(in srgb, var(--polaris-aurora-violet) 8%, transparent) 68%, transparent 82%);
-  filter: blur(38px);
+  background:
+    radial-gradient(circle at 23% 25%, color-mix(in srgb, var(--polaris-aurora-emerald) 35%, transparent), transparent 28%),
+    radial-gradient(circle at 73% 27%, color-mix(in srgb, var(--polaris-aurora-cyan) 34%, transparent), transparent 32%),
+    radial-gradient(circle at 45% 76%, color-mix(in srgb, var(--polaris-aurora-violet) 24%, transparent), transparent 31%),
+    radial-gradient(circle at 83% 79%, color-mix(in srgb, var(--polaris-aurora-teal) 20%, transparent), transparent 26%);
+  filter: blur(34px);
   animation: page-aurora 22s ease-in-out infinite alternate;
   content: "";
   pointer-events: none;
 }
+body::after { position: fixed; inset: 0; z-index: 0; background: #07090b57; content: ""; pointer-events: none; }
 @keyframes page-aurora {
-  from { transform: translate3d(-7%, 2%, 0) rotate(-5deg); opacity: .72; }
-  to { transform: translate3d(8%, -3%, 0) rotate(6deg); opacity: 1; }
+  from { transform: translate3d(-4%, 3%, 0) scale(.96); }
+  to { transform: translate3d(5%, -3%, 0) scale(1.05); }
 }
 a { color: inherit; }
 :where(a, button):focus-visible { outline: 3px solid var(--polaris-north-gold-light); outline-offset: 3px; }
@@ -56,7 +64,21 @@ a { color: inherit; }
   margin-inline: auto;
   padding: clamp(60px, 10vh, 104px) 0 72px;
 }
-.intro { max-width: 720px; margin: 0 auto 52px; text-align: center; }
+.intro { position: relative; isolation: isolate; max-width: 720px; margin: 0 auto 52px; text-align: center; }
+.intro::before {
+  position: absolute;
+  inset: -95px -80px;
+  z-index: -2;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 27% 40%, #3dffa641, transparent 37%),
+    radial-gradient(circle at 75% 36%, #638bff3d, transparent 37%),
+    radial-gradient(circle at 58% 78%, #dc76ff2c, transparent 37%);
+  filter: blur(42px);
+  content: "";
+  pointer-events: none;
+}
+.intro::after { position: absolute; inset: -60px -55px; z-index: -1; border-radius: 50%; background: radial-gradient(ellipse, #080c12a8 16%, #080c1266 50%, transparent 74%); content: ""; pointer-events: none; }
 .polaris-logo { display: block; width: 126px; height: 126px; margin: 0 auto 21px; filter: drop-shadow(0 0 38px #d9a55d42); }
 .intro h1 { margin: 0; font-size: clamp(3.5rem, 10vw, 5.4rem); font-weight: 650; line-height: 1.08; letter-spacing: .03em; }
 .subtitle { margin: 9px 0 0; font-size: clamp(1.2rem, 3.6vw, 1.65rem); letter-spacing: -.025em; }
@@ -81,61 +103,67 @@ a { color: inherit; }
     radial-gradient(ellipse at 88% 10%, color-mix(in srgb, var(--signature) 20%, transparent), transparent 62%),
     var(--surface);
 }
-.app-compact { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 7px; min-width: 0; }
+.app-compact { display: grid; grid-template-columns: minmax(0, 1fr) auto; min-width: 0; border-radius: 12px; background: var(--polaris-glass); }
 .app-main {
   display: grid;
-  grid-template-columns: 50px minmax(0, 1fr) auto;
+  grid-template-columns: 50px minmax(0, 1fr);
   align-items: center;
   gap: 13px;
   min-width: 0;
   min-height: 65px;
-  padding: 7px 15px 7px 8px;
+  padding: 7px 8px;
   border-radius: 12px;
-  background: var(--polaris-glass);
   text-decoration: none;
 }
-a.app-main:hover { background: #182123ee; }
+a.app-main:hover { background: #ffffff0d; }
 .logo-panel { display: grid; place-items: center; width: 50px; height: 50px; border-radius: 9px; background: #ffffff13; }
 .app-logo { display: block; width: 44px; height: 44px; object-fit: contain; filter: drop-shadow(0 3px 8px #0005); }
+.app-monogram { color: #d4c4a0; font-size: 32px; font-weight: 600; line-height: 1; }
 .app-line { display: flex; align-items: baseline; gap: 12px; min-width: 0; white-space: nowrap; }
 .app-line strong { flex: 0 0 auto; font-size: 21px; font-weight: 650; letter-spacing: -.025em; }
 .app-line small { overflow: hidden; min-width: 0; color: #d7e3df; font-size: 13px; text-overflow: ellipsis; }
-.row-arrow { color: var(--signature); font-size: 24px; line-height: 1; }
-.soon { padding: 5px 8px; border: 1px solid #ffffff52; border-radius: 999px; color: #f3e9f1; font-size: 10px; white-space: nowrap; }
+.app-actions { display: flex; align-items: center; gap: 2px; padding-right: 8px; }
 .app-details-toggle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  min-width: 85px;
-  min-height: 65px;
-  padding: 10px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
   border: 0;
-  border-radius: 12px;
-  color: #f3f5f4;
-  background: var(--polaris-glass);
+  border-radius: 50%;
+  color: var(--polaris-north-gold-light);
+  background: transparent;
   font-family: inherit;
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 1.2;
+  font-size: 25px;
+  font-weight: 400;
+  line-height: 1;
   cursor: pointer;
 }
 .app-details-toggle[hidden], .app-details[hidden] { display: none; }
-.app-details-toggle:hover { background: #182123ee; }
-.app-details-toggle span { color: var(--polaris-north-gold-light); font-size: 19px; transition: transform .2s ease; }
-.app-details-toggle[aria-expanded="true"] span { transform: rotate(180deg); }
-.app-details { display: grid; gap: 6px; margin: 7px 0 0; padding: 14px 18px 16px 72px; border-radius: 12px; color: #dde9e5; background: #080c0edc; }
+.app-details-toggle:hover, .app-launch:hover { background: #ffffff16; }
+.app-launch { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; color: var(--signature); font-size: 25px; line-height: 1; text-decoration: none; }
+.release-badge { margin: 0 8px; padding: 5px 8px; border: 1px solid color-mix(in srgb, var(--accent) 70%, transparent); border-radius: 999px; color: #f3e9f1; font-size: 11px; font-weight: 700; letter-spacing: .025em; white-space: nowrap; }
+.fano .release-badge { color: #f2deae; }
+.app-row.expanded .app-compact { border-radius: 12px 12px 0 0; }
+.app-details { display: grid; gap: 6px; padding: 13px 18px 17px 72px; border-top: 1px solid #ffffff1c; border-radius: 0 0 12px 12px; color: #dde9e5; background: var(--polaris-glass); }
 .app-details p { margin: 0; font-size: 13px; line-height: 1.5; }
 .app-details p + p { color: #baccc5; }
 .app-details b { color: #f5f7f2; }
-.krona .app-main, .krona .app-details-toggle { color: #243b33; background: #fffefae8; }
-.krona a.app-main:hover, .krona .app-details-toggle:hover { background: #fff; }
+.krona .app-compact, .krona .app-details { color: #243b33; background: #fffefae8; }
+.krona a.app-main:hover, .krona .app-details-toggle:hover, .krona .app-launch:hover { background: #7f9d9126; }
 .krona .logo-panel { background: #7f9d9130; }
 .krona .app-line small { color: #315d4b; }
-.krona .app-details { color: #2d473c; background: #fffefae8; }
+.krona .app-details { border-top-color: #315d4b33; }
 .krona .app-details p + p, .krona .app-details b { color: #315d4b; }
-.krona .app-details-toggle span { color: #815c2d; }
+.krona .app-details-toggle, .krona .app-launch { color: #315d4b; }
 .ren .logo-panel { background: #d88fad2e; }
+.fano .logo-panel { background: #557f8c4d; }
+.status-legend { margin: 14px 0 0; color: #bac8c6; font-size: 12px; line-height: 1.5; text-align: center; }
+.status-legend strong { color: var(--polaris-north-gold-light); }
+.design-system-invite { max-width: 620px; margin: 54px auto 0; padding-top: 24px; border-top: 1px solid #d9a55d5c; text-align: center; }
+.invite-label { margin: 0; color: var(--polaris-north-gold); font-size: 11px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
+.design-system-invite h2 { margin: 9px 0 7px; font-size: clamp(22px, 4vw, 28px); font-weight: 650; }
+.design-system-invite > p:not(.invite-label) { margin: 0 auto; color: #becdca; font-size: 14px; line-height: 1.6; }
 @media (max-width: 600px) {
   .layout { width: min(100% - 32px, 820px); padding-top: 54px; }
   .intro { margin-bottom: 42px; }
@@ -143,32 +171,31 @@ a.app-main:hover { background: #182123ee; }
   .app-line { gap: 8px; }
   .app-line strong { font-size: 19px; }
   .app-line small { font-size: 12px; }
-  .app-details-toggle { min-width: 45px; font-size: 0; }
-  .app-details-toggle span { font-size: 22px; }
+  .release-badge { margin-inline: 3px; }
 }
 @media (max-width: 390px) {
-  .app-main { grid-template-columns: 42px minmax(0, 1fr) auto; gap: 8px; padding-inline: 6px 9px; }
+  .app-main { grid-template-columns: 42px minmax(0, 1fr); gap: 8px; padding-inline: 6px; }
   .logo-panel { width: 42px; height: 46px; }
   .app-logo { width: 39px; height: 39px; }
   .app-line { gap: 6px; }
   .app-line strong { font-size: 17px; }
   .app-line small { font-size: 11px; }
-  .row-arrow { font-size: 19px; }
-  .soon { padding: 4px 6px; font-size: 9px; }
+  .app-actions { gap: 0; padding-right: 2px; }
+  .release-badge { margin-inline: 1px 3px; padding: 4px 5px; font-size: 10px; }
   .app-details { padding-left: 14px; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   body::before { animation: none; }
-  .app-details-toggle span { transition: none; }
 }
 @media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
-  .app-main, .app-details-toggle { background: #101719; }
-  .app-details { background: #080c0e; }
-  .krona .app-main, .krona .app-details-toggle, .krona .app-details { background: #fffefa; }
+  body::before, .intro::before { opacity: .45; }
+  body::after { background: #07090b91; }
+  .app-compact, .app-details { background: #101719; }
+  .krona .app-compact, .krona .app-details { background: #fffefa; }
 }
 @media (forced-colors: active) {
-  body::before { display: none; }
-  .app-row, .app-main, .app-details-toggle, .app-details { border: 1px solid CanvasText; background: Canvas; box-shadow: none; color: CanvasText; }
-  .app-line small, .row-arrow, .soon, .app-details p + p, .app-details b, .krona .app-line small, .krona .app-details b { color: CanvasText; }
+  body::before, body::after, .intro::before, .intro::after { display: none; }
+  .app-row, .app-compact, .app-details { border: 1px solid CanvasText; background: Canvas; box-shadow: none; color: CanvasText; }
+  .app-line small, .app-launch, .release-badge, .app-details-toggle, .app-details p + p, .app-details b, .krona .app-line small, .krona .app-details b { color: CanvasText; }
 }

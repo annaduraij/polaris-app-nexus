@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ajay.nexus/design-system/runtime/contracts/content.v1.schema.json",
+  "title": "Polaris content v1",
+  "description": "Structural schema. Runtime validators also enforce cross-field font capabilities, approved app scope and preference permissions.",
+  "type": "object",
+  "minProperties": 1,
+  "maxProperties": 999,
+  "additionalProperties": false,
+  "patternProperties": {
+    "^[a-z][a-zA-Z0-9_.-]*$": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4000
+    }
+  }
+}

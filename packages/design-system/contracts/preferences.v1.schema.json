@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ajay.nexus/design-system/runtime/contracts/preferences.v1.schema.json",
+  "title": "Polaris preferences v1",
+  "description": "Structural schema. Runtime validators also enforce cross-field font capabilities, approved app scope and preference permissions.",
+  "oneOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "version": {
+          "const": 1
+        },
+        "app": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+        },
+        "revision": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "kind": {
+          "const": "preview"
+        },
+        "value": {
+          "$ref": "./design-profile.v1.schema.json"
+        }
+      },
+      "required": [
+        "version",
+        "app",
+        "revision",
+        "kind",
+        "value"
+      ]
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "version": {
+          "const": 1
+        },
+        "app": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+        },
+        "revision": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "kind": {
+          "const": "personal"
+        },
+        "value": {
+          "type": "object",
+          "additionalProperties": false,
+          "patternProperties": {
+            "^(?:material\\.(?:opacity|blur)|typography\\.scale|palette\\.(?:neutral|primary|secondary|accent)\\.(?:100|300|500|700|900)|semantic\\.(?:page|surface|surfaceRaised|surfaceInset|text|textMuted|border|focus|primaryFill|primaryText|secondaryFill|secondaryText|headerFill|headerText)|typography\\.roles\\.(?:serif_heading|sans_heading|serif_body|sans_body|label|control|script|mono)\\.(?:font|weight|size|lineHeight|tracking|width))$": {
+              "type": [
+                "string",
+                "number",
+                "null"
+              ]
+            }
+          }
+        }
+      },
+      "required": [
+        "version",
+        "app",
+        "revision",
+        "kind",
+        "value"
+      ]
+    }
+  ]
+}

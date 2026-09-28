@@ -1,0 +1,134 @@
+# Approved app defaults. Developer previews never rewrite this source.
+version: 1
+revision: 2026-09-27.1
+palette:
+  neutral:
+    "100": "#ffffff"
+    "300": "#d0d8d2"
+    "500": "#7b8984"
+    "700": "#0c0e10"
+    "900": "#050606"
+  primary:
+    "100": "#c5f4e1"
+    "300": "#68d9ae"
+    "500": "#00b377"
+    "700": "#00865b"
+    "900": "#005239"
+  secondary:
+    "100": "#d5e9df"
+    "300": "#90b4a4"
+    "500": "#357b60"
+    "700": "#155d46"
+    "900": "#103d30"
+  accent:
+    "100": "#f3facb"
+    "300": "#e0ef94"
+    "500": "#ccee44"
+    "700": "#92ae28"
+    "900": "#4b6016"
+semantic:
+  page: neutral.900
+  surface: neutral.700
+  surfaceRaised: neutral.700
+  surfaceInset: neutral.900
+  text: neutral.100
+  textMuted: neutral.300
+  border: neutral.500
+  focus: accent.500
+  primaryFill: primary.500
+  primaryText: neutral.900
+  secondaryFill: neutral.100
+  secondaryText: neutral.900
+  headerFill: neutral.900
+  headerText: neutral.100
+status:
+  success: "#64db9f"
+  warning: "#e2be6a"
+  error: "#ff8d83"
+  info: "#8fc7ff"
+data:
+  - "#00b377"
+  - "#ccee44"
+  - "#6aafce"
+  - "#c796e4"
+  - "#e19c67"
+media:
+  - "#4c5585"
+  - "#bc7389"
+  - "#cca879"
+  - "#325d62"
+  - "#99929e"
+material:
+  opacity: 0.72
+  blur: 24
+  saturation: 1.35
+  borderOpacity: 0.14
+personal:
+  - material.opacity
+  - material.blur
+  - typography.scale
+id: lyra
+label: Lyra
+fonts:
+  system:
+    family: system-ui
+    fallback: sans-serif
+    assets: []
+    axes:
+      wght:
+        - 100
+        - 900
+    weights:
+      - 400
+      - 600
+      - 700
+  system_mono:
+    family: ui-monospace
+    fallback: monospace
+    assets: []
+    axes:
+      wght:
+        - 100
+        - 900
+    weights:
+      - 400
+      - 600
+      - 700
+typography:
+  scale: 1
+  roles:
+    sans_heading:
+      font: system
+      size: 32
+      weight: 700
+      lineHeight: 1.15
+      tracking: -0.03
+      width: null
+    sans_body:
+      font: system
+      size: 16
+      weight: 400
+      lineHeight: 1.5
+      tracking: 0
+      width: null
+    label:
+      font: system
+      size: 12
+      weight: 600
+      lineHeight: 1.4
+      tracking: 0.02
+      width: null
+    control:
+      font: system
+      size: 14
+      weight: 600
+      lineHeight: 1.2
+      tracking: 0
+      width: null
+    mono:
+      font: system_mono
+      size: 12
+      weight: 400
+      lineHeight: 1.5
+      tracking: 0
+      width: null

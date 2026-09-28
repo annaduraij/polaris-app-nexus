@@ -4,11 +4,23 @@
   "scripts": {
     "dev": "wrangler dev",
     "sync:apps": "node scripts/sync-app-contract.mjs",
-    "predeploy": "npm run sync:apps",
+    "predeploy": "npm run sync:apps && npm run check",
     "deploy": "wrangler deploy",
-    "check": "wrangler deploy --dry-run"
+    "check": "npm run check:generated && npm run build && npm test && npm run check:types && wrangler deploy --dry-run",
+    "predev": "npm run build",
+    "build": "node scripts/build-design-system.mjs",
+    "check:generated": "node scripts/build-design-system.mjs --check",
+    "test": "node scripts/check-syntax.mjs && node --test tests/*.test.mjs",
+    "check:types": "tsc --noEmit --strict --module NodeNext --moduleResolution NodeNext --target ES2022 --lib ES2022,DOM tests/types.ts"
   },
   "devDependencies": {
-    "wrangler": "4.141.0"
-  }
+    "ajv": "8.20.0",
+    "esbuild": "0.25.10",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "typescript": "5.9.3",
+    "wrangler": "4.141.0",
+    "yaml": "2.8.3"
+  },
+  "type": "module"
 }

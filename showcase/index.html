@@ -1,0 +1,39 @@
+<!doctype html>
+<!-- Project: Polaris | Date: 2026-09-27 | Description: Shared design engines and component reference. -->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Polaris · Design system</title>
+  <meta name="description" content="Polaris shared design contracts, typography, color and common components." />
+  <link rel="icon" href="../favicon.svg" />
+  <link rel="stylesheet" href="./runtime/src/styles.css" />
+  <link rel="stylesheet" href="./showcase.css" />
+  <script type="module" src="./showcase.js"></script>
+</head>
+<body>
+  <a class="showcase-skip" href="#main">Skip to design showcase</a>
+  <div id="header" class="polaris-header-host"></div>
+  <main id="main">
+    <a class="back-link" href="/" data-copy="showcase.back"></a>
+    <section class="intro-section">
+      <div class="intro-copy"><p class="eyebrow" data-copy="showcase.eyebrow"></p><h1 data-copy="showcase.title"></h1><p class="lede" data-copy="showcase.description"></p></div>
+      <img class="showcase-mark" src="../logo.svg" alt="" width="148" height="148" />
+    </section>
+    <nav class="showcase-toolbar" aria-label="Reference profile and runtime mode">
+      <div class="profile-tabs"><a id="lyra-link" data-copy="showcase.lyra"></a><a id="photography-link" data-copy="showcase.photography"></a></div>
+      <div class="mode-tabs"><a id="development-link" data-copy="showcase.development"></a><a id="production-link" data-copy="showcase.production"></a></div>
+    </nav>
+    <p id="mode-description" class="mode-description"></p>
+    <div id="personal-settings" hidden><label><span data-copy="showcase.productionScale"></span><input id="personal-scale" type="range" min="0.75" max="2" step="0.05" /></label><output id="personal-value"></output><button id="reset-personal" class="polaris-button" data-copy="showcase.resetPersonal"></button></div>
+    <section id="consumer" class="consumer-stage" aria-label="Live application reference"></section>
+    <p id="action-status" role="status"></p>
+    <section class="reference-section"><div class="section-heading"><span class="section-number">01</span><div><h2 data-copy="showcase.paletteTitle"></h2><p data-copy="showcase.paletteDescription"></p></div></div><div id="palette" class="palette-grid"></div><div id="semantic-preview" class="semantic-preview polaris-surface"></div></section>
+    <section class="reference-section"><div class="section-heading"><span class="section-number">02</span><div><h2 data-copy="showcase.typeTitle"></h2><p data-copy="showcase.typeDescription"></p></div></div><div id="typography" class="type-grid"></div></section>
+    <section class="reference-section"><div class="section-heading"><span class="section-number">03</span><div><h2 data-copy="showcase.materialTitle"></h2><p data-copy="showcase.materialDescription"></p></div></div><div class="material-grid"><div class="material-backdrop"><div class="polaris-surface material-card"><span class="eyebrow" data-copy="showcase.livePreview"></span><h3 data-copy="showcase.materialTitle"></h3><p id="material-values"></p></div></div><div class="independent-palettes"><h3 data-copy="showcase.statusTitle"></h3><div id="statuses" class="status-row"></div><h3 data-copy="showcase.dataTitle"></h3><div id="data-palette" class="bar-palette"></div><h3 data-copy="showcase.mediaTitle"></h3><div id="media-palette" class="bar-palette"></div></div></div></section>
+    <section class="reference-section header-reference"><div class="section-heading"><span class="section-number">04</span><div><h2 data-copy="showcase.headerTitle"></h2><p data-copy="showcase.headerDescription"></p></div></div><label class="header-selector"><span data-copy="showcase.headerExample"></span><select id="header-example"><option value="mixed" data-copy="showcase.headerMixed"></option><option value="icons" data-copy="showcase.headerIcons"></option><option value="buttons" data-copy="showcase.headerButtons"></option><option value="overflow" data-copy="showcase.headerOverflow"></option></select></label><p id="header-units"></p></section>
+    <section id="content-editor" class="reference-section" hidden></section>
+    <footer><p data-copy="showcase.footer"></p><p data-copy="showcase.details"></p><a href="./integration.md" data-copy="showcase.docs"></a></footer>
+  </main>
+</body>
+</html>

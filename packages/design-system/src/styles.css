@@ -54,20 +54,20 @@
 .polaris-lab-choices[hidden] { display: none; }
 .polaris-lab-choices .polaris-button { justify-content: flex-start; border-radius: 8px; }
 .polaris-lab-launcher .polaris-button { color: #fff; background: #263b32; border-color: #7b9b8d; font: 600 13px/1.3 system-ui, sans-serif; font-variation-settings: normal; }
-.polaris-lab { box-sizing: border-box; width: min(520px, calc(100vw - 24px)); max-height: calc(100dvh - 24px); margin: 12px 12px 12px auto; padding: 0; color: #eff5f1; background: #101816; border: 1px solid #7b9b8d; border-radius: 20px; font: 400 14px/1.5 system-ui, sans-serif; box-shadow: 0 20px 100px #000a; }
+.polaris-lab { box-sizing: border-box; width: min(520px, calc(100vw - 24px)); max-height: calc(100dvh - 24px); margin: 12px 12px 12px auto; padding: 0; color: var(--polaris-text, #eff5f1); background: var(--polaris-surface-raised, #101816); border: 1px solid var(--polaris-border, #7b9b8d); border-radius: 20px; font: 400 14px/1.5 system-ui, sans-serif; box-shadow: 0 20px 100px #000a; }
 .polaris-lab *, .polaris-lab *::before, .polaris-lab *::after { box-sizing: border-box; }
-.polaris-lab-head { position: sticky; top: 0; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 20px; background: #101816; border-bottom: 1px solid #405b4c; }
+.polaris-lab-head { position: sticky; top: 0; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 20px; background: var(--polaris-surface-raised, #101816); border-bottom: 1px solid var(--polaris-border, #405b4c); }
 .polaris-lab-head h2 { margin: 0; font: 600 20px/1.3 system-ui, sans-serif; }
-.polaris-lab .polaris-button { min-block-size: 44px; padding: 10px 14px; border-color: #587b68; color: #fff; background: #263b32; font: 600 12px/1.3 system-ui, sans-serif; letter-spacing: normal; font-variation-settings: normal; white-space: normal; }
+.polaris-lab .polaris-button { min-block-size: 44px; padding: 10px 14px; border-color: var(--polaris-border, #587b68); color: var(--polaris-secondary-text, #fff); background: var(--polaris-secondary-fill, #263b32); font: 600 12px/1.3 system-ui, sans-serif; letter-spacing: normal; font-variation-settings: normal; white-space: normal; }
 .polaris-lab-body { padding: 0 20px 20px; }
-.polaris-lab-note, .polaris-lab-status { margin: 14px 20px; color: #bacac1; font: 400 12px/1.5 system-ui, sans-serif; }
+.polaris-lab-note, .polaris-lab-status { margin: 14px 20px; color: var(--polaris-text-muted, #bacac1); font: 400 12px/1.5 system-ui, sans-serif; }
 .polaris-lab-body > .polaris-lab-note { margin-inline: 0; }
-.polaris-lab-status { color: #e1f0d0; }
-.polaris-fieldset { min-width: 0; margin: 18px 0; padding: 16px; border: 1px solid #405b4c; border-radius: 12px; }
+.polaris-lab-status { color: var(--polaris-text, #e1f0d0); }
+.polaris-fieldset { min-width: 0; margin: 18px 0; padding: 16px; border: 1px solid var(--polaris-border, #405b4c); border-radius: 12px; }
 .polaris-fieldset legend { padding: 0 6px; font-weight: 650; }
 .polaris-field { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-block: 10px; font: 400 13px/1.5 system-ui, sans-serif; }
 .polaris-field > span { flex: 1; }
-.polaris-field input, .polaris-field select, .polaris-field textarea { max-width: 60%; min-height: 44px; min-width: 0; width: 180px; border: 1px solid #607969; border-radius: 7px; color: #fff; background: #1c2b24; font: 400 14px/1.4 system-ui, sans-serif; padding: 8px; }
+.polaris-field input, .polaris-field select, .polaris-field textarea { max-width: 60%; min-height: 44px; min-width: 0; width: 180px; border: 1px solid var(--polaris-border, #607969); border-radius: 7px; color: var(--polaris-text, #fff); background: var(--polaris-surface-inset, #1c2b24); font: 400 14px/1.4 system-ui, sans-serif; padding: 8px; }
 .polaris-field input[type=color] { width: 100%; height: 44px; padding: 4px; }
 .polaris-field input:disabled { opacity: .45; cursor: not-allowed; }
 .polaris-field:has(textarea) { display: block; }
@@ -77,7 +77,7 @@
 .polaris-shades input { max-width: 100%; }
 .polaris-lab-actions { display: flex; flex-wrap: wrap; gap: 8px; }
 .polaris-checkbox { display: flex; gap: 10px; align-items: center; padding: 12px 0; }
-.polaris-checkbox input { width: 20px; height: 20px; }
+.polaris-checkbox input { width: 20px; height: 20px; accent-color: var(--polaris-primary-fill); }
 [data-polaris-role] { font-family: var(--role-family, system-ui, sans-serif); font-weight: var(--role-weight, 400); font-size: var(--role-size, 16px); line-height: var(--role-line-height, 1.5); letter-spacing: var(--role-tracking, 0); font-stretch: var(--role-width, normal); font-variation-settings: var(--role-variation, normal); font-synthesis: none; }
 @media (max-width: 480px) { .polaris-lab-launcher { right: 12px; bottom: 12px; } .polaris-header-brand { font-size: 14px; gap: 6px; } .polaris-header-brand img { width: 24px; height: 24px; } }
 @media (prefers-reduced-transparency: reduce), (prefers-contrast: more) { .polaris-surface, .polaris-header { background: var(--polaris-surface); backdrop-filter: none; -webkit-backdrop-filter: none; border-color: var(--polaris-border); } }

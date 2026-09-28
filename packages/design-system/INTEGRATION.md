@@ -217,3 +217,5 @@ For **Krona**, the actual static application now loads the shared startup engine
 - Revisions invalidate old preferences rather than performing automatic migrations. Storage updates are scoped to the current engine; cross-tab live synchronization is not included.
 - The small shared component set is intentional: header, semantic buttons/surfaces, typography-role styling, and lab fields/dialogs. Existing application-specific layouts remain app-owned.
 - The supported browser target is modern native ES modules, dialog, ResizeObserver and CSS color-mix. Material fallbacks cover reduced transparency/forced colors; older browser polyfills are app-owned.
+
+Typography Lab defaults to Heading, Body, Label, Control, Script, and Monospace. The “Separate serif and sans-serif styles” toggle reveals the separate heading/body roles without changing saved design values. In the simplified view, edits apply to all enabled members of the selected group; font-family changes preserve each member’s size and spacing. The lab panel and controls use the application’s live semantic colors.

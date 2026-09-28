@@ -13,7 +13,7 @@ export function mountLabs(engine, { container = document.body, fonts = {}, copy 
   const t = key => copy[key] ?? content[key] ?? key;
   const launcher = doc.createElement('div'); launcher.className = 'polaris-lab-launcher';
   const dialogs = [], renderers = [];
-  let activeRole = Object.keys(engine.profile.typography.roles)[0], internalChange = false, contrastContainer;
+  let activeRole = 'heading', separateFamilies = false, internalChange = false, contrastContainer;
   const el = (tag, className, text) => { const node = doc.createElement(tag); if (className) node.className = className; if (text !== undefined) node.textContent = text; return node; };
   const button = (text, click) => { const node = el('button', 'polaris-button', text); node.type = 'button'; node.addEventListener('click', click); return node; };
   const choices = el('div', 'polaris-lab-choices'); choices.id = `polaris-lab-choices-${++launcherCount}`; choices.hidden = true; choices.setAttribute('role', 'menu'); choices.setAttribute('aria-label', t('lab.launcher'));
@@ -102,29 +102,52 @@ export function mountLabs(engine, { container = document.body, fonts = {}, copy 
     transfer(chroma.body, chroma.status);
   }
   const typography = shell('typography');
+  // Group existing contract roles without rewriting saved profiles just to change the editor view.
+  const simpleRoles = ['heading', 'body', 'label', 'control', 'script', 'mono'];
+  const members = role => ['heading', 'body'].includes(role) ? [`serif_${role}`, `sans_${role}`] : [role];
+  const enabledMembers = (profile, role) => members(role).filter(key => Object.hasOwn(profile.typography.roles, key));
+  function editRoles(next, edit) { for (const key of enabledMembers(next, activeRole)) edit(next.typography.roles[key], next); }
   function renderTypography() {
     typography.body.replaceChildren(); const profile = engine.profile;
     field(typography.body, t('lab.scale'), profile.typography.scale, { min: .75, max: 2, step: .05 }, value => update(next => { next.typography.scale = value; }, typography.status));
-    field(typography.body, t('lab.chooseRole'), activeRole, { choices: TYPE_ROLES.map(role => [role, t(`role.${role}`)]) }, value => { activeRole = value; renderTypography(); });
-    const enabled = el('label', 'polaris-checkbox'), checkbox = el('input'); checkbox.type = 'checkbox'; checkbox.checked = Object.hasOwn(profile.typography.roles, activeRole);
+    const familyToggle = el('label', 'polaris-checkbox'), familyCheckbox = el('input'); familyCheckbox.type = 'checkbox'; familyCheckbox.checked = separateFamilies;
+    familyToggle.append(familyCheckbox, el('span', '', t('lab.separateFamilies'))); typography.body.append(familyToggle);
+    familyCheckbox.addEventListener('change', () => {
+      separateFamilies = familyCheckbox.checked;
+      activeRole = separateFamilies ? (enabledMembers(profile, activeRole)[0] ?? members(activeRole).at(-1)) : activeRole.replace(/^(serif|sans)_/, '');
+      renderTypography(); typography.body.querySelector('input[type=checkbox]')?.focus();
+    });
+    field(typography.body, t('lab.chooseRole'), activeRole, { choices: (separateFamilies ? TYPE_ROLES : simpleRoles).map(role => [role, t(`role.${role}`)]) }, value => { activeRole = value; renderTypography(); });
+    const targets = enabledMembers(profile, activeRole);
+    if (targets.length > 1) typography.body.append(el('p', 'polaris-lab-note', t('lab.groupedRoles')));
+    const enabled = el('label', 'polaris-checkbox'), checkbox = el('input'); checkbox.type = 'checkbox'; checkbox.checked = targets.length > 0;
     enabled.append(checkbox, el('span', '', t('lab.enabled'))); typography.body.append(enabled);
     checkbox.addEventListener('change', () => update(next => {
-      if (checkbox.checked) { const first = Object.values(next.typography.roles)[0]; next.typography.roles[activeRole] = structuredClone(first); }
-      else delete next.typography.roles[activeRole];
+      if (checkbox.checked) { const first = Object.values(next.typography.roles)[0]; next.typography.roles[members(activeRole).at(-1)] = structuredClone(first); }
+      else for (const key of targets) delete next.typography.roles[key];
     }, typography.status, true));
-    const spec = profile.typography.roles[activeRole];
+    const spec = profile.typography.roles[targets[0]];
     if (spec) {
       const catalog = { ...fonts, ...profile.fonts }, font = catalog[spec.font];
       const group = section(typography.body, t(`role.${activeRole}`));
       field(group, t('lab.font'), spec.font, { choices: Object.entries(catalog).map(([id, entry]) => [id, entry.family]) }, value => update(next => {
-        const selected = catalog[value], role = next.typography.roles[activeRole]; next.fonts[value] = structuredClone(selected); role.font = value;
-        role.weight = selected.axes.wght ? Math.max(selected.axes.wght[0], Math.min(selected.axes.wght[1], role.weight)) : selected.weights.reduce((best, n) => Math.abs(n - role.weight) < Math.abs(best - role.weight) ? n : best);
-        role.width = selected.axes.wdth ? Math.max(selected.axes.wdth[0], Math.min(selected.axes.wdth[1], role.width ?? 100)) : null;
+        const selected = catalog[value]; next.fonts[value] = structuredClone(selected);
+        editRoles(next, role => {
+          role.font = value;
+          role.weight = selected.axes.wght ? Math.max(selected.axes.wght[0], Math.min(selected.axes.wght[1], role.weight)) : selected.weights.reduce((best, n) => Math.abs(n - role.weight) < Math.abs(best - role.weight) ? n : best);
+          role.width = selected.axes.wdth ? Math.max(selected.axes.wdth[0], Math.min(selected.axes.wdth[1], role.width ?? 100)) : null;
+        });
       }, typography.status, true));
-      field(group, t('lab.weight'), spec.weight, font.axes.wght ? { min: font.axes.wght[0], max: font.axes.wght[1], step: 1 } : { choices: font.weights.map(n => [String(n), String(n)]) }, value => update(next => { next.typography.roles[activeRole].weight = Number(value); }, typography.status));
-      for (const [key, min, max, step] of [['size', 8, 120, 1], ['lineHeight', .8, 2.5, .05], ['tracking', -.1, .5, .01]]) field(group, t(`lab.${key}`), spec[key], { min, max, step }, value => update(next => { next.typography.roles[activeRole][key] = value; }, typography.status));
-      field(group, t('lab.width'), spec.width ?? 100, { disabled: !font.axes.wdth, min: font.axes.wdth?.[0] ?? 100, max: font.axes.wdth?.[1] ?? 100, step: 1 }, value => update(next => { next.typography.roles[activeRole].width = value; }, typography.status));
-      typography.body.append(el('p', 'polaris-lab-note', font.axes.wdth ? t('lab.widthAvailable').replace('{min}', font.axes.wdth[0]).replace('{max}', font.axes.wdth[1]) : t('lab.widthUnavailable')));
+      field(group, t('lab.weight'), spec.weight, font.axes.wght ? { min: font.axes.wght[0], max: font.axes.wght[1], step: 1 } : { choices: font.weights.map(n => [String(n), String(n)]) }, value => update(next => editRoles(next, role => {
+        const selected = catalog[role.font], weight = Number(value);
+        role.weight = selected.axes.wght ? Math.max(selected.axes.wght[0], Math.min(selected.axes.wght[1], weight)) : selected.weights.reduce((best, n) => Math.abs(n - weight) < Math.abs(best - weight) ? n : best);
+      }), typography.status, true));
+      for (const [key, min, max, step] of [['size', 8, 120, 1], ['lineHeight', .8, 2.5, .05], ['tracking', -.1, .5, .01]]) field(group, t(`lab.${key}`), spec[key], { min, max, step }, value => update(next => editRoles(next, role => { role[key] = value; }), typography.status));
+      const widths = targets.map(key => catalog[profile.typography.roles[key].font].axes.wdth);
+      const minWidth = Math.max(...widths.map(axis => axis?.[0] ?? 100)), maxWidth = Math.min(...widths.map(axis => axis?.[1] ?? 100));
+      const hasWidth = widths.every(Boolean) && minWidth <= maxWidth;
+      field(group, t('lab.width'), spec.width ?? 100, { disabled: !hasWidth, min: minWidth, max: maxWidth, step: 1 }, value => update(next => editRoles(next, role => { role.width = value; }), typography.status));
+      typography.body.append(el('p', 'polaris-lab-note', hasWidth ? t('lab.widthAvailable').replace('{min}', minWidth).replace('{max}', maxWidth) : t('lab.widthUnavailable')));
     }
     transfer(typography.body, typography.status);
   }

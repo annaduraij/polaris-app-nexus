@@ -222,9 +222,9 @@ Typography Lab defaults to Heading, Body, Label, Control, Script, and Monospace.
 
 Glass Lab owns material controls: live opacity and blur sliders, a patterned surface specimen, and optional saturation/border-opacity fields. Reset glass restores only approved material settings and preserves color and typography edits. The shared engine retains these settings after closing the lab or reloading; existing app-specific glass-level offsets and reduced-transparency preferences still apply.
 
-The shared launcher uses Polaris-owned dark glass, emerald/teal/violet aurora surfaces, and North Gold accents from the Polaris logo. These scoped brand tokens are separate from app theme tokens; the lab panels still follow the consuming app’s live colors.
+The shared launcher uses Polaris-owned dark glass and North Gold accents from the Polaris logo. These scoped brand tokens are separate from app theme tokens; the lab panels still follow the consuming app’s live colors.
 
-The launcher embeds the canonical Polaris SVG from the shared package. Its outer menu is near-black glass; aurora color is limited to a faint tint on action surfaces. The logo retains its North Gold gradient and transparent center.
+The launcher embeds the canonical Polaris SVG from the shared package. Its outer menu is near-black glass; individual icon buttons and the Polaris logo have no background, border, or shadow. The logo retains its North Gold gradient and transparent center.
 
 The logo opens a narrow vertical drawer, ordered Typography (`type`), Chroma (`palette`), and Glass (`mirror-rectangular`). Pinned Lucide SVG icon actions retain full accessible names and native tooltips, 44-pixel targets, arrow-key navigation, and Escape focus return.
 

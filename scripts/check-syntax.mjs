@@ -4,7 +4,7 @@ import { readdir } from 'node:fs/promises';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 const root = fileURLToPath(new URL('../', import.meta.url));
-for (const directory of ['packages/design-system/src', 'packages/design-system/generated', 'scripts', 'showcase', 'tests']) {
+for (const directory of ['packages/design-system/src', 'packages/design-system/generated', 'public', 'scripts', 'showcase', 'tests']) {
   for (const name of await readdir(new URL(`../${directory}/`, import.meta.url))) {
     if (!/\.(m?js)$/.test(name)) continue;
     const result = spawnSync(process.execPath, ['--check', `${directory}/${name}`], { cwd: root, stdio: 'inherit' });

@@ -90,8 +90,6 @@ export function mountLabs(engine, { container = document.body, fonts = {}, copy 
     const semantic = section(chroma.body, t('lab.semantic'));
     const choices = FAMILIES.flatMap(family => SHADES.map(shade => [`${family}.${shade}`, `${t(`lab.${family}`)} ${shade}`]));
     for (const [role, reference] of Object.entries(profile.semantic)) field(semantic, t(`semantic.${role}`), reference, { choices }, value => update(next => { next.semantic[role] = value; }, chroma.status));
-    const material = section(chroma.body, t('lab.material'));
-    for (const [key, min, max, step] of [['opacity', 0, 1, .01], ['blur', 0, 60, 1], ['saturation', 0, 2, .05], ['borderOpacity', 0, 1, .01]]) field(material, t(`lab.${key}`), profile.material[key], { min, max, step }, value => update(next => { next.material[key] = value; }, chroma.status));
     const status = section(chroma.body, t('lab.status'));
     for (const [role, color] of Object.entries(profile.status)) field(status, t(`showcase.${role}`), color, { type: 'color' }, value => update(next => { next.status[role] = value; }, chroma.status));
     for (const name of ['data', 'media']) {
@@ -151,7 +149,34 @@ export function mountLabs(engine, { container = document.body, fonts = {}, copy 
     }
     transfer(typography.body, typography.status);
   }
-  renderers.push(renderChroma, renderTypography); renderers.forEach(render => render()); container.append(launcher);
+  const glass = shell('glass');
+  function renderGlass() {
+    glass.body.replaceChildren(); const profile = engine.profile;
+    glass.body.append(el('p', 'polaris-lab-note', t('lab.glassHelp')));
+    const preview = el('div', 'polaris-glass-preview');
+    preview.append(el('div', 'polaris-surface polaris-glass-sample', t('lab.glassPreview'))); glass.body.append(preview);
+    const material = section(glass.body, t('lab.material'));
+    for (const [key, max, step, format] of [['opacity', 1, .01, value => `${Math.round(value * 100)}%`], ['blur', 60, 1, value => `${value} px`]]) {
+      const wrapper = el('label', 'polaris-glass-control'), input = el('input'), output = el('output');
+      const caption = el('span', 'polaris-glass-caption'); caption.append(el('span', '', t(`lab.${key}`)), output);
+      input.type = 'range'; input.min = 0; input.max = max; input.step = step; input.value = profile.material[key];
+      input.setAttribute('aria-label', t(`lab.${key}`));
+      function refreshValue() { output.textContent = format(Number(input.value)); input.setAttribute('aria-valuetext', output.textContent); }
+      refreshValue();
+      // Keep the slider mounted while dragging; the shared engine updates both the app and specimen.
+      input.addEventListener('input', () => {
+        update(next => { next.material[key] = Number(input.value); }, glass.status);
+        input.value = engine.profile.material[key]; refreshValue();
+      });
+      wrapper.append(caption, input); material.append(wrapper);
+    }
+    const advanced = el('details', 'polaris-glass-advanced'); advanced.append(el('summary', '', t('lab.glassAdvanced')));
+    for (const [key, max, step] of [['saturation', 2, .05], ['borderOpacity', 1, .01]]) field(advanced, t(`lab.${key}`), profile.material[key], { min: 0, max, step }, value => update(next => { next.material[key] = value; }, glass.status));
+    material.append(advanced);
+    material.append(button(t('lab.glassReset'), () => update(next => { next.material = structuredClone(engine.approved.material); }, glass.status, true)));
+    transfer(glass.body, glass.status);
+  }
+  renderers.push(renderChroma, renderTypography, renderGlass); renderers.forEach(render => render()); container.append(launcher);
   const unsubscribe = engine.subscribe(() => { if (!internalChange) renderers.forEach(render => render()); });
   return { dispose() { unsubscribe(); doc.removeEventListener('click', outsideClick); for (const dialog of dialogs) { if (dialog.open) dialog.close(); dialog.remove(); } launcher.remove(); } };
 }

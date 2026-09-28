@@ -71,6 +71,11 @@ export declare const content: {
   readonly "lab.chroma": string;
   readonly "lab.launcher": string;
   readonly "lab.typography": string;
+  readonly "lab.glass": string;
+  readonly "lab.glassHelp": string;
+  readonly "lab.glassPreview": string;
+  readonly "lab.glassAdvanced": string;
+  readonly "lab.glassReset": string;
   readonly "lab.close": string;
   readonly "lab.palette": string;
   readonly "lab.semantic": string;

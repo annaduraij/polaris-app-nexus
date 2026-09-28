@@ -33,7 +33,8 @@ export function mountLabs(engine, { container = document.body, fonts = {}, copy 
   function openChoices() { choices.hidden = false; launcherButton.setAttribute('aria-expanded', 'true'); choices.querySelector('button')?.focus(); }
   function closeChoices(returnFocus = true) { choices.hidden = true; launcherButton.setAttribute('aria-expanded', 'false'); if (returnFocus && launcherButton.isConnected) launcherButton.focus(); }
   function outsideClick(event) { if (!choices.hidden && !launcher.contains(event.target)) closeChoices(false); }
-  doc.addEventListener('click', outsideClick);
+  // Capture outside clicks before a consuming app can stop their propagation.
+  doc.addEventListener('click', outsideClick, true);
   launcher.addEventListener('keydown', event => {
     if (event.key === 'Escape' && !choices.hidden) { event.preventDefault(); closeChoices(); return; }
     if (event.target === launcherButton && ['ArrowDown', 'ArrowUp'].includes(event.key)) { event.preventDefault(); openChoices(); return; }
@@ -63,6 +64,11 @@ export function mountLabs(engine, { container = document.body, fonts = {}, copy 
     head.append(el('h2', '', t(`lab.${name}`)), close);
     const body = el('div', 'polaris-lab-body'), status = el('p', 'polaris-lab-status'); status.setAttribute('role', 'status'); status.setAttribute('aria-live', 'polite');
     dialog.append(head, el('p', 'polaris-lab-note', t(engine.mode === 'customization' ? 'lab.customizationOnly' : 'lab.previewOnly')), body, status);
+    dialog.addEventListener('click', event => {
+      if (event.target !== dialog) return;
+      const rect = dialog.getBoundingClientRect();
+      if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) dialog.close();
+    });
     dialog.addEventListener('close', () => { if (launcherButton.isConnected) launcherButton.focus(); });
     if (name === 'typography') choices.prepend(trigger); else choices.append(trigger);
     container.append(dialog); dialogs.push(dialog);
@@ -261,5 +267,5 @@ export function mountLabs(engine, { container = document.body, fonts = {}, copy 
   }
   renderers.push(renderChroma, renderTypography, renderGlass); renderers.forEach(render => render()); container.append(launcher);
   const unsubscribe = engine.subscribe(() => { if (!internalChange) renderers.forEach(render => render()); });
-  return { dispose() { unsubscribe(); doc.removeEventListener('click', outsideClick); for (const dialog of dialogs) { if (dialog.open) dialog.close(); dialog.remove(); } launcher.remove(); } };
+  return { dispose() { unsubscribe(); doc.removeEventListener('click', outsideClick, true); for (const dialog of dialogs) { if (dialog.open) dialog.close(); dialog.remove(); } launcher.remove(); } };
 }

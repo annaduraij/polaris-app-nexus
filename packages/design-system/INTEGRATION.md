@@ -229,3 +229,5 @@ The launcher embeds the canonical Polaris SVG from the shared package. Its outer
 The logo opens a narrow vertical drawer, ordered Typography (`type`), Chroma (`palette`), and Glass (`mirror-rectangular`). Pinned Lucide SVG icon actions retain full accessible names and native tooltips, 44-pixel targets, arrow-key navigation, and Escape focus return.
 
 Lucide artwork and its license are bundled in the shared package; the source revision is recorded in `assets/icons/SOURCE.json`. No runtime icon CDN is used.
+
+The launcher logo renders at 40 pixels inside its 44-pixel target. Lucide strokes and filled details use a diagonal emerald–teal–cyan–violet aurora gradient, retaining the original icon shapes and transparent button backgrounds.

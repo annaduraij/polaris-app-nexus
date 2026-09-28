@@ -47,11 +47,13 @@
 .polaris-lab-launcher {
   --polaris-tool-dark: #07090b; --polaris-tool-glass: #07090bf5; --polaris-tool-text: #f3f5f4;
   --polaris-tool-gold: #d9a55d; --polaris-tool-gold-light: #fff4cf;
+  --polaris-tool-aurora-emerald: #68d9b9; --polaris-tool-aurora-teal: #53c7ca;
+  --polaris-tool-aurora-cyan: #80b9ef; --polaris-tool-aurora-violet: #b393de;
   position: fixed; z-index: 1000; right: 20px; bottom: 20px; color-scheme: dark;
 }
-.polaris-lab-launcher .polaris-lab-trigger { display: grid; place-items: center; box-sizing: border-box; width: 44px; height: 44px; min-height: 44px; padding: 7px; border: 0; border-radius: 8px; background: transparent; color: var(--polaris-tool-gold); cursor: pointer; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none; }
+.polaris-lab-launcher .polaris-lab-trigger { display: grid; place-items: center; box-sizing: border-box; width: 44px; height: 44px; min-height: 44px; padding: 0; border: 0; border-radius: 8px; background: transparent; color: var(--polaris-tool-gold); cursor: pointer; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none; }
 .polaris-lab-launcher .polaris-lab-trigger:hover { background: transparent; color: var(--polaris-tool-gold-light); filter: brightness(1.15); }
-.polaris-lab-trigger svg { display: block; width: 30px; height: 30px; overflow: visible; }
+.polaris-lab-trigger svg { display: block; width: 40px; height: 40px; overflow: visible; }
 .polaris-lab-launcher :is(.polaris-lab-trigger, .polaris-button):focus-visible { outline: 3px solid var(--polaris-tool-gold-light); outline-offset: 4px; }
 .polaris-lab-choices { position: absolute; right: -7px; bottom: 54px; display: grid; gap: 6px; box-sizing: border-box; width: 58px; padding: 6px; border: 1px solid color-mix(in srgb, var(--polaris-tool-gold) 45%, transparent); border-radius: 14px; background: var(--polaris-tool-glass); box-shadow: 0 12px 40px #0008; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
 .polaris-lab-choices[hidden] { display: none; }
@@ -59,6 +61,7 @@
 .polaris-lab-launcher .polaris-button { box-sizing: border-box; width: 44px; height: 44px; min-block-size: 44px; padding: 0; color: var(--polaris-tool-gold); background: transparent; border: 0; box-shadow: none; font: 600 13px/1.3 system-ui, sans-serif; font-variation-settings: normal; }
 .polaris-lab-choices svg { display: block; width: 23px; height: 23px; pointer-events: none; }
 .polaris-lab-launcher .polaris-button:hover { color: var(--polaris-tool-gold-light); background: transparent; box-shadow: none; filter: none; }
+.polaris-lab-launcher .polaris-button:hover svg { filter: brightness(1.15); }
 @media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
   .polaris-lab-launcher { --polaris-tool-glass: var(--polaris-tool-dark); }
   .polaris-lab-launcher :is(.polaris-lab-trigger, .polaris-lab-choices) { backdrop-filter: none; -webkit-backdrop-filter: none; }
@@ -68,6 +71,8 @@
   .polaris-lab-launcher :is(.polaris-lab-trigger, .polaris-button), .polaris-lab-launcher :is(.polaris-lab-trigger, .polaris-button):hover { background: transparent; color: CanvasText; }
   .polaris-lab-launcher :is(.polaris-lab-trigger, .polaris-button):focus-visible { outline-color: Highlight; }
   .polaris-lab-trigger path { fill: ButtonText; }
+  .polaris-lab-choices svg { stroke: ButtonText; }
+  .polaris-lab-choices svg [fill^="url("] { fill: ButtonText; }
 }
 .polaris-lab { box-sizing: border-box; width: min(520px, calc(100vw - 24px)); max-height: calc(100dvh - 24px); margin: 12px 12px 12px auto; padding: 0; color: var(--polaris-text, #eff5f1); background: var(--polaris-surface-raised, #101816); border: 1px solid var(--polaris-border, #7b9b8d); border-radius: 20px; font: 400 14px/1.5 system-ui, sans-serif; box-shadow: 0 20px 100px #000a; }
 .polaris-lab *, .polaris-lab *::before, .polaris-lab *::after { box-sizing: border-box; }

@@ -1,6 +1,12 @@
 # Polaris
 
-**Jay's App Nexus** is a static overview of Ajay's apps. It has no runtime dependencies. Its app cards are generated from the opening paragraphs of the Lyra, Krona, and Ren READMEs.
+**Jay's App Nexus** is a static overview of Ajay's apps and the home of the Polaris shared design system. The landing page has no runtime dependencies. Its app cards are generated from the opening paragraphs of the Lyra, Krona, and Ren READMEs.
+
+## Shared design system
+
+Polaris also provides a versioned, framework-independent design package, always-active color/typography/content engines, floating developer labs, and a common responsive header. The live showcase at `/design-system/` includes a vanilla Lyra reference and a React photography reference. Existing source applications have not been migrated.
+
+Run `npm ci && npm run build`, then serve `public`. `npm run check` validates YAML and generated drift, runs the regression suite and public API type checks, and performs a Worker deployment dry run. See [the complete integration guide](docs/design-system.md), [source audit](docs/source-audit.md), [browser verification](docs/design-verification.md), and [package](packages/design-system/README.md).
 
 ## App identity contract
 
@@ -34,7 +40,7 @@ Run `npm run sync:apps` after changing an app identity. The command expects the 
 
 ## Preview
 
-From the `public` directory, run `python3 -m http.server 8000` and open <http://localhost:8000>.
+Run `npm run build`, then from the `public` directory run `python3 -m http.server 8000` and open <http://localhost:8000>. The design-system showcase is at <http://localhost:8000/design-system/>.
 
 ## Publish
 

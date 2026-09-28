@@ -3,6 +3,7 @@
 import { FAMILIES, SHADES, TYPE_ROLES, validateCatalog } from './contracts.js';
 import { content } from '../generated/content.js';
 import { contrastReport } from './engine.js';
+let launcherCount = 0;
 
 /** Optional development entry point: importing this module never creates a lab. */
 export function mountLabs(engine, { container = document.body, fonts = {}, copy = content } = {}) {
@@ -15,16 +16,35 @@ export function mountLabs(engine, { container = document.body, fonts = {}, copy 
   let activeRole = Object.keys(engine.profile.typography.roles)[0], internalChange = false, contrastContainer;
   const el = (tag, className, text) => { const node = doc.createElement(tag); if (className) node.className = className; if (text !== undefined) node.textContent = text; return node; };
   const button = (text, click) => { const node = el('button', 'polaris-button', text); node.type = 'button'; node.addEventListener('click', click); return node; };
+  const choices = el('div', 'polaris-lab-choices'); choices.id = `polaris-lab-choices-${++launcherCount}`; choices.hidden = true; choices.setAttribute('role', 'menu'); choices.setAttribute('aria-label', t('lab.launcher'));
+  const cog = button('', () => { if (choices.hidden) openChoices(); else closeChoices(); }); cog.className = 'polaris-lab-cog'; cog.setAttribute('aria-label', t('lab.launcher')); cog.setAttribute('aria-haspopup', 'menu'); cog.setAttribute('aria-controls', choices.id); cog.setAttribute('aria-expanded', 'false');
+  const svg = doc.createElementNS('http://www.w3.org/2000/svg', 'svg'); svg.setAttribute('viewBox', '0 0 32 32'); svg.setAttribute('aria-hidden', 'true');
+  const gear = doc.createElementNS(svg.namespaceURI, 'polygon');
+  gear.setAttribute('points', Array.from({ length: 32 }, (_, i) => { const angle = i * Math.PI / 16, radius = i % 4 < 2 ? 12 : 9; return `${16 + Math.cos(angle) * radius},${16 + Math.sin(angle) * radius}`; }).join(' '));
+  const dot = doc.createElementNS(svg.namespaceURI, 'circle'); dot.setAttribute('cx', '16'); dot.setAttribute('cy', '16'); dot.setAttribute('r', '3'); dot.setAttribute('class', 'polaris-lab-cog-dot'); svg.append(gear, dot); cog.append(svg); launcher.append(choices, cog);
+  function openChoices() { choices.hidden = false; cog.setAttribute('aria-expanded', 'true'); choices.querySelector('button')?.focus(); }
+  function closeChoices(returnFocus = true) { choices.hidden = true; cog.setAttribute('aria-expanded', 'false'); if (returnFocus && cog.isConnected) cog.focus(); }
+  function outsideClick(event) { if (!choices.hidden && !launcher.contains(event.target)) closeChoices(false); }
+  doc.addEventListener('click', outsideClick);
+  launcher.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && !choices.hidden) { event.preventDefault(); closeChoices(); return; }
+    if (event.target === cog && ['ArrowDown', 'ArrowUp'].includes(event.key)) { event.preventDefault(); openChoices(); return; }
+    if (choices.hidden || !['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) return;
+    event.preventDefault(); const items = [...choices.querySelectorAll('button')], index = items.indexOf(doc.activeElement);
+    const next = event.key === 'Home' ? 0 : event.key === 'End' ? items.length - 1 : (index + (event.key === 'ArrowDown' ? 1 : -1) + items.length) % items.length;
+    items[next]?.focus();
+  });
+  launcher.addEventListener('focusout', event => { if (event.relatedTarget && !launcher.contains(event.relatedTarget)) closeChoices(false); });
   function shell(name) {
     const dialog = el('dialog', 'polaris-lab'); dialog.setAttribute('aria-label', t(`lab.${name}`));
-    const trigger = button(t(`lab.${name}`), () => dialog.showModal()); trigger.setAttribute('aria-haspopup', 'dialog');
+    const trigger = button(t(`lab.${name}`), () => { closeChoices(false); dialog.showModal(); }); trigger.setAttribute('aria-haspopup', 'dialog'); trigger.setAttribute('role', 'menuitem');
     const head = el('header', 'polaris-lab-head');
     const close = button(t('lab.close'), () => dialog.close());
     head.append(el('h2', '', t(`lab.${name}`)), close);
     const body = el('div', 'polaris-lab-body'), status = el('p', 'polaris-lab-status'); status.setAttribute('role', 'status'); status.setAttribute('aria-live', 'polite');
     dialog.append(head, el('p', 'polaris-lab-note', t('lab.previewOnly')), body, status);
-    dialog.addEventListener('close', () => trigger.focus());
-    launcher.append(trigger); container.append(dialog); dialogs.push(dialog);
+    dialog.addEventListener('close', () => { if (cog.isConnected) cog.focus(); });
+    choices.append(trigger); container.append(dialog); dialogs.push(dialog);
     return { body, status };
   }
   function update(mutate, status, rerender = false) {
@@ -110,5 +130,5 @@ export function mountLabs(engine, { container = document.body, fonts = {}, copy 
   }
   renderers.push(renderChroma, renderTypography); renderers.forEach(render => render()); container.append(launcher);
   const unsubscribe = engine.subscribe(() => { if (!internalChange) renderers.forEach(render => render()); });
-  return { dispose() { unsubscribe(); for (const dialog of dialogs) { if (dialog.open) dialog.close(); dialog.remove(); } launcher.remove(); } };
+  return { dispose() { unsubscribe(); doc.removeEventListener('click', outsideClick); for (const dialog of dialogs) { if (dialog.open) dialog.close(); dialog.remove(); } launcher.remove(); } };
 }

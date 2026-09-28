@@ -4,7 +4,7 @@
 
 ## Shared design system
 
-Polaris also provides a versioned, framework-independent design package, always-active color/typography/content engines, floating developer labs, and a common responsive header. The live showcase at `/design-system/` includes a vanilla Lyra reference and a React photography reference. Existing source applications have not been migrated.
+Polaris also provides a versioned, framework-independent design package, always-active color/typography/content engines, developer labs behind one compact cog, and a common responsive header. The live showcase at `/design-system/` includes vanilla and React reference fixtures. Lyra and Krona now have local integrations of the shared startup engine and labs through app-owned profiles and pinned vendor snapshots; their existing headers and legacy copy remain app-owned. Photography remains a read-only reference and has not been modified or migrated. These integrations have not been deployed.
 
 Run `npm ci && npm run build`, then serve `public`. `npm run check` validates YAML and generated drift, runs the regression suite and public API type checks, and performs a Worker deployment dry run. See [the complete integration guide](docs/design-system.md), [source audit](docs/source-audit.md), [browser verification](docs/design-verification.md), and [package](packages/design-system/README.md).
 

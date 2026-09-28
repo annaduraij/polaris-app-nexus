@@ -136,7 +136,7 @@ if (developmentBuild) {
 }
 ```
 
-One compact cog with a gold center dot opens the Chroma Lab, Typography Lab, and Glass Lab choices. The menu supports arrow/Home/End keys, Escape, outside dismissal and focus return. Chroma Lab edits every family shade, semantic mapping, status/data/media palette, and reports contrast. Typography Lab enables optional roles and edits family, weight, size, scale, line height, tracking and genuine variable width. Both offer a labelled JSON import/export area, validation errors, and reset. Their native dialogs support keyboard navigation, Escape and return focus to the cog. Calling `mountLabs` for a production engine creates no controls.
+One compact Polaris logo button opens the Chroma Lab, Typography Lab, and Glass Lab choices. The menu supports arrow/Home/End keys, Escape, outside dismissal and focus return. Chroma Lab edits every family shade, semantic mapping, status/data/media palette, and reports contrast. Typography Lab enables optional roles and edits family, weight, size, scale, line height, tracking and genuine variable width. Both offer a labelled JSON import/export area, validation errors, and reset. Their native dialogs support keyboard navigation, Escape and return focus to the Polaris logo button. Calling `mountLabs` for a production engine creates no controls.
 
 ## React integration
 
@@ -206,7 +206,7 @@ The photography reference covers **dark browser UI only**. Its existing light ro
 
 For **Lyra**, the actual browser shell now loads native modules at startup without adding React or runtime npm dependencies. Its app-owned profile and CSS bridge connect page/accent/text, header materials, glass/control surfaces, semantic playback actions, real typography roles, status, and categorical chart colors. Existing glass-level calibrations remain explicit offsets around the Balanced material baseline. The functional header, legacy copy, artwork sampling/shader preferences and volume/intensity scale remain Lyra-owned. See Lyra's `docs/POLARIS.md` and its native integration tests for coverage and snapshot update instructions.
 
-For **Krona**, the actual static application now loads the shared startup engine with its own light profile, preserving ivory surfaces, sage, deep-green actions and existing Mulish/Lustria typography. Its app-owned token bridge connects existing UI consumers, while a development server enables the shared cog; ordinary production static files remain lab-free. Budget, recurrence, guide and backup data/models remain outside the design integration. The date/profile workflow header and existing non-YAML copy remain app-owned. Krona's integration documentation and tests define its precise coverage.
+For **Krona**, the actual static application now loads the shared startup engine with its own light profile, preserving ivory surfaces, sage, deep-green actions and existing Mulish/Lustria typography. Its app-owned token bridge connects existing UI consumers, while a development server enables the shared logo launcher; ordinary production static files remain lab-free. Budget, recurrence, guide and backup data/models remain outside the design integration. The date/profile workflow header and existing non-YAML copy remain app-owned. Krona's integration documentation and tests define its precise coverage.
 
 `installAliases(target, aliases)` validates names, installs CSS references and returns cleanup that restores pre-existing inline values. It provides an opt-in bridge for targeted migration; importing the package alone changes no app.
 
@@ -223,3 +223,5 @@ Typography Lab defaults to Heading, Body, Label, Control, Script, and Monospace.
 Glass Lab owns material controls: live opacity and blur sliders, a patterned surface specimen, and optional saturation/border-opacity fields. Reset glass restores only approved material settings and preserves color and typography edits. The shared engine retains these settings after closing the lab or reloading; existing app-specific glass-level offsets and reduced-transparency preferences still apply.
 
 The shared launcher uses Polaris-owned dark glass, emerald/teal/violet aurora surfaces, and North Gold accents from the Polaris logo. These scoped brand tokens are separate from app theme tokens; the lab panels still follow the consuming app’s live colors.
+
+The launcher embeds the canonical Polaris SVG from the shared package. Its outer menu is near-black glass; aurora color is limited to a faint tint on action surfaces. The logo retains its North Gold gradient and transparent center.

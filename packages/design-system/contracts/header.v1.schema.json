@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ajay.nexus/design-system/runtime/contracts/header.v1.schema.json",
+  "title": "Polaris header v1",
+  "description": "Structural schema. Runtime validators also enforce cross-field font capabilities, approved app scope and preference permissions.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "version": {
+      "const": 1
+    },
+    "sideCapacity": {
+      "const": 3
+    },
+    "iconWeight": {
+      "const": 1
+    },
+    "buttonWeight": {
+      "const": 1.5
+    },
+    "overflowTriggerWeight": {
+      "const": 1
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+          },
+          "kind": {
+            "enum": [
+              "icon",
+              "button"
+            ]
+          },
+          "side": {
+            "enum": [
+              "left",
+              "right"
+            ]
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "priority": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "kind",
+          "side",
+          "label"
+        ]
+      }
+    }
+  },
+  "required": [
+    "version",
+    "sideCapacity",
+    "iconWeight",
+    "buttonWeight",
+    "overflowTriggerWeight",
+    "actions"
+  ]
+}

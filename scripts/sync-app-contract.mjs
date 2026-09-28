@@ -62,26 +62,24 @@ function readIdentity(readme, id) {
 
 function renderApp(app, identity) {
   const { name, subtitle, description, inspiration, logoFile, surface, raisedSurface, secondary, signature, accent } = identity;
-  const tag = app.url ? 'a' : 'article';
-  const attributes = app.url
-    ? `href="${app.url}" aria-label="Open ${escapeHtml(name)}"`
-    : `aria-labelledby="${app.id}-title"`;
-  const action = app.url
-    ? '<span class="row-arrow" aria-hidden="true">↗</span>'
-    : '<span class="soon">Coming soon</span>';
+  const mainTag = app.url ? 'a' : 'div';
+  const mainAttributes = app.url ? ` href="${app.url}" aria-label="Open ${escapeHtml(name)}"` : '';
+  const action = app.url ? '<span class="row-arrow" aria-hidden="true">↗</span>' : '<span class="soon">Coming soon</span>';
 
-  return `        <${tag} class="app-row ${app.id}${app.url ? '' : ' upcoming'}" ${attributes} style="--surface: ${surface}; --surface-raised: ${raisedSurface}; --secondary: ${secondary}; --signature: ${signature}; --accent: ${accent}">
-          <span class="logo-panel"><img class="app-logo ${app.id}-logo" src="./brand/${logoFile}" width="48" height="48" alt="" /></span>
-          <span class="card-content">
-            <span class="app-text">
-              <strong${app.url ? '' : ` id="${app.id}-title"`}>${escapeHtml(name)}</strong>
-              <small>${escapeHtml(subtitle)}</small>
-              <span class="app-description">${escapeHtml(description)}</span>
-              <span class="app-inspiration"><b>Why:</b> ${escapeHtml(inspiration)}</span>
-            </span>
-            ${action}
-          </span>
-        </${tag}>`;
+  return `        <article class="app-row ${app.id}${app.url ? '' : ' upcoming'}" style="--surface: ${surface}; --surface-raised: ${raisedSurface}; --secondary: ${secondary}; --signature: ${signature}; --accent: ${accent}">
+          <div class="app-compact">
+            <${mainTag} class="app-main"${mainAttributes}>
+              <span class="logo-panel"><img class="app-logo ${app.id}-logo" src="./brand/${logoFile}" width="48" height="48" alt="" /></span>
+              <span class="app-line"><strong id="${app.id}-title">${escapeHtml(name)}</strong><small>${escapeHtml(subtitle)}</small></span>
+              ${action}
+            </${mainTag}>
+            <button class="app-details-toggle" type="button" aria-expanded="false" aria-controls="${app.id}-details" aria-label="Show ${escapeHtml(name)} details" hidden>Details <span aria-hidden="true">⌄</span></button>
+          </div>
+          <div class="app-details" id="${app.id}-details">
+            <p>${escapeHtml(description)}</p>
+            <p><b>Why:</b> ${escapeHtml(inspiration)}</p>
+          </div>
+        </article>`;
 }
 
 const html = await readFile(indexPath, 'utf8');

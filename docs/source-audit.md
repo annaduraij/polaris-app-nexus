@@ -137,7 +137,7 @@ These are behavior checks, not claims that all source-app routes already pass.
 | Preferences | Dev experiments do not leak into public preferences; malformed or mismatched stored data falls back safely |
 | Palette roles | Changing secondary action does not recolor primary text; changing a family updates every role mapped to it |
 | Materials | Color customization preserves glass intensity and media palette independence |
-| Typography | Every enabled role has a real consumer; disabled roles are absent from controls and font loading |
+| Typography | Every enabled role has a real consumer; disabled roles contribute no runtime tokens or font loading until enabled |
 | Font assets | Selected fonts load outside developer mode; unsupported width cannot be committed |
 | Content | YAML generation is deterministic; stale output and invalid keys fail checks |
 | Header | Per-side weighted capacity, hamburger reservation, narrow layout, large text, keyboard navigation |

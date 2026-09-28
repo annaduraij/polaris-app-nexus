@@ -14,3 +14,8 @@ copy.text('showcase.title');
 copy.text('showcase.nonexistent');
 // @ts-expect-error Profile roles accept only the agreed optional semantic roles.
 profile.typography.roles.heading = {};
+
+const customizer = createDesignEngine({ profile, mode: 'customization', storage: null });
+mountLabs(customizer, { container: document.body, fonts: developerFonts });
+// @ts-expect-error Public appearance customization does not enable content editing.
+createContentEngine(content, { mode: 'customization' });

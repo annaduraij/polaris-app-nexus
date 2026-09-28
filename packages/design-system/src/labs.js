@@ -7,9 +7,9 @@ import { labIcons } from '../generated/lab-icons.js';
 import { contrastReport } from './engine.js';
 let launcherCount = 0;
 
-/** Optional development entry point: importing this module never creates a lab. */
+/** Optional appearance controls: importing this module never creates a lab. */
 export function mountLabs(engine, { container = document.body, fonts = {}, copy = content } = {}) {
-  if (engine.mode !== 'development') return { dispose() {} };
+  if (!['development', 'customization'].includes(engine.mode)) return { dispose() {} };
   if (Object.keys(fonts).length) validateCatalog(fonts);
   const doc = container.ownerDocument;
   const t = key => copy[key] ?? content[key] ?? key;
@@ -60,7 +60,7 @@ export function mountLabs(engine, { container = document.body, fonts = {}, copy 
     const close = button(t('lab.close'), () => dialog.close());
     head.append(el('h2', '', t(`lab.${name}`)), close);
     const body = el('div', 'polaris-lab-body'), status = el('p', 'polaris-lab-status'); status.setAttribute('role', 'status'); status.setAttribute('aria-live', 'polite');
-    dialog.append(head, el('p', 'polaris-lab-note', t('lab.previewOnly')), body, status);
+    dialog.append(head, el('p', 'polaris-lab-note', t(engine.mode === 'customization' ? 'lab.customizationOnly' : 'lab.previewOnly')), body, status);
     dialog.addEventListener('close', () => { if (launcherButton.isConnected) launcherButton.focus(); });
     if (name === 'typography') choices.prepend(trigger); else choices.append(trigger);
     container.append(dialog); dialogs.push(dialog);

@@ -9,7 +9,7 @@
     <meta name="theme-color" content="#07090b" />
     <title>Polaris — Jay's App Nexus</title>
     <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./styles.css?v=7" />
+    <link rel="stylesheet" href="./styles.css?v=8" />
     <script src="./landing.js" defer></script>
   </head>
   <body>
@@ -20,7 +20,6 @@
         <h1>Polaris</h1>
         <p class="subtitle">Jay's App Nexus</p>
         <p class="description">A shared design and application architecture for Jay's apps. Common controls, themes, and simple surfaces give each app a familiar foundation.</p>
-        <a class="design-system-link" href="./design-system/">Explore the design system <span aria-hidden="true">↗</span></a>
       </header>
       <section class="apps" id="apps" aria-label="Apps">
         <!-- apps:start -->
@@ -29,9 +28,11 @@
             <a class="app-main" href="https://lyra.ajay.nexus" aria-label="Open Lyra">
               <span class="logo-panel"><img class="app-logo lyra-logo" src="./brand/lyra.png" width="48" height="48" alt="" /></span>
               <span class="app-line"><strong id="lyra-title">Lyra</strong><small>Music and metadata in harmony</small></span>
-              <span class="row-arrow" aria-hidden="true">↗</span>
             </a>
-            <button class="app-details-toggle" type="button" aria-expanded="false" aria-controls="lyra-details" aria-label="Show Lyra details" hidden>Details <span aria-hidden="true">⌄</span></button>
+            <div class="app-actions">
+              <button class="app-details-toggle" type="button" aria-expanded="false" aria-controls="lyra-details" aria-label="Show Lyra details" hidden><span aria-hidden="true">+</span></button>
+              <a class="app-launch" href="https://lyra.ajay.nexus" aria-label="Open Lyra"><span aria-hidden="true">↗</span></a>
+            </div>
           </div>
           <div class="app-details" id="lyra-details">
             <p>Lyra brings Spotify library data, playback, and recording metadata together in a local music workspace.</p>
@@ -43,30 +44,57 @@
             <a class="app-main" href="https://krona.ajay.nexus" aria-label="Open Krona">
               <span class="logo-panel"><img class="app-logo krona-logo" src="./brand/krona.svg" width="48" height="48" alt="" /></span>
               <span class="app-line"><strong id="krona-title">Krona</strong><small>Budgeting and visualization in sync</small></span>
-              <span class="row-arrow" aria-hidden="true">↗</span>
             </a>
-            <button class="app-details-toggle" type="button" aria-expanded="false" aria-controls="krona-details" aria-label="Show Krona details" hidden>Details <span aria-hidden="true">⌄</span></button>
+            <div class="app-actions">
+              <button class="app-details-toggle" type="button" aria-expanded="false" aria-controls="krona-details" aria-label="Show Krona details" hidden><span aria-hidden="true">+</span></button>
+              <a class="app-launch" href="https://krona.ajay.nexus" aria-label="Open Krona"><span aria-hidden="true">↗</span></a>
+            </div>
           </div>
           <div class="app-details" id="krona-details">
             <p>Krona is a browser-local monthly budget app for tracking spending, planned purchases, and recurring bills.</p>
             <p><b>Why:</b> Created to make everyday money decisions easier to see and plan while keeping personal budget data on your device.</p>
           </div>
         </article>
-        <article class="app-row ren upcoming" style="--surface: #284f45; --surface-raised: #f5f3ed; --secondary: #d88fad; --signature: #66815e; --accent: #e5c76b">
+        <article class="app-row ren" style="--surface: #284f45; --surface-raised: #f5f3ed; --secondary: #d88fad; --signature: #66815e; --accent: #e5c76b">
           <div class="app-compact">
             <div class="app-main">
               <span class="logo-panel"><img class="app-logo ren-logo" src="./brand/ren.svg" width="48" height="48" alt="" /></span>
               <span class="app-line"><strong id="ren-title">Ren</strong><small>Useful little tools in bloom</small></span>
-              <span class="soon">Coming soon</span>
             </div>
-            <button class="app-details-toggle" type="button" aria-expanded="false" aria-controls="ren-details" aria-label="Show Ren details" hidden>Details <span aria-hidden="true">⌄</span></button>
+            <div class="app-actions">
+              <button class="app-details-toggle" type="button" aria-expanded="false" aria-controls="ren-details" aria-label="Show Ren details" hidden><span aria-hidden="true">+</span></button>
+              <span class="release-badge beta" aria-label="Beta: live for private use">Beta</span>
+            </div>
           </div>
           <div class="app-details" id="ren-details">
             <p>Ren is a collection of small, independent applets for everyday tasks.</p>
             <p><b>Why:</b> Created to give small ideas a useful home where each tool can grow as it is refined.</p>
           </div>
         </article>
+        <article class="app-row fano" style="--surface: #1b2731; --surface-raised: #263742; --secondary: #557f8c; --signature: #7db7c0; --accent: #d4b77c">
+          <div class="app-compact">
+            <div class="app-main">
+              <span class="logo-panel"><span class="app-monogram" aria-hidden="true">F</span></span>
+              <span class="app-line"><strong id="fano-title">Fano</strong><small>A clearer Apple Photos catalog</small></span>
+            </div>
+            <div class="app-actions">
+              <button class="app-details-toggle" type="button" aria-expanded="false" aria-controls="fano-details" aria-label="Show Fano details" hidden><span aria-hidden="true">+</span></button>
+              <span class="release-badge alpha" aria-label="Alpha: early preview">Alpha</span>
+            </div>
+          </div>
+          <div class="app-details" id="fano-details">
+            <p>Fano audits an Apple Photos library and prepares exact, reviewable changes in a local Mac workspace.</p>
+            <p><b>Why:</b> Created to make photo organization easier to review before changes are applied.</p>
+          </div>
+        </article>
         <!-- apps:end -->
+      </section>
+      <p class="status-legend"><strong>Beta</strong> is live for private use. <strong>Alpha</strong> is an early preview.</p>
+      <section class="design-system-invite" aria-labelledby="system-title">
+        <p class="invite-label">Behind the apps</p>
+        <h2 id="system-title">Made to work together.</h2>
+        <p>Explore the shared design language, controls, themes, and application architecture that give these projects a familiar foundation while each keeps its own character.</p>
+        <a class="design-system-link" href="./design-system/">Explore the Polaris design system <span aria-hidden="true">↗</span></a>
       </section>
     </main>
   </body>

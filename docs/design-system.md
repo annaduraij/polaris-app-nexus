@@ -136,7 +136,7 @@ if (developmentBuild) {
 }
 ```
 
-One compact cog with a red center dot opens the Chroma Lab, Typography Lab, and Glass Lab choices. The menu supports arrow/Home/End keys, Escape, outside dismissal and focus return. Chroma Lab edits every family shade, semantic mapping, status/data/media palette, and reports contrast. Typography Lab enables optional roles and edits family, weight, size, scale, line height, tracking and genuine variable width. Both offer a labelled JSON import/export area, validation errors, and reset. Their native dialogs support keyboard navigation, Escape and return focus to the cog. Calling `mountLabs` for a production engine creates no controls.
+One compact cog with a gold center dot opens the Chroma Lab, Typography Lab, and Glass Lab choices. The menu supports arrow/Home/End keys, Escape, outside dismissal and focus return. Chroma Lab edits every family shade, semantic mapping, status/data/media palette, and reports contrast. Typography Lab enables optional roles and edits family, weight, size, scale, line height, tracking and genuine variable width. Both offer a labelled JSON import/export area, validation errors, and reset. Their native dialogs support keyboard navigation, Escape and return focus to the cog. Calling `mountLabs` for a production engine creates no controls.
 
 ## React integration
 
@@ -221,3 +221,5 @@ For **Krona**, the actual static application now loads the shared startup engine
 Typography Lab defaults to Heading, Body, Label, Control, Script, and Monospace. The “Separate serif and sans-serif styles” toggle reveals the separate heading/body roles without changing saved design values. In the simplified view, edits apply to all enabled members of the selected group; font-family changes preserve each member’s size and spacing. The lab panel and controls use the application’s live semantic colors.
 
 Glass Lab owns material controls: live opacity and blur sliders, a patterned surface specimen, and optional saturation/border-opacity fields. Reset glass restores only approved material settings and preserves color and typography edits. The shared engine retains these settings after closing the lab or reloading; existing app-specific glass-level offsets and reduced-transparency preferences still apply.
+
+The shared launcher uses Polaris-owned dark glass, emerald/teal/violet aurora surfaces, and North Gold accents from the Polaris logo. These scoped brand tokens are separate from app theme tokens; the lab panels still follow the consuming app’s live colors.

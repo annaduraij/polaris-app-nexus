@@ -35,6 +35,7 @@ for (const name of (await readdir(path.join(pkg, 'profiles'))).sort()) {
 const catalog = validateCatalog(await yaml('packages/design-system/profiles/developer-fonts.yaml'));
 const content = validateContent(await yaml('content/design-system.yaml'));
 const preamble = '// Generated from YAML by scripts/build-design-system.mjs. Do not edit.\n';
+await emit('packages/design-system/generated/logo.js', `// Generated from public/logo.svg. Do not edit.\nexport const polarisLogo = ${JSON.stringify(await readFile(path.join(root, 'public/logo.svg'), 'utf8'))};\n`);
 await emit('packages/design-system/generated/profiles.js', `${preamble}export const profiles = ${JSON.stringify(profiles, null, 2)};\n`);
 await emit('packages/design-system/generated/developer-fonts.js', `${preamble}export const developerFonts = ${JSON.stringify(catalog, null, 2)};\n`);
 await emit('packages/design-system/generated/developer-fonts.d.ts', `${preamble}import type { FontCatalog } from '../src/index.js';\nexport declare const developerFonts: FontCatalog;\n`);

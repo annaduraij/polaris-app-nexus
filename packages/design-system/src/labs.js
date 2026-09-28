@@ -3,6 +3,7 @@
 import { FAMILIES, SHADES, TYPE_ROLES, validateCatalog } from './contracts.js';
 import { content } from '../generated/content.js';
 import { polarisLogo } from '../generated/logo.js';
+import { labIcons } from '../generated/lab-icons.js';
 import { contrastReport } from './engine.js';
 let launcherCount = 0;
 
@@ -18,6 +19,7 @@ export function mountLabs(engine, { container = document.body, fonts = {}, copy 
   const el = (tag, className, text) => { const node = doc.createElement(tag); if (className) node.className = className; if (text !== undefined) node.textContent = text; return node; };
   const button = (text, click) => { const node = el('button', 'polaris-button', text); node.type = 'button'; node.addEventListener('click', click); return node; };
   const choices = el('div', 'polaris-lab-choices'); choices.id = `polaris-lab-choices-${++launcherCount}`; choices.hidden = true; choices.setAttribute('role', 'menu'); choices.setAttribute('aria-label', t('lab.launcher'));
+  choices.setAttribute('aria-orientation', 'vertical');
   const launcherButton = button('', () => { if (choices.hidden) openChoices(); else closeChoices(); }); launcherButton.className = 'polaris-lab-trigger'; launcherButton.setAttribute('aria-label', t('lab.launcher')); launcherButton.setAttribute('aria-haspopup', 'menu'); launcherButton.setAttribute('aria-controls', choices.id); launcherButton.setAttribute('aria-expanded', 'false');
   // Embed the build-owned canonical logo; unique gradient IDs support multiple lab instances.
   const template = doc.createElement('template'); template.innerHTML = polarisLogo;
@@ -41,14 +43,19 @@ export function mountLabs(engine, { container = document.body, fonts = {}, copy 
   launcher.addEventListener('focusout', event => { if (event.relatedTarget && !launcher.contains(event.relatedTarget)) closeChoices(false); });
   function shell(name) {
     const dialog = el('dialog', 'polaris-lab'); dialog.setAttribute('aria-label', t(`lab.${name}`));
-    const trigger = button(t(`lab.${name}`), () => { closeChoices(false); dialog.showModal(); }); trigger.setAttribute('aria-haspopup', 'dialog'); trigger.setAttribute('role', 'menuitem');
+    const trigger = button('', () => { closeChoices(false); dialog.showModal(); }); trigger.setAttribute('aria-haspopup', 'dialog'); trigger.setAttribute('role', 'menuitem');
+    trigger.setAttribute('aria-label', t(`lab.${name}`)); trigger.title = t(`lab.${name}`);
+    const iconTemplate = doc.createElement('template'); iconTemplate.innerHTML = labIcons[name];
+    const icon = iconTemplate.content.firstElementChild; icon.setAttribute('aria-hidden', 'true');
+    trigger.append(icon);
     const head = el('header', 'polaris-lab-head');
     const close = button(t('lab.close'), () => dialog.close());
     head.append(el('h2', '', t(`lab.${name}`)), close);
     const body = el('div', 'polaris-lab-body'), status = el('p', 'polaris-lab-status'); status.setAttribute('role', 'status'); status.setAttribute('aria-live', 'polite');
     dialog.append(head, el('p', 'polaris-lab-note', t('lab.previewOnly')), body, status);
     dialog.addEventListener('close', () => { if (launcherButton.isConnected) launcherButton.focus(); });
-    choices.append(trigger); container.append(dialog); dialogs.push(dialog);
+    if (name === 'typography') choices.prepend(trigger); else choices.append(trigger);
+    container.append(dialog); dialogs.push(dialog);
     return { body, status };
   }
   function update(mutate, status, rerender = false) {

@@ -225,3 +225,7 @@ Glass Lab owns material controls: live opacity and blur sliders, a patterned sur
 The shared launcher uses Polaris-owned dark glass, emerald/teal/violet aurora surfaces, and North Gold accents from the Polaris logo. These scoped brand tokens are separate from app theme tokens; the lab panels still follow the consuming app’s live colors.
 
 The launcher embeds the canonical Polaris SVG from the shared package. Its outer menu is near-black glass; aurora color is limited to a faint tint on action surfaces. The logo retains its North Gold gradient and transparent center.
+
+The logo opens a narrow vertical drawer, ordered Typography (`type`), Chroma (`palette`), and Glass (`mirror-rectangular`). Pinned Lucide SVG icon actions retain full accessible names and native tooltips, 44-pixel targets, arrow-key navigation, and Escape focus return.
+
+Lucide artwork and its license are bundled in the shared package; the source revision is recorded in `assets/icons/SOURCE.json`. No runtime icon CDN is used.

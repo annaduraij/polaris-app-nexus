@@ -185,5 +185,7 @@ export const content = {
   "lab.glassTintHelp": "Choose a semantic color. Change its palette in Chroma Lab to update every linked surface.",
   "lab.glassAppReset": "Reset to app default",
   "lab.glassPolarisReset": "Reset to Polaris default",
-  "lab.glassRoleColors": "Role colors"
+  "lab.glassRoleColors": "Role colors",
+  "lab.glassSliderHint": "Click or tap the bar to reset to the app default. Drag or use arrow keys to adjust; Delete also resets.",
+  "lab.glassControlReset": "{control} restored to the app default."
 };

@@ -19,11 +19,11 @@ const defaultAppsRoot = existsSync(path.join(siblingRoot, 'lyra-music/README.md'
 const appsRoot = path.resolve(process.env.POLARIS_APPS_ROOT ?? defaultAppsRoot);
 const indexPath = path.join(projectRoot, 'public/index.html');
 const apps = [
-  { id: 'lyra', directory: 'lyra-music', url: 'https://lyra.ajay.nexus' },
-  { id: 'krona', directory: 'krona-budget', url: 'https://krona.ajay.nexus' },
-  { id: 'ren', directory: 'enigma-misc', stage: 'beta' },
+  { id: 'lyra', directory: 'lyra-music', platform: 'Web', url: 'https://lyra.ajay.nexus' },
+  { id: 'krona', directory: 'krona-budget', platform: 'Web', url: 'https://krona.ajay.nexus' },
+  { id: 'ren', directory: 'enigma-misc', platform: 'Web', stage: 'beta' },
   {
-    id: 'fano', directory: 'fano', stage: 'alpha',
+    id: 'fano', directory: 'fano', platform: 'Mac', stage: 'alpha',
     // Copy remains Polaris-owned; artwork comes from Fano's canonical logo.
     identity: {
       name: 'Fano', subtitle: 'A clearer Apple Photos catalog',
@@ -84,9 +84,11 @@ function renderApp(app, identity) {
   const { name, subtitle, description, inspiration, logoFile, surface, raisedSurface, secondary, signature, accent } = identity;
   const mainTag = app.url ? 'a' : 'div';
   const mainAttributes = app.url ? ` href="${app.url}" aria-label="Open ${escapeHtml(name)}"` : '';
+  const badges = [`<span class="app-badge platform-badge" aria-label="Platform: ${app.platform}">${app.platform}</span>`];
+  if (app.stage) badges.push(`<span class="app-badge release-badge ${app.stage}" aria-label="${stages[app.stage].label}: ${stages[app.stage].meaning}">${stages[app.stage].label}</span>`);
   const action = app.url
     ? `<a class="app-launch" href="${app.url}" aria-label="Open ${escapeHtml(name)}"><span aria-hidden="true">↗</span></a>`
-    : `<span class="release-badge ${app.stage}" aria-label="${stages[app.stage].label}: ${stages[app.stage].meaning}">${stages[app.stage].label}</span>`;
+    : '';
   const logo = logoFile
     ? `<img class="app-logo ${app.id}-logo" src="./brand/${logoFile}" width="48" height="48" alt="" />`
     : '<span class="app-monogram" aria-hidden="true">F</span>';
@@ -97,9 +99,11 @@ function renderApp(app, identity) {
               <span class="logo-panel">${logo}</span>
               <span class="app-line"><strong id="${app.id}-title">${escapeHtml(name)}</strong><small>${escapeHtml(subtitle)}</small></span>
             </${mainTag}>
+            <div class="app-badges">
+              ${badges.join('\n              ')}
+            </div>
             <div class="app-actions">
-              <button class="app-details-toggle" type="button" aria-expanded="false" aria-controls="${app.id}-details" aria-label="Show ${escapeHtml(name)} details" hidden><span aria-hidden="true">+</span></button>
-              ${action}
+              <button class="app-details-toggle" type="button" aria-expanded="false" aria-controls="${app.id}-details" aria-label="Show ${escapeHtml(name)} details" hidden><span aria-hidden="true">+</span></button>${action ? `\n              ${action}` : ''}
             </div>
           </div>
           <div class="app-details" id="${app.id}-details">

@@ -23,14 +23,14 @@ const apps = [
   { id: 'krona', directory: 'krona-budget', url: 'https://krona.ajay.nexus' },
   { id: 'ren', directory: 'enigma-misc', stage: 'beta' },
   {
-    id: 'fano', stage: 'alpha',
-    // Fano is a local CLI and has no public app identity contract yet.
+    id: 'fano', directory: 'fano', stage: 'alpha',
+    // Copy remains Polaris-owned; artwork comes from Fano's canonical logo.
     identity: {
       name: 'Fano', subtitle: 'A clearer Apple Photos catalog',
       description: 'Fano audits an Apple Photos library and prepares exact, reviewable changes in a local Mac workspace.',
       inspiration: 'Created to make photo organization easier to review before changes are applied.',
       surface: '#1b2731', raisedSurface: '#263742', secondary: '#557f8c', signature: '#7db7c0', accent: '#d4b77c',
-      logoFile: null,
+      logo: 'design/logos/primary/fano-logo.svg',
     },
   },
 ];
@@ -117,13 +117,12 @@ if (!marker.test(html)) {
 
 const sources = [];
 for (const app of apps) {
-  if (app.identity) {
-    sources.push({ app, identity: app.identity });
-    continue;
-  }
-  const appRoot = path.join(appsRoot, app.directory);
-  const readme = await readFile(path.join(appRoot, 'README.md'), 'utf8');
-  const identity = readIdentity(readme, app.id);
+  // A clean branding worktree can supply Fano's artwork while its primary
+  // checkout contains unrelated provider work on an older branch.
+  const appRoot = app.id === 'fano'
+    ? path.resolve(process.env.POLARIS_FANO_ROOT ?? path.join(appsRoot, app.directory))
+    : path.join(appsRoot, app.directory);
+  const identity = app.identity ?? readIdentity(await readFile(path.join(appRoot, 'README.md'), 'utf8'), app.id);
   const logoPath = path.resolve(appRoot, identity.logo);
   if (!logoPath.startsWith(`${appRoot}${path.sep}`) || !/\.(png|svg)$/i.test(logoPath)) {
     throw new Error(`${app.id}: logo must be a local PNG or SVG within its repository`);

@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-labelledby="mark-title mark-desc">
+  <title id="mark-title">Fano — primary expanded-border logo</title>
+  <desc id="mark-desc">An edge-to-edge squircle app tile with an expanded 12 px near-black frame, 24 evenly spaced white film cutouts following its continuous corners, a deep forest-teal-gold sensor gradient, and a larger raised gold Polaris astroid with clear tip margins.</desc>
+  <defs>
+    <linearGradient id="mark-sensor" gradientUnits="userSpaceOnUse" x1="16" y1="112" x2="112" y2="16">
+      <stop offset="0" stop-color="#01573A" />
+      <stop offset=".5" stop-color="#1E4C51" />
+      <stop offset="1" stop-color="#6D6730" />
+    </linearGradient>
+    <linearGradient id="mark-gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFF4CF" />
+      <stop offset="1" stop-color="#D9A55D" />
+    </linearGradient>
+    <filter id="mark-astroid-shadow" filterUnits="userSpaceOnUse" x="16" y="12" width="96" height="108" color-interpolation-filters="sRGB">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur" />
+      <feOffset in="blur" dx="0" dy="1.5" result="offset" />
+      <feFlood flood-color="#17221B" flood-opacity=".35" result="color" />
+      <feComposite in="color" in2="offset" operator="in" result="shadow" />
+      <feMerge>
+        <feMergeNode in="shadow" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+  <path d="M30 4 H98 C121.635 4 124 6.365 124 30 V98 C124 121.635 121.635 124 98 124 H30 C6.365 124 4 121.635 4 98 V30 C4 6.365 6.365 4 30 4Z" fill="url(#mark-sensor)" />
+  <path d="M30 4 H98 C121.635 4 124 6.365 124 30 V98 C124 121.635 121.635 124 98 124 H30 C6.365 124 4 121.635 4 98 V30 C4 6.365 6.365 4 30 4Z M30 16 H98 C110.727 16 112 17.273 112 30 V98 C112 110.727 110.727 112 98 112 H30 C17.273 112 16 110.727 16 98 V30 C16 17.273 17.273 16 30 16Z" fill="#080909" fill-rule="evenodd" />
+  <g fill="#FFFFFF">
+    <rect x="61" y="7" width="6" height="6" />
+    <rect x="78.1652" y="7" width="6" height="6" />
+    <rect x="95.3303" y="7.0002" width="6" height="6" transform="rotate(0.0723 98.3303 10.0002)" />
+    <rect x="111.8179" y="10.1821" width="6" height="6" transform="rotate(45 114.8179 13.1821)" />
+    <rect x="114.9998" y="26.6697" width="6" height="6" transform="rotate(-0.0723 117.9998 29.6697)" />
+    <rect x="115" y="43.8348" width="6" height="6" />
+    <rect x="115" y="61" width="6" height="6" />
+    <rect x="115" y="78.1652" width="6" height="6" />
+    <rect x="114.9998" y="95.3303" width="6" height="6" transform="rotate(0.0723 117.9998 98.3303)" />
+    <rect x="111.8179" y="111.8179" width="6" height="6" transform="rotate(45 114.8179 114.8179)" />
+    <rect x="95.3303" y="114.9998" width="6" height="6" transform="rotate(-0.0723 98.3303 117.9998)" />
+    <rect x="78.1652" y="115" width="6" height="6" />
+    <rect x="61" y="115" width="6" height="6" />
+    <rect x="43.8348" y="115" width="6" height="6" />
+    <rect x="26.6697" y="114.9998" width="6" height="6" transform="rotate(0.0723 29.6697 117.9998)" />
+    <rect x="10.1821" y="111.8179" width="6" height="6" transform="rotate(45 13.1821 114.8179)" />
+    <rect x="7.0002" y="95.3303" width="6" height="6" transform="rotate(-0.0723 10.0002 98.3303)" />
+    <rect x="7" y="78.1652" width="6" height="6" />
+    <rect x="7" y="61" width="6" height="6" />
+    <rect x="7" y="43.8348" width="6" height="6" />
+    <rect x="7.0002" y="26.6697" width="6" height="6" transform="rotate(0.0723 10.0002 29.6697)" />
+    <rect x="10.1821" y="10.1821" width="6" height="6" transform="rotate(45 13.1821 13.1821)" />
+    <rect x="26.6697" y="7.0002" width="6" height="6" transform="rotate(-0.0723 29.6697 10.0002)" />
+    <rect x="43.8348" y="7" width="6" height="6" />
+  </g>
+  <g filter="url(#mark-astroid-shadow)">
+    <path d="M32 3 C32 18.95 39.2 32 48 32 C39.2 32 32 45.05 32 61 C32 45.05 24.8 32 16 32 C24.8 32 32 18.95 32 3Z M32 21 C32 27.05 35.15 32 39 32 C35.15 32 32 36.95 32 43 C32 36.95 28.85 32 25 32 C28.85 32 32 27.05 32 21Z" transform="translate(64 64) scale(2.20875 1.4725) translate(-32 -32)" fill="url(#mark-gold)" fill-rule="evenodd" stroke="none" />
+  </g>
+</svg>

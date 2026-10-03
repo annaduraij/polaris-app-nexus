@@ -122,7 +122,7 @@ a.app-main:hover { background: #ffffff0d; }
 .app-line { display: flex; align-items: baseline; gap: 12px; min-width: 0; white-space: nowrap; }
 .app-line strong { flex: 0 0 auto; font-size: 21px; font-weight: 650; letter-spacing: -.025em; }
 .app-line small { overflow: hidden; min-width: 0; color: #d7e3df; font-size: 13px; text-overflow: ellipsis; }
-.app-badges { display: grid; align-content: center; gap: 4px; padding-block: 5px; }
+.app-badges { display: grid; grid-auto-flow: column; grid-auto-columns: 44px; align-content: center; gap: 4px; padding-block: 5px; }
 /* Reserve the launch column for every app so disclosure controls stay aligned. */
 .app-actions { display: grid; grid-template-columns: repeat(2, 44px); align-items: center; gap: 2px; padding-right: 8px; }
 .app-details-toggle {
@@ -145,6 +145,8 @@ a.app-main:hover { background: #ffffff0d; }
 .app-details-toggle:hover, .app-launch:hover { background: #ffffff16; }
 .app-launch { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; color: var(--signature); font-size: 25px; line-height: 1; text-decoration: none; }
 .app-badge { display: grid; place-items: center; width: 44px; padding: 5px 2px; border: 1px solid #ffffff3f; border-radius: 999px; color: #f3e9f1; font-size: 11px; font-weight: 700; line-height: 1.2; letter-spacing: .025em; white-space: nowrap; }
+.platform-badge { border-color: transparent; color: var(--surface); background: #f3f5f4; }
+.lyra .platform-badge { color: var(--secondary); }
 .release-badge { border-color: color-mix(in srgb, var(--accent) 70%, transparent); }
 .fano .release-badge { color: #f2deae; }
 .app-row.expanded .app-compact { border-radius: 12px 12px 0 0; }
@@ -160,6 +162,7 @@ a.app-main:hover { background: #ffffff0d; }
 .krona .app-details p + p, .krona .app-details b { color: #315d4b; }
 .krona .app-details-toggle, .krona .app-launch { color: #315d4b; }
 .krona .app-badge { border-color: #315d4b66; color: #315d4b; }
+.krona .platform-badge { border-color: transparent; color: var(--signature); }
 .ren .logo-panel { background: #d88fad2e; }
 .fano .logo-panel { background: #557f8c4d; }
 .status-legend { margin: 14px 0 0; color: #bac8c6; font-size: 12px; line-height: 1.5; text-align: center; }

@@ -38,6 +38,10 @@ The logo path is relative to that app's repository. Polaris checks that all fiel
 
 Run `npm run sync:apps` after changing an app identity. The command looks for sibling `lyra-music`, `krona-budget`, `enigma-misc`, and `fano` checkouts, with the older `/Users/ajay/projects` workspace layout as a fallback. Set `POLARIS_APPS_ROOT` to the parent directory of those repositories elsewhere. Ren is the current identity of the `enigma-misc` repository; its beta card stays non-clickable because it is for private use. Fano is an alpha preview whose public copy and colors currently live in `scripts/sync-app-contract.mjs`, since its local CLI README has no app identity block. Its logo is copied from Fano's canonical `design/logos/primary/fano-logo.svg`. Set `POLARIS_FANO_ROOT` to a clean Fano checkout when the sibling checkout is on an older work branch. Release-stage labels are Polaris-owned metadata, separate from application color and UI-status contracts.
 
+## Planned applications
+
+See the [planned-app register](docs/planned-apps.md) for projects grouped under Polaris before release. Photography PPI Calculator has a separate repository and rough plan for comparing one image across print sizes with a scaled 0–600 PPI heatmap.
+
 ## Preview
 
 Run `npm run build`, then from the `public` directory run `python3 -m http.server 8000` and open <http://localhost:8000>. The design-system showcase is at <http://localhost:8000/design-system/>.

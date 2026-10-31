@@ -42,6 +42,10 @@ Run `npm run sync:apps` after changing an app identity. The command looks for si
 
 See the [planned-app register](docs/planned-apps.md) for projects grouped under Polaris before release. Photography PPI Calculator has a separate repository and rough plan for comparing one image across print sizes with a scaled 0–600 PPI heatmap.
 
+## Application development
+
+Polaris applications use the [feature documentation convention](docs/features/README.md): one Markdown document per feature under lowercase `docs/features/`, with future feature sets under `docs/features/planned/`. Design approval alone does not establish a feature; its document moves out of `planned/` after implementation and verification. Existing integration guides and audits remain linked from the feature index.
+
 ## Preview
 
 Run `npm run build`, then from the `public` directory run `python3 -m http.server 8000` and open <http://localhost:8000>. The design-system showcase is at <http://localhost:8000/design-system/>.

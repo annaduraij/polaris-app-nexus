@@ -32,6 +32,8 @@ For a workflow that needs three levels, use **Simple**, **Advanced**, and **Exte
 - **Advanced:** Common adjustments and the measurements needed to understand them.
 - **Extended:** Independent adjustments, full relevant metadata, and diagnostic values.
 
+Compact selectors may abbreviate their visible labels when space is limited, while preserving full accessible names and tooltips. The Print Lab review accepted **Bas / Adv / Ext** for **Basic / Advanced / Extended**; its Basic level retains the existing Simple behavior.
+
 Each level must still communicate the operation accurately. Progressive disclosure should reduce detail without hiding a consequential effect or inventing a simpler result. Do not add three levels to a workflow that has no need for them.
 
 ## Previews And Measurements
@@ -40,7 +42,7 @@ Make the visual preview respond to the operation being selected. If two options 
 
 Label source/image dimensions, output/paper dimensions, intentional borders, unused fit space, and cropped content separately when those concepts exist. Prefer linked **Horizontal Borders** and **Vertical Borders** for common symmetric adjustments; reveal independent sides when users request finer control. Show paired inputs or individual-side inputs one set at a time; avoid exposing redundant rows for the same physical adjustment. For spatial placement, use a three-by-three anchor grid with directional SVG arrows and a center dot, and give every position a text label for accessibility. Keep the preview boundary visible so an intentional crop cannot be confused with clipped interface content.
 
-Put the target or requested result before the measured result in the local reading order. Explain comparisons to a target in terms of that target. Use a narrow dedicated target-status column when inline check/cross symbols crowd the measured value. Keep the column compact rather than repeating a full text outcome in every row. Use SVG symbols with accessible labels. Keep an adjusted or relative reference distinct from the underlying physical measure; a reference percentage must not be labeled as raw PPI. Avoid unexplained competing “recommended” values when the workflow already provides a target control.
+Put the target or requested result before the measured result in the local reading order. Explain comparisons to a target in terms of that target. Use a narrow dedicated target-status column when inline check/cross symbols crowd the measured value. Keep the column compact rather than repeating a full text outcome in every row. Use SVG symbols with accessible labels. Visually mute rows that fall below the chosen target while preserving the full color and opacity of their measurement heatmaps. Keep those rows usable and retain the selected-row highlight. Keep an adjusted or relative reference distinct from the underlying physical measure; a reference percentage must not be labeled as raw PPI. Avoid unexplained competing “recommended” values when the workflow already provides a target control.
 
 Use a three-column footer: relevant application information on the left, the existing symmetric Polaris logo centered, and **Jay Annadurai** on the right. Keep the logo centered independently of the text widths. Pull the canonical `public/logo.svg` from Polaris and scale it; do not redraw it. This is accepted design guidance, not a claim that all app footers have been migrated.
 

@@ -14,7 +14,7 @@ Keep the wording precise enough to distinguish related objects. For example, ima
 
 Use compact chips for a short set of common presets or mutually exclusive choices. Avoid numbered promotional cards when the user is selecting a setting. Numbers should communicate an actual required order, rather than decorate parallel options.
 
-Use independent toggles for capabilities that can operate together. Reserve a single-choice selector for genuinely exclusive alternatives. Label each toggle by the capability it adds, and make the current combination understandable without treating it as a numbered journey. In Print Lab, **Composition-Aware** and **Distance-Aware** can be combined; **Direct PPI** describes the baseline when neither is enabled.
+Use visibly recognizable switches, with a track and thumb, for independent capabilities that can operate together. A selected chip alone does not communicate the requested on/off behavior. Reserve a single-choice selector for genuinely exclusive alternatives. Label each toggle by the capability it adds, and make the current combination understandable without treating it as a numbered journey. In Print Lab, **Composition-Aware** and **Distance-Aware** can be combined; **Direct PPI** describes the baseline when neither is enabled.
 
 Put a unit selector immediately above or beside the input it controls. Keep the current physical quantity when switching units. Distinguish this local input unit from any separate display-unit setting. Expose useful, short preset lists near the affected preview rather than requiring a trip to global settings for routine changes.
 
@@ -36,9 +36,11 @@ Each level must still communicate the operation accurately. Progressive disclosu
 
 Make the visual preview respond to the operation being selected. If two options produce different placement or cropping, show the difference in the image itself and explain it in concise helper text. A static illustration that obscures the difference is insufficient.
 
-Label source/image dimensions, output/paper dimensions, intentional borders, unused fit space, and cropped content separately when those concepts exist. Prefer linked **Horizontal Borders** and **Vertical Borders** for common symmetric adjustments; reveal independent sides when users request finer control. Keep the preview boundary visible so an intentional crop cannot be confused with clipped interface content.
+Label source/image dimensions, output/paper dimensions, intentional borders, unused fit space, and cropped content separately when those concepts exist. Prefer linked **Horizontal Borders** and **Vertical Borders** for common symmetric adjustments; reveal independent sides when users request finer control. Show paired inputs or individual-side inputs one set at a time; avoid exposing redundant rows for the same physical adjustment. For spatial placement, use a three-by-three anchor grid with directional SVG arrows and a center dot, and give every position a text label for accessibility. Keep the preview boundary visible so an intentional crop cannot be confused with clipped interface content.
 
-Put the target or requested result before the measured result in the local reading order. Explain comparisons to a target in terms of that target. Avoid unexplained competing “recommended” values when the workflow already provides a target control.
+Put the target or requested result before the measured result in the local reading order. Explain comparisons to a target in terms of that target. Place a simple target check/cross beside the measured value instead of spending a table column on a binary outcome. Use SVG symbols with accessible labels. Keep an adjusted or relative reference distinct from the underlying physical measure; a reference percentage must not be labeled as raw PPI. Avoid unexplained competing “recommended” values when the workflow already provides a target control.
+
+Use **Polaris by J** for Polaris footer attribution.
 
 ## Appearance And Application Boundaries
 

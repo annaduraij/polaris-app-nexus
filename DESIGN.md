@@ -2,6 +2,10 @@
 
 Polaris is Jay's App Nexus and the shared design and application architecture system behind it. It gives applications common design contracts, controls, themes, and simple surfaces while allowing each app to keep its own identity. The landing page introduces the apps; the design-system showcase demonstrates the shared system.
 
+## Interface Conventions
+
+Use the accepted [interface conventions](docs/interface-conventions.md) when designing and revising Polaris applications: direct functional copy, Title Case labels, compact controls, progressive detail, and previews that explain the selected operation. These are design requirements; adoption and verification remain specific to each application.
+
 ## Polaris palette
 
 Polaris owns a distinct identity separate from the consuming apps:

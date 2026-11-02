@@ -16,7 +16,7 @@ Use compact chips for a short set of common presets or mutually exclusive choice
 
 Use visibly recognizable switches, with a track and thumb, for independent capabilities that can operate together. A selected chip alone does not communicate the requested on/off behavior. Reserve a single-choice selector for genuinely exclusive alternatives. Label each toggle by the capability it adds, and make the current combination understandable without treating it as a numbered journey. In Print Lab, **Composition-Aware** and **Distance-Aware** can be combined; **Direct PPI** describes the baseline when neither is enabled.
 
-Center compatible awareness switches within Configuration and center the Resolution selector within its section. Keep detail-level controls at the top right of their panel. Reduce redundant rows, excess padding, and empty preview space while preserving readable text and reachable controls. Use modest corner radii on compact preset buttons.
+Center compatible awareness switches within Configuration and center the Resolution selector within its section. Keep detail-level controls at the top right of their panel. Reduce redundant rows, excess padding, and empty preview space while preserving readable text and reachable controls. Use modest corner radii on compact preset buttons and center common paper presets within their preview group. Keep unit preferences subtle within Configuration. Show primary PPI values with one short visual-acuity percentage beneath them, and combine related scale labels instead of repeating separate legends and explanatory blocks.
 
 Put a unit selector immediately above or beside the input it controls. Keep the current physical quantity when switching units. Distinguish this local input unit from any separate display-unit setting. Expose useful, short preset lists near the affected preview rather than requiring a trip to global settings for routine changes.
 
@@ -42,7 +42,7 @@ Label source/image dimensions, output/paper dimensions, intentional borders, unu
 
 Put the target or requested result before the measured result in the local reading order. Explain comparisons to a target in terms of that target. Use a narrow dedicated target-status column when inline check/cross symbols crowd the measured value. Keep the column compact rather than repeating a full text outcome in every row. Use SVG symbols with accessible labels. Keep an adjusted or relative reference distinct from the underlying physical measure; a reference percentage must not be labeled as raw PPI. Avoid unexplained competing “recommended” values when the workflow already provides a target control.
 
-Use **Polaris by J** for Polaris footer attribution.
+Use a three-column footer: relevant application information on the left, the existing symmetric Polaris logo centered, and **Jay Annadurai** on the right. Keep the logo centered independently of the text widths. Pull the canonical `public/logo.svg` from Polaris and scale it; do not redraw it. This is accepted design guidance, not a claim that all app footers have been migrated.
 
 ## Appearance And Application Boundaries
 

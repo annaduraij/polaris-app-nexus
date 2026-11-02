@@ -37,6 +37,8 @@ Applications without a package registry can copy `scripts/vendor-design-package.
 
 ## Design contract
 
+The accepted [interface conventions](interface-conventions.md) guide application layout and wording alongside the token contract: direct functional labels, compact configuration controls, progressive disclosure, and accurate previews. These conventions do not imply a runtime component or a completed consumer migration.
+
 The v1 profile has `version`, `id`, `revision`, `label`, `palette`, `semantic`, `status`, `data`, `media`, `material`, `fonts`, `typography`, and `personal` fields. Unknown fields are rejected. Schemas provide structural validation; runtime validation adds cross-field font capabilities and permission checks.
 
 Four configurable color families each have five explicit shades: **neutral, primary, secondary, accent**, with stops `100`, `300`, `500`, `700`, `900`. Shades are authored values, not automatically generated blends. Semantic roles reference a family and stop, such as `neutral.100` or `primary.500`. Components consume semantic tokens, rather than assuming that a particular family always serves a particular purpose.

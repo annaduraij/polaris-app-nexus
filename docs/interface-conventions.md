@@ -8,6 +8,8 @@ Use direct, functional copy that names the task, setting, or result. Prefer **Co
 
 Use Title Case for headings, section names, control labels, option labels, and named actions, including **Target PPI** and **About And Sources**. Preserve established technical capitalization such as PPI, APS-C, and megapixel abbreviations. Use sentence case for explanatory prose, complete sentences, errors, and longer instructions.
 
+Explain model-dependent numbers through a compact info button that opens on hover, keyboard focus, or click/tap. Keep a short active reference visible near the number; put formulas, examples, and model limits in the callout. Make the callout dismissible and usable on narrow screens.
+
 Keep the wording precise enough to distinguish related objects. For example, image dimensions and paper dimensions describe different things; a label such as “Actual Photograph” does not communicate which measurement is shown. Put a short dimension value beside the relevant object, including in parentheses when that keeps the label compact.
 
 ## Controls And Configuration
